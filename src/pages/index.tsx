@@ -23,7 +23,7 @@ export default function Home() {
                   Debitis quisquam cupiditate nihil corporis commodi animi sint
                   doloremque numquam aliquid itaque.
                 </p>
-                <Link href="/signup">
+                <Link href="/translators">
                   <a className="btn btn-yellow mr-4 shadow-xl">
                     Find Translator
                   </a>
