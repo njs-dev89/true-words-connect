@@ -6,7 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import app from "../config/firebaseConfig";
+import app, { db } from "../config/firebaseConfig";
+import { collection, doc, setDoc } from "@firebase/firestore";
 
 const auth = getAuth(app);
 const formatAuthUser = (user) => ({
@@ -39,8 +40,61 @@ export default function useAuth() {
   const signInUser = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);
 
-  const createUser = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+  const createUser = async (username, email, password) => {
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const clients = collection(db, "clients");
+      const userDoc = doc(clients, credential.user.uid);
+      const newUser = await setDoc(userDoc, {
+        email: credential.user.email,
+        username,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const createTranslatorApplicant = async (username, email, password) => {
+    try {
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const addTranslatorApplicant = async (
+    userId,
+    username,
+    email,
+    languages,
+    resumeLink,
+    passportLink,
+    idCardLink,
+    videoLink
+  ) => {
+    try {
+      const applicants = collection(db, "applicants");
+      const userDoc = doc(applicants, userId);
+      const newUser = await setDoc(userDoc, {
+        email,
+        username,
+        languages,
+        resume_link: resumeLink,
+        passport_link: passportLink,
+        id_card_link: idCardLink,
+        video_link: videoLink,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const logOut = () => signOut(auth).then(clear);
 
@@ -55,6 +109,8 @@ export default function useAuth() {
     loading,
     signInUser,
     createUser,
+    createTranslatorApplicant,
+    addTranslatorApplicant,
     logOut,
   };
 }

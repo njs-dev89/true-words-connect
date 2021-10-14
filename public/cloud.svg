@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.384" height="15.217" viewBox="0 0 19.384 15.217">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3e69b3;
+      }
+    </style>
+  </defs>
+  <g id="cloud-computing" transform="translate(0 -55.032)">
+    <g id="Group_2746" data-name="Group 2746" transform="translate(0 55.032)">
+      <g id="Group_2745" data-name="Group 2745" transform="translate(0 0)">
+        <path id="Path_2381" data-name="Path 2381" class="cls-1" d="M16.15,60.074A6.663,6.663,0,0,0,3.043,61.213a3.634,3.634,0,0,0,.606,7.22H6.677V67.221H3.649a2.423,2.423,0,1,1,0-4.845.606.606,0,0,0,.606-.606,5.451,5.451,0,0,1,10.8-1.06.606.606,0,0,0,.515.485,3.028,3.028,0,0,1-.412,6.027H12.734v1.211h2.423a4.24,4.24,0,0,0,.993-8.358Z" transform="translate(0 -55.032)"/>
+        <path id="Path_2382" data-name="Path 2382" class="cls-1" d="M183.458,249.187l-2.423,2.423.854.854,1.393-1.387v5.808h1.211v-5.808l1.387,1.387.854-.854-2.423-2.423A.606.606,0,0,0,183.458,249.187Z" transform="translate(-174.182 -241.668)"/>
+      </g>
+    </g>
+  </g>
+</svg>
