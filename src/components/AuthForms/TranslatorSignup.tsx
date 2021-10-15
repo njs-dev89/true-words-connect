@@ -45,18 +45,23 @@ function TranslatorSignup() {
     setStep(3);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    addTranslatorApplicant(
-      authUser.uid,
-      username,
-      email,
-      languages,
-      resumeLink,
-      passportLink,
-      idCardLink,
-      videoLink
-    );
+    try {
+      await addTranslatorApplicant(
+        authUser.uid,
+        username,
+        email,
+        languages,
+        resumeLink,
+        passportLink,
+        idCardLink,
+        videoLink
+      );
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <LeftImagePanel imgSrc="/applicant.svg">

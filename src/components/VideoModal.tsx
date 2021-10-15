@@ -18,7 +18,7 @@ const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
   return <video ref={videoRef} width={500} height={500} autoPlay controls />;
 };
 
-export default function Modal({ setShowModal, setVideoLink }) {
+export default function VideoModal({ setShowModal, setVideoLink }) {
   const videoRef = useRef(null);
   const { authUser } = useFirebaseAuth();
   const [showPreview, setShowPreview] = useState(true);

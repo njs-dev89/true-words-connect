@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
+import { FcHighPriority, FcOk } from "react-icons/fc";
 
 function IdCardUpload({ setIdCardLink }) {
   const { authUser } = useFirebaseAuth();
@@ -57,12 +58,12 @@ function IdCardUpload({ setIdCardLink }) {
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
         </div>
-        <div className="text-base ml-2">Upload Scanned Id Card</div>
+        <div className="text-base ml-2 mr-2">Upload Scanned Id Card</div>
         {upload && (
           <ProgressRing radius={12} stroke={2} progress={idCardProgress} />
         )}
-        {!upload && uploadSuccess && "success"}
-        {!upload && uploadFailed && "failed"}
+        {!upload && uploadSuccess && <FcOk className="text-xl" />}
+        {!upload && uploadFailed && <FcHighPriority className="text-xl" />}
 
         <input
           type="file"

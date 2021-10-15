@@ -9,6 +9,7 @@ function ProgressRing({ radius, stroke, progress }) {
     <svg height={radius * 2} width={radius * 2}>
       <circle
         stroke="black"
+        strokeOpacity="0.3"
         fill="transparent"
         strokeWidth={stroke}
         strokeDasharray={circumference + " " + circumference}

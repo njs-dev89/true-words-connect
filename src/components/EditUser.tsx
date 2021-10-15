@@ -48,7 +48,7 @@ function EditUser({ setShowModal, translator }) {
       {
         username,
         fullname,
-        hourly_rate: hourlyPrice,
+        hourly_rate: Number(hourlyPrice),
         address: {
           city,
           state,

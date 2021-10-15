@@ -24,9 +24,7 @@ export default function Home() {
                   doloremque numquam aliquid itaque.
                 </p>
                 <Link href="/translators">
-                  <a className="btn btn-yellow mr-4 shadow-xl">
-                    Find Translator
-                  </a>
+                  <a className="btn btn-yellow mr-4 shadow-xl">Find Provider</a>
                 </Link>
                 <Link href="/translator-signup">
                   <a className="btn btn-outline">Start Translating</a>

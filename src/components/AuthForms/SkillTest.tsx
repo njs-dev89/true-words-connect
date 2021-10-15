@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Modal from "../Modal";
+import React from "react";
+import VideoModal from "../VideoModal";
 // import { IoMdVideocam } from "react-icons/io";
 
 function SkillTest({ setVideoLink }) {
@@ -25,7 +25,7 @@ function SkillTest({ setVideoLink }) {
         Crete a video while reading this text and upload for review process
       </p>
       {showModal && (
-        <Modal setShowModal={setShowModal} setVideoLink={setVideoLink} />
+        <VideoModal setShowModal={setShowModal} setVideoLink={setVideoLink} />
       )}
     </div>
   );

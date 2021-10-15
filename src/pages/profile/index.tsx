@@ -1,8 +1,11 @@
 import { doc, getDoc } from "@firebase/firestore";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import EditUser from "../../components/EditUser";
+import Tab from "../../components/Tabs/Tab";
+import TabPane from "../../components/Tabs/TabPane";
+import TabsPaneContainer from "../../components/Tabs/TabsPaneContainer";
+import UserDetails from "../../components/UserDetails";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 
@@ -54,42 +57,7 @@ function ProfilePage() {
                 <div className="flex justify-end mr-4 mb-8 text-blue-600">
                   <button onClick={() => setShowModal(true)}>Edit</button>
                 </div>
-                <div className="flex flex-col items-center px-4 pb-4 border-b">
-                  <div className="w-24 h-24 relative rounded-full overflow-hidden">
-                    <Image src={translator.profile_pic} alt="" layout="fill" />
-                  </div>
-                  <h3 className="font-bold text-lg mt-4 mb-2">
-                    {translator.username}
-                  </h3>
-                  <p className="text-center text-sm">
-                    Tag line Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Nihil?
-                  </p>
-                  <p className="text-gray-700 mt-4">Not rated Yet</p>
-                </div>
-                <div className="px-4 mt-4">
-                  <h3 className="text-blue-600 font-bold ">
-                    Personal Information
-                  </h3>
-                  <div className="flex">
-                    <div className="mr-4">
-                      <p className="my-3">Full Name</p>
-                      <p className="my-3">Email</p>
-                      <p className="my-3">Location</p>
-                    </div>
-                    <div className="text-gray-600">
-                      <p className="my-3">
-                        {translator.fullname ? translator.fullname : "Not set"}
-                      </p>
-                      <p className="my-3">{translator.email}</p>
-                      <p className="my-3">
-                        {translator.address
-                          ? `${translator.address.city}, ${translator.address.state}, ${translator.address.country}`
-                          : "Not set yet"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <UserDetails translator={translator} />
               </>
             )}
           </div>
@@ -104,181 +72,104 @@ function ProfilePage() {
                   className="flex justify-between mb-0 list-none flex-wrap pt-3 pb-4 pl-4"
                   role="tablist"
                 >
-                  <li className="-mb-px mr-2 last:mr-0 text-center">
-                    <a
-                      className={
-                        " font-bold px-4 py-3 " +
-                        (openTab === 1
-                          ? "text-yellow-300 border-b-2 border-yellow-300"
-                          : "text-black-600 bg-white")
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setOpenTab(1);
-                      }}
-                      data-toggle="tab"
-                      href="#link1"
-                      role="tablist"
-                    >
-                      Overview
-                    </a>
-                  </li>
-                  <li className="-mb-px mr-2 last:mr-0 text-center">
-                    <a
-                      className={
-                        "font-bold px-4 py-3 leading-normal " +
-                        (openTab === 2
-                          ? "text-yellow-300 border-b-2 border-yellow-300"
-                          : "text-black-600 bg-white")
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setOpenTab(2);
-                      }}
-                      data-toggle="tab"
-                      href="#link2"
-                      role="tablist"
-                    >
-                      Orders
-                    </a>
-                  </li>
-                  <li className="-mb-px mr-2 last:mr-0 text-center">
-                    <a
-                      className={
-                        "font-bold px-4 py-3 leading-normal " +
-                        (openTab === 3
-                          ? "text-yellow-300 border-b-2 border-yellow-300"
-                          : "text-black-600 bg-white")
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setOpenTab(3);
-                      }}
-                      data-toggle="tab"
-                      href="#link3"
-                      role="tablist"
-                    >
-                      Messages
-                    </a>
-                  </li>
-                  <li className="-mb-px mr-2 last:mr-0 text-center">
-                    <a
-                      className={
-                        "font-bold px-4 py-3 leading-normal " +
-                        (openTab === 4
-                          ? "text-yellow-300 border-b-2 border-yellow-300"
-                          : "text-black-600 bg-white")
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setOpenTab(4);
-                      }}
-                      data-toggle="tab"
-                      href="#link3"
-                      role="tablist"
-                    >
-                      Offer Request
-                    </a>
-                  </li>
+                  <Tab
+                    openTab={openTab}
+                    setOpenTab={setOpenTab}
+                    tabNo={1}
+                    text="Overview"
+                  />
+                  <Tab
+                    openTab={openTab}
+                    setOpenTab={setOpenTab}
+                    tabNo={2}
+                    text="Orders"
+                  />
 
-                  <li className="-mb-px mr-2 last:mr-0 text-center">
-                    <a
-                      className={
-                        "font-bold px-4 py-3 leading-normal " +
-                        (openTab === 5
-                          ? "text-yellow-300 border-b-2 border-yellow-300"
-                          : "text-black-600 bg-white")
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setOpenTab(5);
-                      }}
-                      data-toggle="tab"
-                      href="#link3"
-                      role="tablist"
-                    >
-                      Reviews
-                    </a>
-                  </li>
+                  <Tab
+                    openTab={openTab}
+                    setOpenTab={setOpenTab}
+                    tabNo={3}
+                    text="Messages"
+                  />
+                  <Tab
+                    openTab={openTab}
+                    setOpenTab={setOpenTab}
+                    tabNo={4}
+                    text="Offer Request"
+                  />
+
+                  <Tab
+                    openTab={openTab}
+                    setOpenTab={setOpenTab}
+                    tabNo={5}
+                    text="Reviews"
+                  />
                 </ul>
                 {/*========Tabs End========== */}
 
                 {/*========Tabs Pane========== */}
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6">
-                  <div className="px-4 py-5 flex-auto">
-                    <div className="tab-content tab-space">
-                      <div
-                        className={openTab === 1 ? "block" : "hidden"}
-                        id="link1"
-                      >
-                        {loading ? (
-                          <p>Loading...</p>
-                        ) : (
-                          <>
-                            {" "}
-                            <div className="mb-4">
-                              <h3 className="text-blue-600 font-bold text-xl">
-                                Hourly Price
-                              </h3>
-                              <p className="">
-                                {translator.hourly_rate
-                                  ? `$${translator.hourly_rate}`
-                                  : "Rate Not set yet"}
-                              </p>
-                            </div>
-                            <div className="">
-                              <h3 className="text-blue-600 font-bold text-xl">
-                                About
-                              </h3>
-                              <p className="p-4 mt-4 pb-8 border rounded">
-                                {translator.about
-                                  ? translator.about
-                                  : "Please add something about yourself to show here"}
-                              </p>
-                            </div>
-                            <div className="mt-6">
-                              <h3 className="text-blue-600 font-bold text-xl">
-                                Languages
-                              </h3>
-                              <ul className="list-disc list-inside mt-4">
-                                {translator.languages.map((lang, idx) => (
-                                  <li key={idx}>{lang}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          </>
-                        )}{" "}
-                      </div>
-                      <div
-                        className={openTab === 2 ? "block" : "hidden"}
-                        id="link2"
-                      >
-                        <p>
-                          Completely synergize resource taxing relationships via
-                          premier niche markets. Professionally cultivate
-                          one-to-one customer service with robust ideas.
-                          <br />
-                          <br />
-                          Dynamically innovate resource-leveling customer
-                          service for state of the art customer service.
-                        </p>
-                      </div>
-                      <div
-                        className={openTab === 3 ? "block" : "hidden"}
-                        id="link3"
-                      >
-                        <p>
-                          Efficiently unleash cross-media information without
-                          cross-media value. Quickly maximize timely
-                          deliverables for real-time schemas.
-                          <br />
-                          <br /> Dramatically maintain clicks-and-mortar
-                          solutions without functional solutions.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <TabsPaneContainer>
+                  <TabPane openTab={openTab} tabNo={1}>
+                    {loading ? (
+                      <p>Loading...</p>
+                    ) : (
+                      <>
+                        {" "}
+                        <div className="mb-4">
+                          <h3 className="text-blue-600 font-bold text-xl">
+                            Hourly Price
+                          </h3>
+                          <p className="">
+                            {translator.hourly_rate
+                              ? `$${translator.hourly_rate}`
+                              : "Rate Not set yet"}
+                          </p>
+                        </div>
+                        <div className="">
+                          <h3 className="text-blue-600 font-bold text-xl">
+                            About
+                          </h3>
+                          <p className="p-4 mt-4 pb-8 border rounded">
+                            {translator.about
+                              ? translator.about
+                              : "Please add something about yourself to show here"}
+                          </p>
+                        </div>
+                        <div className="mt-6">
+                          <h3 className="text-blue-600 font-bold text-xl">
+                            Languages
+                          </h3>
+                          <ul className="list-disc list-inside mt-4">
+                            {translator.languages.map((lang, idx) => (
+                              <li key={idx}>{lang}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </>
+                    )}{" "}
+                  </TabPane>
+                  <TabPane openTab={openTab} tabNo={2}>
+                    <p>
+                      Completely synergize resource taxing relationships via
+                      premier niche markets. Professionally cultivate one-to-one
+                      customer service with robust ideas.
+                      <br />
+                      <br />
+                      Dynamically innovate resource-leveling customer service
+                      for state of the art customer service.
+                    </p>
+                  </TabPane>
+                  <TabPane openTab={openTab} tabNo={3}>
+                    <p>
+                      Efficiently unleash cross-media information without
+                      cross-media value. Quickly maximize timely deliverables
+                      for real-time schemas.
+                      <br />
+                      <br /> Dramatically maintain clicks-and-mortar solutions
+                      without functional solutions.
+                    </p>
+                  </TabPane>
+                </TabsPaneContainer>
                 {/*========Tabs Pane End========== */}
               </div>
             </div>

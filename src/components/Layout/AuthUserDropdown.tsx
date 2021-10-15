@@ -12,7 +12,7 @@ function AuthUserDropdown() {
         <FaAngleDown />
       </button>
       {showDropdown && (
-        <div className="absolute right-0 bg-gray-50 w-36 rounded px-4 py-4">
+        <div className="absolute right-0 bg-gray-50 w-36 rounded px-4 py-4 z-50">
           <ul>
             <li className="text-gray-500 py-2">
               <Link href="/profile">
