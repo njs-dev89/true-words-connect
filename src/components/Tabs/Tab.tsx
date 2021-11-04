@@ -2,7 +2,7 @@ import React from "react";
 
 function Tab({ openTab, setOpenTab, text, tabNo }): JSX.Element {
   return (
-    <li className="-mb-px mr-2 last:mr-0 text-center">
+    <li className="-mb-1 mr-2 last:mr-0 text-center">
       <a
         className={
           " font-bold px-4 py-3 " +

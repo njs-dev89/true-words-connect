@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -14,21 +15,30 @@ export default function Home() {
         <div className="home-banner">
           <div className="container">
             <div className="grid grid-cols-11">
-              <div className="col-span-6">
-                <h1 className="headline">
+              <div className="col-span-11 md:col-span-6">
+                <h1 className="headline text-center md:text-left">
                   Connecting and preserving the world through languages
                 </h1>
-                <p className="mb-12">
+                <p className="mb-12 text-center md:text-left">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Debitis quisquam cupiditate nihil corporis commodi animi sint
                   doloremque numquam aliquid itaque.
                 </p>
-                <Link href="/translators">
-                  <a className="btn btn-yellow mr-4 shadow-xl">Find Provider</a>
-                </Link>
-                <Link href="/translator-signup">
-                  <a className="btn btn-outline">Start Translating</a>
-                </Link>
+                <div className="text-center md:text-left">
+                  <Link href="/translators">
+                    <a className="btn btn-yellow mr-4 shadow-xl">
+                      Find Provider
+                    </a>
+                  </Link>
+                  <Link href="/translator-signup">
+                    <a className="btn btn-outline">Start Providing</a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-span-11 md:col-span-5">
+                <div className="relative h-96">
+                  <Image src="/home.svg" alt="" layout="fill" />
+                </div>
               </div>
             </div>
           </div>

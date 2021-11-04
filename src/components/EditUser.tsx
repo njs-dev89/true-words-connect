@@ -110,7 +110,7 @@ function EditUser({ setShowModal, translator }) {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="username" className="text-sm mb-4 font-bold">
+                <label htmlFor="fullname" className="text-sm mb-4 font-bold">
                   Full Name
                 </label>
                 <input

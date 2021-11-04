@@ -14,7 +14,7 @@ function SignupForm({
 }) {
   return (
     <form className="" onSubmit={onSubmit}>
-      {error && <div>{error}</div>}
+      {error && <div className="text-red-600 text-sm">*{error}</div>}
       <Input
         type="text"
         label="Username"

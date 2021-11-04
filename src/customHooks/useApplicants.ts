@@ -4,7 +4,7 @@ import { db } from "../config/firebaseConfig";
 
 export default function useApplicants() {
   const [applicants, setApplicants] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
   useEffect(() => {
     const q = query(collection(db, "applicants"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -14,13 +14,13 @@ export default function useApplicants() {
         data["id"] = doc.id;
         applicants.push(data);
       });
-      setLoading(true);
+      setDataLoading(true);
 
       setApplicants(applicants);
-      setLoading(false);
+      setDataLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  return { loading, applicants };
+  return { dataLoading, applicants };
 }

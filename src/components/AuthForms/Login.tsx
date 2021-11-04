@@ -4,6 +4,7 @@ import React, { ChangeEvent, useState } from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
+import validator from "validator";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,15 @@ function Login() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    if (validator.isEmpty(email)) {
+      return setError("Email field is empty");
+    }
+    if (!validator.isEmail(email)) {
+      return setError("Invalid email address");
+    }
+    if (!validator.isLength(password, { min: 6, max: undefined })) {
+      return setError("Password must be atleast 6 characters long");
+    }
     setError(null);
     signInUser(email, password)
       .then(() => {
@@ -28,7 +38,7 @@ function Login() {
       <div>
         <h3 className="text-3xl text-yellow-300 font-bold mb-6">Login</h3>
         <form className="" onSubmit={onSubmit}>
-          {error && <div>{error}</div>}
+          {error && <div className="text-red-600 text-sm">*{error}</div>}
           <Input
             type="email"
             label="Email"

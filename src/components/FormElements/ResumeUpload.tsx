@@ -6,14 +6,17 @@ import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import { FcHighPriority, FcOk } from "react-icons/fc";
 
-function ResumeUpload({ setResumeLink }) {
+function ResumeUpload({ setResumeLink, setError }) {
   const { authUser } = useFirebaseAuth();
   const [upload, setUpload] = useState(false);
   const [resumeProgress, setResumeProgress] = useState(0);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadFailed, setUploadFailed] = useState(false);
   const uploadResume = (e) => {
-    console.log(e.target.files[0]);
+    console.log(e.target.files[0].type);
+    if (e.target.files[0].type !== "application/pdf") {
+      return setError("Resumes must be in pdf format");
+    }
     setUpload(true);
     const storageRef = ref(storage, `resumes/${authUser.uid}`);
     const uploadResume = uploadBytesResumable(storageRef, e.target.files[0]);
@@ -53,7 +56,7 @@ function ResumeUpload({ setResumeLink }) {
     );
   };
   return (
-    <div className="">
+    <div className="mt-4">
       <label className="w-full flex items-center justify-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide cursor-pointer ease-linear transition-all duration-150">
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
@@ -68,6 +71,7 @@ function ResumeUpload({ setResumeLink }) {
         <input
           type="file"
           name="resume"
+          accept=".pdf"
           id="resume"
           className="hidden"
           onChange={uploadResume}

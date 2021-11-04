@@ -12,9 +12,7 @@ function TranslatorsPage() {
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                   <div className="">
-                    <h3 className="text-blue-600 font-bold text-xl">
-                      Applicants
-                    </h3>
+                    <h3 className="text-blue font-bold text-xl">Applicants</h3>
                     <table className="w-full p-5 text-gray-700 table-bottom-spaced">
                       <thead>
                         <tr className="bg-white rounded-table-cell">

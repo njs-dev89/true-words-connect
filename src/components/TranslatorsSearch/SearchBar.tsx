@@ -90,7 +90,7 @@ function SearchBar({ query }) {
     >
       <div className="pt-32 flex justify-center">
         <form
-          className=" flex"
+          className="flex flex-col sm:flex-row"
           onSubmit={(e) => {
             e.preventDefault();
             setLocation({ lat: currentPosition.lat, lng: currentPosition.lng });
@@ -107,7 +107,7 @@ function SearchBar({ query }) {
                   ref={placeRef}
                   onChange={(e) => setPlace(e.target.value)}
                   type="text"
-                  className="form-input rounded-full w-96 py-3"
+                  className="form-input rounded-full w-96 py-3 border"
                   placeholder="Enter Location"
                 />
                 {place !== "" && (
@@ -123,14 +123,16 @@ function SearchBar({ query }) {
               </>
             </Autocomplete>
           </div>
-          <button
-            type="button"
-            onClick={() => setShowModal(true)}
-            className="btn btn-rounded px-3 py-3 mx-4 bg-white"
-          >
-            Search on the map
-          </button>
-          <button className="btn btn-yellow btn-rounded">Search</button>
+          <div className="mt-4 sm:mt-0">
+            <button
+              type="button"
+              onClick={() => setShowModal(true)}
+              className="btn-rounded px-6 py-3 border-2 mx-4 bg-white"
+            >
+              Search on the map
+            </button>
+            <button className="btn btn-yellow btn-rounded">Search</button>
+          </div>
         </form>
 
         {showModal && (

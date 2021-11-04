@@ -5,17 +5,22 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  onIdTokenChanged,
 } from "firebase/auth";
-import app, { db } from "../config/firebaseConfig";
-import { collection, doc, setDoc } from "@firebase/firestore";
+import app, { db, functions } from "../config/firebaseConfig";
+import { collection, doc, getDoc, setDoc } from "@firebase/firestore";
+import { httpsCallable } from "firebase/functions";
 
 const auth = getAuth(app);
 const formatAuthUser = (user) => ({
   uid: user.uid,
   email: user.email,
+  role: user.role,
+  profile: user.profile,
 });
 
 export default function useAuth() {
+  const addClientRole = httpsCallable(functions, "addClientRole");
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +32,33 @@ export default function useAuth() {
     }
 
     setLoading(true);
+    const token = await authState.getIdTokenResult(true);
+    authState.role = token.claims.role;
+    if (token.claims.role === "translator") {
+      const docRef = doc(db, `/translators/${authState.uid}`);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        authState.profile = docSnap.data();
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+
+    if (token.claims.role === "client") {
+      const docRef = doc(db, `/clients/${authState.uid}`);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        authState.profile = docSnap.data();
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
     var formattedUser = formatAuthUser(authState);
+    console.log(formattedUser);
     setAuthUser(formattedUser);
     setLoading(false);
   };
@@ -52,7 +83,11 @@ export default function useAuth() {
       const newUser = await setDoc(userDoc, {
         email: credential.user.email,
         username,
+        profile_pic: "/profile-placeholder.png",
       });
+      const roleMessage = await addClientRole({ uid: credential.user.uid });
+      console.log(roleMessage);
+      authStateChanged(credential.user);
     } catch (e) {
       console.log(e);
     }
@@ -101,7 +136,13 @@ export default function useAuth() {
   // listen for Firebase state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
-    return () => unsubscribe();
+    const unsub = onIdTokenChanged(auth, (token) => {
+      console.log(token);
+    });
+    return () => {
+      unsubscribe();
+      unsub();
+    };
   }, []);
 
   return {

@@ -1,13 +1,16 @@
 import "../styles/globals.css";
 import { AuthUserProvider } from "../context/authContext";
 import Layout from "../components/Layout/Layout";
+import { AgoraProviderWithNoSSR } from "../context/agoraContextNoSsr";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthUserProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AgoraProviderWithNoSSR>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AgoraProviderWithNoSSR>
     </AuthUserProvider>
   );
 }

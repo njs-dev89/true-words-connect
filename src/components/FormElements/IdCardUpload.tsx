@@ -6,7 +6,7 @@ import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import { FcHighPriority, FcOk } from "react-icons/fc";
 
-function IdCardUpload({ setIdCardLink }) {
+function IdCardUpload({ setIdCardLink, setError }) {
   const { authUser } = useFirebaseAuth();
   const [upload, setUpload] = useState(false);
   const [idCardProgress, setIdCardProgress] = useState(0);
@@ -14,6 +14,9 @@ function IdCardUpload({ setIdCardLink }) {
   const [uploadFailed, setUploadFailed] = useState(false);
   const uploadIdCard = (e) => {
     console.log(e.target.files[0]);
+    if (e.target.files[0].type.split("/")[0] !== "image") {
+      return setError("Passport must be an image format");
+    }
     setUpload(true);
     const storageRef = ref(storage, `idCard/${authUser.uid}`);
     const uploadIdCard = uploadBytesResumable(storageRef, e.target.files[0]);
@@ -68,6 +71,7 @@ function IdCardUpload({ setIdCardLink }) {
         <input
           type="file"
           name="idCard"
+          accept="image/*"
           id="idCard"
           className="hidden"
           onChange={uploadIdCard}

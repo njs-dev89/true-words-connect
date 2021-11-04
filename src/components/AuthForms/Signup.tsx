@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useFirebaseAuth } from "../../context/authContext";
-import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
 import SignupForm from "./SignupForm";
+import validator from "validator";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -17,6 +17,21 @@ function Signup() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    if (!validator.isLength(username, { min: 6, max: undefined })) {
+      return setError("Username must be atleast 6 characters long");
+    }
+    if (!validator.isAlphanumeric(username, "en-US", { ignore: "_" })) {
+      return setError("Username must contain letters, numbers or underscore ");
+    }
+    if (validator.isEmpty(email)) {
+      return setError("Email field is empty");
+    }
+    if (!validator.isEmail(email)) {
+      return setError("Invalid email address");
+    }
+    if (!validator.isLength(password, { min: 6, max: undefined })) {
+      return setError("Password must be atleast 6 characters long");
+    }
     setError(null);
     createUser(username, email, password)
       .then(() => {

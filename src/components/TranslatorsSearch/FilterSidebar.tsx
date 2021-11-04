@@ -25,7 +25,7 @@ function FilterSidebar({ query }) {
   // }, []);
 
   return (
-    <div className="col-span-1">
+    <div className="col-span-4 sm:col-span-1">
       <div className="shadow bg-white p-4 rounded-md">
         <h3 className="font-bold text-sm mb-4">Filter by hourly rate</h3>
         <MultiRangeSlider

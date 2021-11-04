@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
 import { useFirebaseAuth } from "../../context/authContext";
 import Link from "next/link";
 
-function AuthUserDropdown() {
-  const [showDropdown, setShowDropDown] = useState(false);
-  const { logOut } = useFirebaseAuth();
+function AuthUserDropdown({ showDropdown }) {
+  const { logOut, authUser } = useFirebaseAuth();
   return (
     <div className="relative">
-      <button onClick={() => setShowDropDown(!showDropdown)}>
-        <FaAngleDown />
-      </button>
       {showDropdown && (
-        <div className="absolute right-0 bg-gray-50 w-36 rounded px-4 py-4 z-50">
+        <div className="absolute top-4 right-0 bg-gray-50 w-36 rounded px-4 py-4 z-50">
           <ul>
             <li className="text-gray-500 py-2">
-              <Link href="/profile">
+              <Link
+                href={`${
+                  authUser.role === "translator"
+                    ? "/profile/overview"
+                    : "/profile/orders"
+                }`}
+              >
                 <a>Profile</a>
               </Link>
             </li>

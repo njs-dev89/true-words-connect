@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 import AdminSidebar from "./AdminSidebar";
+import { useFirebaseAuth } from "../../context/authContext";
+import { useAgora } from "../../context/agoraContextNoSsr";
+import { httpsCallable } from "@firebase/functions";
+import { functions } from "../../config/firebaseConfig";
 
+const genRtmToken = httpsCallable(functions, "genRtmToken");
 function Layout({ children }) {
   const router = useRouter();
+  const { authUser } = useFirebaseAuth();
+  const { loginToAgoraRtm } = useAgora();
+  const agoraLogin = async (uid) => {
+    const token = await genRtmToken({ uid });
+    console.log(token.data);
+    await loginToAgoraRtm(uid, token.data);
+  };
+  useEffect(() => {
+    if (authUser) {
+      agoraLogin(authUser.uid);
+    }
+  }, [authUser]);
   return (
     <div>
       <Navbar />
