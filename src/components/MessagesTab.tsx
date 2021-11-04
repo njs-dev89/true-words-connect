@@ -5,6 +5,8 @@ import { collection, doc, onSnapshot, query, where } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import MessageRooms from "./MessageRooms";
+import { IoMdSend } from "react-icons/io";
+import Image from "next/image";
 
 function MessagesTab() {
   const router = useRouter();
@@ -52,29 +54,75 @@ function MessagesTab() {
     }
   }, [rooms, router]);
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-3 gap-4">
       {!loading && rooms.length > 0 ? (
         <>
           <MessageRooms rooms={rooms} />
-          <div className="col-span-2">
-            <div>
-              {messages.length &&
+          <div className="col-span-3 md:col-span-2">
+            <div className="grid grid-cols-12">
+              <div className="col-span-1 w-8 h-8 relative rounded-full overflow-hidden mt-4">
+                <Image src="/profile-placeholder.png" alt="" layout="fill" />
+              </div>
+              <div className="flex justify-between col-span-10">
+                <div className="">
+                  <div className="flex">
+                    <p className="font-medium">John Doe</p>
+                  </div>
+                  <div className="bg-gray-300 p-4 rounded-xl text-sm mb-4">
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Excepturi explicabo obcaecati doloremque quasi beatae?
+                      Earum pariatur sequi repudiandae reprehenderit, a maiores
+                      culpa suscipit consequatur expedita officia reiciendis,
+                      tenetur aperiam corporis.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* {messages.length &&
                 messages.map((mesg) => {
                   return <p>{mesg.text}</p>;
-                })}
+                })} */}
             </div>
-            <div>
-              <textarea
+            <div className="grid grid-cols-12">
+              <div className="col-span-1 w-8 h-8 relative rounded-full overflow-hidden mt-4">
+                <Image src="/profile-placeholder.png" alt="" layout="fill" />
+              </div>
+              <div className="flex justify-between col-span-10">
+                <div className="">
+                  <div className="flex">
+                    <p className="font-medium">John Doe</p>
+                  </div>
+                  <div className="bg-gray-300 p-4 rounded-xl text-sm mb-4">
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Excepturi explicabo obcaecati doloremque quasi beatae?
+                      Earum pariatur sequi repudiandae reprehenderit, a maiores
+                      culpa suscipit consequatur expedita officia reiciendis,
+                      tenetur aperiam corporis.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* {messages.length &&
+                messages.map((mesg) => {
+                  return <p>{mesg.text}</p>;
+                })} */}
+            </div>
+            <div className="flex relative">
+              <input
+                className="form-input border-2 rounded-md px-4 py-4 flex-grow"
                 name="msg"
                 id=""
-                cols={20}
-                rows={5}
+                placeholder="Type your message"
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
-              >
-                Enter message
-              </textarea>
+              />
+
               <button
+                className="absolute text-yellow right-0 mr-4 transform top-1/2 -translate-y-2/4"
                 onClick={() => {
                   const peerId =
                     authUser.role === "client"
@@ -84,14 +132,14 @@ function MessagesTab() {
                   sendMessageToPeer(msg, peerId);
                 }}
               >
-                Send
+                <IoMdSend className="text-3xl" />
               </button>
             </div>
           </div>
         </>
       ) : authUser.role === "client" ? (
         <div className="col-span-3 mt-16">
-          <p className="text-center">You haven't started any chat yet</p>
+          <p className="text-center">You haven&apos;t started any chat yet</p>
         </div>
       ) : (
         <div className="col-span-3 mt-16">

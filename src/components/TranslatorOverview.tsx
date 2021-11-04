@@ -16,8 +16,16 @@ function TranslatorOverview({ translator }) {
     const messageRoomsCollection = collection(db, `/messageRooms`);
     try {
       const msgRoomDocRef = await addDoc(messageRoomsCollection, {
-        client: { id: client.id },
-        translator: { id: translator.id },
+        client: {
+          id: client.id,
+          username: client.username,
+          profile_pic: client.profile_pic,
+        },
+        translator: {
+          id: translator.id,
+          username: translator.username,
+          profile_pic: translator.profile_pic,
+        },
       });
       const msgRoomSnap = await getDoc(msgRoomDocRef);
       router.push(`/profile/messages?room=${msgRoomSnap.id}`);
@@ -48,7 +56,18 @@ function TranslatorOverview({ translator }) {
               className="btn-small btn-blue"
               onClick={() => {
                 console.log(translator);
-                createMessage({ id: authUser?.uid }, { id: translator.id });
+                createMessage(
+                  {
+                    id: authUser?.uid,
+                    username: authUser.profile.username,
+                    profile_pic: authUser.profile.profile_pic,
+                  },
+                  {
+                    id: translator.id,
+                    username: translator.username,
+                    profile_pic: translator.profile_pic,
+                  }
+                );
               }}
             >
               Send message

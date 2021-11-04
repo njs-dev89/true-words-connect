@@ -53,6 +53,7 @@ function OfferRequest() {
           {offerRequests.map((req) => {
             return (
               <TableRowCollapse
+                key={req.id}
                 rowItems={[
                   req.client.username,
                   req.service,
@@ -101,13 +102,13 @@ function OfferRequest() {
     ) : authUser.role === "client" ? (
       <div className="col-span-3 mt-16">
         <p className="text-center">
-          You haven't sent any offer request yet yet
+          You haven&apos;t sent any offer request yet yet
         </p>
       </div>
     ) : (
       <div className="col-span-3 mt-16">
         <p className="text-center">
-          You haven't recieved any offer request yet
+          You haven&apos;t recieved any offer request yet
         </p>
       </div>
     );

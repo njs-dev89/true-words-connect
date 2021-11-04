@@ -12,6 +12,7 @@ import { db } from "../config/firebaseConfig";
 import MessagesTab from "./MessagesTab";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { BiEdit } from "react-icons/bi";
 
 function TranslatorProfile({ userId }) {
   const { query } = useRouter();
@@ -53,7 +54,12 @@ function TranslatorProfile({ userId }) {
             ) : (
               <>
                 <div className="flex justify-end mr-4 mb-8 text-blue">
-                  <button onClick={() => setShowModal(true)}>Edit</button>
+                  <button
+                    className=" p-2 bg-indigo-200 rounded-full"
+                    onClick={() => setShowModal(true)}
+                  >
+                    <BiEdit className="text-2xl" />
+                  </button>
                 </div>
                 <UserDetails translator={translator} />
               </>

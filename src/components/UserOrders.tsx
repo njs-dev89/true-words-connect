@@ -57,9 +57,21 @@ function UserOrders() {
               <tr className="" key={order.id}>
                 <td className="py-4 flex justify-center gap-3 items-center">
                   <div className="w-8 h-8 relative rounded-full overflow-hidden">
-                    <Image src="/search-image.jpg" alt="" layout="fill" />
+                    <Image
+                      src={
+                        authUser.role === "client"
+                          ? order.translator.profile_pic ||
+                            "/profile-placeholder.png"
+                          : order.client.profile_pic ||
+                            "/profile-placeholder.png"
+                      }
+                      alt=""
+                      layout="fill"
+                    />
                   </div>
-                  {order.translator.username}
+                  {authUser.role === "client"
+                    ? order.translator.username || "John doe"
+                    : order.client.username || "John doe"}
                 </td>
                 <td className="py-4 text-center">{order.service}</td>
                 <td className="py-4 text-center">${order.price}</td>
@@ -79,11 +91,11 @@ function UserOrders() {
     </div>
   ) : authUser.role === "client" ? (
     <div className="col-span-3 mt-16">
-      <p className="text-center">You haven't ordered yet</p>
+      <p className="text-center">You haven&apos;t ordered yet</p>
     </div>
   ) : (
     <div className="col-span-3 mt-16">
-      <p className="text-center">You haven't recieved any order yet</p>
+      <p className="text-center">You haven&apos;t recieved any order yet</p>
     </div>
   );
 }

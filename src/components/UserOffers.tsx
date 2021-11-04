@@ -68,7 +68,11 @@ function UserOffers() {
               <tr className="" key={offer.id}>
                 <td className="py-4 flex justify-center gap-3 items-center">
                   <div className="w-8 h-8 relative rounded-full overflow-hidden">
-                    <Image src="/search-image.jpg" alt="" layout="fill" />
+                    <Image
+                      src={offer.translator.profile_pic}
+                      alt=""
+                      layout="fill"
+                    />
                   </div>
                   {offer.translator.username}
                 </td>
@@ -92,11 +96,11 @@ function UserOffers() {
     </div>
   ) : authUser.role === "client" ? (
     <div className="col-span-3 mt-16">
-      <p className="text-center">You haven't recieved any offer yet</p>
+      <p className="text-center">You haven&apos;t recieved any offer yet</p>
     </div>
   ) : (
     <div className="col-span-3 mt-16">
-      <p className="text-center">You haven't sent any offer</p>
+      <p className="text-center">You haven&apos;t sent any offer</p>
     </div>
   );
 }

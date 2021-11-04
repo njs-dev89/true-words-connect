@@ -3,7 +3,7 @@ import SingleRoom from "./SingleRoom";
 
 function MessageRooms({ rooms }) {
   return (
-    <div>
+    <div className="col-span-3 md:col-span-1">
       {rooms.map((room) => (
         <SingleRoom room={room} key={room.id} />
       ))}

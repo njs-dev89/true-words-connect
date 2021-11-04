@@ -10,6 +10,7 @@ import MessagesTab from "./MessagesTab";
 import UserOffers from "./UserOffers";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { BiEdit } from "react-icons/bi";
 
 function ClientProfile({ userId }) {
   const [openTab, setOpenTab] = useState(1);
@@ -49,7 +50,12 @@ function ClientProfile({ userId }) {
             ) : (
               <>
                 <div className="flex justify-end mr-4 mb-8 text-blue">
-                  <button onClick={() => setShowModal(true)}>Edit</button>
+                  <button
+                    className=" p-2 bg-indigo-200 rounded-full"
+                    onClick={() => setShowModal(true)}
+                  >
+                    <BiEdit className="text-2xl" />
+                  </button>
                 </div>
                 <UserDetails translator={translator} />
               </>

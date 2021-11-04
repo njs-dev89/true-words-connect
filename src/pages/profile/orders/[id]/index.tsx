@@ -7,7 +7,7 @@ function OrderDetailsPage() {
   const { loading, authUser } = useFirebaseAuth();
   const router = useRouter();
   useEffect(() => {
-    if (!loading || !authUser) {
+    if (!loading && !authUser) {
       router.push("/login");
     }
   }, [authUser, loading, router]);
