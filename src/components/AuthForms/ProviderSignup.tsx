@@ -12,7 +12,7 @@ import validator from "validator";
 import LanguageTags from "../FormElements/LanguageTags";
 import LanguageProficiency from "../FormElements/LanguageProficiency";
 
-function TranslatorSignup() {
+function ProviderSignup() {
   const [step, setStep] = useState(1);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ function TranslatorSignup() {
   const router = useRouter();
   const [error, setError] = useState(null);
 
-  const { authUser, createTranslatorApplicant, addTranslatorApplicant } =
+  const { authUser, createProviderApplicant, addProviderApplicant } =
     useFirebaseAuth();
 
   const onSignup = (event) => {
@@ -48,7 +48,7 @@ function TranslatorSignup() {
       return setError("Password must be atleast 6 characters long");
     }
     setError(null);
-    createTranslatorApplicant(username, email, password)
+    createProviderApplicant(username, email, password)
       .then(() => {
         console.log("Success. The user is created in Firebase");
         setStep(2);
@@ -75,7 +75,7 @@ function TranslatorSignup() {
       return setError("Please capture and upload your video");
     }
     try {
-      await addTranslatorApplicant(
+      await addProviderApplicant(
         authUser.uid,
         username,
         email,
@@ -93,7 +93,7 @@ function TranslatorSignup() {
 
   useEffect(() => {
     if (authUser && authUser.role !== undefined) {
-      router.push("/translators");
+      router.push("/providers");
     }
     if (authUser && step === 1) {
       setStep(2);
@@ -184,4 +184,4 @@ function TranslatorSignup() {
   );
 }
 
-export default TranslatorSignup;
+export default ProviderSignup;

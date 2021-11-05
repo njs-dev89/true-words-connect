@@ -41,7 +41,7 @@ function CreateOfferRequest({ setShowModal }) {
 
     const offerRequestCollection = collection(
       db,
-      `/translators/${query.id}/offerRequest`
+      `/providers/${query.id}/offerRequest`
     );
     const offerReqDocRef = await addDoc(offerRequestCollection, formData);
     setShowModal(false);

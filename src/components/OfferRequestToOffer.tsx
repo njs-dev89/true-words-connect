@@ -13,7 +13,7 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
     e.preventDefault();
     delete reqData.budget;
     reqData.price = offerAmount;
-    reqData.translator = {
+    reqData.provider = {
       id: authUser.uid,
       username: authUser.profile.username,
       profile_pic: authUser.profile.profile_pic,
@@ -22,7 +22,7 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
     try {
       const offerDocRef = await addDoc(offerCollection, reqData);
       await deleteDoc(
-        doc(db, `/translators/${authUser.uid}/offerRequest`, reqData.id)
+        doc(db, `/providers/${authUser.uid}/offerRequest`, reqData.id)
       );
       setShowModal(false);
     } catch (error) {

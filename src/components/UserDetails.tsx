@@ -1,18 +1,18 @@
 import React from "react";
 import Image from "next/image";
 
-function UserDetails({ translator }) {
+function UserDetails({ provider }) {
   return (
     <>
       <div className="flex flex-col items-center px-4 pb-4 border-b">
         <div className="w-24 h-24 relative rounded-full overflow-hidden">
           <Image
-            src={translator.profile_pic || "/profile-placeholder.png"}
+            src={provider.profile_pic || "/profile-placeholder.png"}
             alt=""
             layout="fill"
           />
         </div>
-        <h3 className="font-bold text-lg mt-4 mb-2">{translator.username}</h3>
+        <h3 className="font-bold text-lg mt-4 mb-2">{provider.username}</h3>
         <p className="text-center text-sm">Add something about yourself</p>
         <p className="text-gray-700 mt-4">Not rated Yet</p>
       </div>
@@ -26,12 +26,12 @@ function UserDetails({ translator }) {
           </div>
           <div className="text-gray-600">
             <p className="my-3">
-              {translator.fullname ? translator.fullname : "Add your name"}
+              {provider.fullname ? provider.fullname : "Add your name"}
             </p>
-            <p className="my-3">{translator.email}</p>
+            <p className="my-3">{provider.email}</p>
             <p className="my-3">
-              {translator?.address?.city
-                ? translator.address?.city
+              {provider?.address?.city
+                ? provider.address?.city
                 : "Add your city"}
             </p>
           </div>

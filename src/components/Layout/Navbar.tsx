@@ -32,17 +32,17 @@ function Navbar() {
               {authUser && (
                 <>
                   <li className="font-medium">
-                    <Link href="/translators">
+                    <Link href="/providers">
                       <a>Providers</a>
                     </Link>
                   </li>
                   <li className="font-medium">
-                    <Link href="/translators">
+                    <Link href="/providers">
                       <a>How it works</a>
                     </Link>
                   </li>
                   <li className="font-medium">
-                    <Link href="/translators">
+                    <Link href="/providers">
                       <a>Terms of Services</a>
                     </Link>
                   </li>

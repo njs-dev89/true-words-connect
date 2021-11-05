@@ -1,6 +1,6 @@
-import FilterSidebar from "../../components/TranslatorsSearch/FilterSidebar";
-import SearchBar from "../../components/TranslatorsSearch/SearchBar";
-import SearchResult from "../../components/TranslatorsSearch/SearchResult";
+import FilterSidebar from "../../components/ProvidersSearch/FilterSidebar";
+import SearchBar from "../../components/ProvidersSearch/SearchBar";
+import SearchResult from "../../components/ProvidersSearch/SearchResult";
 import algoliasearch from "algoliasearch/lite";
 import { SearchProvider } from "../../context/searchAndFilterContext";
 
@@ -8,9 +8,9 @@ const client = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
-const index = client.initIndex("translators");
+const index = client.initIndex("providers");
 
-function TranslatorsPage({ query, hits }) {
+function ProvidersPage({ query, hits }) {
   console.log(hits);
   return (
     <SearchProvider>
@@ -19,7 +19,7 @@ function TranslatorsPage({ query, hits }) {
           <SearchBar query={query} />
           <div className="grid grid-cols-4 gap-4  mt-16">
             <FilterSidebar query={query} />
-            <SearchResult translators={hits.hits} />
+            <SearchResult providers={hits.hits} />
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@ function TranslatorsPage({ query, hits }) {
   );
 }
 
-export default TranslatorsPage;
+export default ProvidersPage;
 
 export const getServerSideProps = async (context) => {
   let filtArray = [];

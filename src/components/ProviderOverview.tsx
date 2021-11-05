@@ -5,11 +5,11 @@ import { db } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import CreateOfferRequest from "./CreateOfferRequest";
 
-function TranslatorOverview({ translator }) {
+function ProviderOverview({ provider }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
   const [showModal, setShowModal] = useState(false);
-  const createMessage = async (client, translator) => {
+  const createMessage = async (client, provider) => {
     const messageRoomsCollection = collection(db, `/messageRooms`);
     try {
       const msgRoomDocRef = await addDoc(messageRoomsCollection, {
@@ -18,10 +18,10 @@ function TranslatorOverview({ translator }) {
           username: client.username,
           profile_pic: client.profile_pic,
         },
-        translator: {
-          id: translator.id,
-          username: translator.username,
-          profile_pic: translator.profile_pic,
+        provider: {
+          id: provider.id,
+          username: provider.username,
+          profile_pic: provider.profile_pic,
         },
       });
       const msgRoomSnap = await getDoc(msgRoomDocRef);
@@ -52,7 +52,7 @@ function TranslatorOverview({ translator }) {
             <button
               className="btn-small btn-blue"
               onClick={() => {
-                console.log(translator);
+                console.log(provider);
                 if (!authUser) {
                   return router.push("/login");
                 }
@@ -63,9 +63,9 @@ function TranslatorOverview({ translator }) {
                     profile_pic: authUser.profile.profile_pic,
                   },
                   {
-                    id: translator.id,
-                    username: translator.username,
-                    profile_pic: translator.profile_pic,
+                    id: provider.id,
+                    username: provider.username,
+                    profile_pic: provider.profile_pic,
                   }
                 );
               }}
@@ -74,12 +74,12 @@ function TranslatorOverview({ translator }) {
             </button>
           </div>
         </div>
-        <p className="p-4 mt-4 pb-8 border rounded">{translator.about}</p>
+        <p className="p-4 mt-4 pb-8 border rounded">{provider.about}</p>
       </div>
       <div className="mt-6">
         <h3 className="text-blue font-bold text-xl">Languages</h3>
         <ul className="list-disc list-inside mt-4">
-          {translator.languages.map((lang, idx) => (
+          {provider.languages.map((lang, idx) => (
             <li key={idx} className="flex items-baseline mb-2">
               <span className="font-medium mr-2">{lang.language}</span>(
               {lang.proficiency})
@@ -91,4 +91,4 @@ function TranslatorOverview({ translator }) {
   );
 }
 
-export default TranslatorOverview;
+export default ProviderOverview;

@@ -20,7 +20,7 @@ function Layout({ children }) {
   };
 
   const setGeoLocation = async (uid) => {
-    const userDoc = doc(db, `/translators/${uid}`);
+    const userDoc = doc(db, `/providers/${uid}`);
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         console.log("I ran");
@@ -42,7 +42,7 @@ function Layout({ children }) {
     if (authUser) {
       agoraLogin(authUser.uid);
     }
-    if (authUser && authUser.role === "translator") {
+    if (authUser && authUser.role === "provider") {
       setGeoLocation(authUser.uid);
     }
   }, [authUser]);

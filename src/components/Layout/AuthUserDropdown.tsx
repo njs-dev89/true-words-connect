@@ -12,7 +12,7 @@ function AuthUserDropdown({ showDropdown }) {
             <li className="text-gray-500 py-2">
               <Link
                 href={`${
-                  authUser.role === "translator"
+                  authUser.role === "provider"
                     ? "/profile/overview"
                     : "/profile/orders"
                 }`}
@@ -28,12 +28,12 @@ function AuthUserDropdown({ showDropdown }) {
             <li className="text-gray-500 py-2">
               <Link
                 href={`${
-                  authUser.role === "translator"
+                  authUser.role === "provider"
                     ? "/profile/orders"
                     : "/profile/offers"
                 }`}
               >
-                {authUser.role === "translator" ? <a>Orders</a> : <a>Offers</a>}
+                {authUser.role === "provider" ? <a>Orders</a> : <a>Offers</a>}
               </Link>
             </li>
             <li className="text-gray-500 py-2">

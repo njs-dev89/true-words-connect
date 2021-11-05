@@ -15,7 +15,7 @@ function OfferRequest() {
   useEffect(() => {
     const offerRequestCollection = collection(
       db,
-      `/translators/${authUser.uid}/offerRequest`
+      `/providers/${authUser.uid}/offerRequest`
     );
     const q = query(offerRequestCollection);
     const unsubscribe = onSnapshot(q, {}, (querySnapshot) => {

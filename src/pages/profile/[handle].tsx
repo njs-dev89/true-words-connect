@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ClientProfile from "../../components/ClientProfile";
-import TranslatorProfile from "../../components/TranslatorProfile";
+import ProviderProfile from "../../components/ProviderProfile";
 import { useFirebaseAuth } from "../../context/authContext";
 
 function ProfilePage() {
@@ -18,8 +18,8 @@ function ProfilePage() {
   if (authUser && authUser.role === "client") {
     return <ClientProfile userId={authUser.uid} />;
   }
-  if (authUser && authUser.role === "translator") {
-    return <TranslatorProfile userId={authUser.uid} />;
+  if (authUser && authUser.role === "provider") {
+    return <ProviderProfile userId={authUser.uid} />;
   }
   if (authUser && authUser.role === undefined) {
     return (

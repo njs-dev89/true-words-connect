@@ -2,20 +2,20 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-function ProfileCard({ translator }) {
+function ProfileCard({ provider }) {
   return (
     <div className="flex flex-col sm:flex-row gap-8 border rounded-lg px-6 pt-4 pb-12 mt-4 relative">
       <div className="flex flex-col items-center">
         <div className="relative w-20 h-20 rounded-full overflow-hidden">
-          <Image src={translator.profile_pic} alt="" layout="fill" />
+          <Image src={provider.profile_pic} alt="" layout="fill" />
         </div>
         <p className="mt-4 text-sm">Not Rated yet</p>
       </div>
       <div className="flex-grow">
         <div className="flex justify-between items-baseline">
-          <h3 className="font-bold">{translator.username}</h3>
+          <h3 className="font-bold">{provider.username}</h3>
 
-          <Link href={`/translators/profile/${translator.objectID}`}>
+          <Link href={`/providers/profile/${provider.objectID}`}>
             <a className="btn btn-yellow  sm:relative">See Profile</a>
           </Link>
         </div>
@@ -23,11 +23,11 @@ function ProfileCard({ translator }) {
         <div className="flex flex-col sm:flex-row mt-6">
           <p className="font-medium text-gray-700">
             <span className="font-bold text-black">Hourly Rate:</span> $
-            {translator.hourly_rate}
+            {provider.hourly_rate}
           </p>
           <p className="sm:ml-32 mt-4 sm:mt-0 font-medium text-gray-700">
             <span className="font-bold text-black">Language Skills:</span>{" "}
-            {translator.languages.map((lang) => lang.language).join(",")}
+            {provider.languages.map((lang) => lang.language).join(",")}
           </p>
         </div>
       </div>

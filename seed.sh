@@ -1,1 +1,1 @@
-LOCATION=us-central1 PROJECT_ID=truewordsconnect-30a9d ALGOLIA_APP_ID=LE0ZSH5R72 ALGOLIA_API_KEY=baffc9e1611b2949cec666d96373b8be ALGOLIA_INDEX_NAME=translators COLLECTION_PATH=translators GOOGLE_APPLICATION_CREDENTIALS=./truewordsconnect-sa.json npx firestore-algolia-search
+LOCATION=us-central1 PROJECT_ID=truewordsconnect-30a9d ALGOLIA_APP_ID=LE0ZSH5R72 ALGOLIA_API_KEY=6764645fe53c9ca32077b3a63deabbb4 ALGOLIA_INDEX_NAME=providers COLLECTION_PATH=providers GOOGLE_APPLICATION_CREDENTIALS=./truewordsconnect-sa.json npx firestore-algolia-search

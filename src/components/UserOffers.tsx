@@ -72,12 +72,12 @@ function UserOffers() {
                 <td className="py-4 flex justify-center gap-3 items-center">
                   <div className="w-8 h-8 relative rounded-full overflow-hidden">
                     <Image
-                      src={offer.translator.profile_pic}
+                      src={offer.provider.profile_pic}
                       alt=""
                       layout="fill"
                     />
                   </div>
-                  {offer.translator.username}
+                  {offer.provider.username}
                 </td>
                 <td className="py-4 text-center">{offer.service}</td>
                 <td className="py-4 text-center">${offer.price}</td>

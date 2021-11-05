@@ -8,24 +8,24 @@ import TabsPaneContainer from "../../../components/Tabs/TabsPaneContainer";
 import UserDetails from "../../../components/UserDetails";
 import UserReviews from "../../../components/UserReviews";
 import { useFirebaseAuth } from "../../../context/authContext";
-import TranslatorOverview from "../../../components/TranslatorOverview";
+import ProviderOverview from "../../../components/ProviderOverview";
 
-function TranslatorProfilePage() {
+function ProviderProfilePage() {
   const { query } = useRouter();
   const { authUser } = useFirebaseAuth();
   const [loading, setLoading] = useState(true);
-  const [translator, setTranslator] = useState(null);
+  const [provider, setProvider] = useState(null);
   const [openTab, setOpenTab] = useState(1);
 
   useEffect(() => {
     async function loadData() {
-      const docRef = doc(db, `/translators/${query.id}`);
+      const docRef = doc(db, `/providers/${query.id}`);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        const translator = docSnap.data();
-        translator.id = docSnap.id;
-        setTranslator(translator);
+        const provider = docSnap.data();
+        provider.id = docSnap.id;
+        setProvider(provider);
         setLoading(false);
       } else {
         // doc.data() will be undefined in this case
@@ -42,11 +42,7 @@ function TranslatorProfilePage() {
         <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
           {/*========= Left Panel ========== */}
           <div className="col-span-4 sm:col-span-1 bg-white py-6 shadow-md rounded-xl">
-            {loading ? (
-              <p>loading...</p>
-            ) : (
-              <UserDetails translator={translator} />
-            )}
+            {loading ? <p>loading...</p> : <UserDetails provider={provider} />}
           </div>
           {/*========= Left Panel End ========== */}
 
@@ -80,7 +76,7 @@ function TranslatorProfilePage() {
                     {loading ? (
                       <p>Loading...</p>
                     ) : (
-                      <TranslatorOverview translator={translator} />
+                      <ProviderOverview provider={provider} />
                     )}
                   </TabPane>
                   <TabPane openTab={openTab} tabNo={2}>
@@ -99,4 +95,4 @@ function TranslatorProfilePage() {
   );
 }
 
-export default TranslatorProfilePage;
+export default ProviderProfilePage;

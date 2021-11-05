@@ -6,10 +6,10 @@ import { db } from "../config/firebaseConfig";
 import { doc, setDoc } from "@firebase/firestore";
 import { useRouter } from "next/router";
 
-function EditUser({ setShowModal, translator }) {
+function EditUser({ setShowModal, provider }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [username, setUsername] = useState(translator.username);
+  const [username, setUsername] = useState(provider.username);
   const [fullname, setFullname] = useState("");
   const [hourlyPrice, setHourlyPrice] = useState(null);
   const [about, setAbout] = useState("");
@@ -19,30 +19,30 @@ function EditUser({ setShowModal, translator }) {
   const [picLink, setPicLink] = useState("");
 
   useEffect(() => {
-    if (translator.address) {
-      setCity(translator.address.city);
-      setState(translator.address.state);
-      setCountry(translator.address.country);
+    if (provider.address) {
+      setCity(provider.address.city);
+      setState(provider.address.state);
+      setCountry(provider.address.country);
     }
-    if (translator.fullname) {
-      setFullname(translator.fullname);
+    if (provider.fullname) {
+      setFullname(provider.fullname);
     }
 
-    if (translator.about) {
-      setAbout(translator.about);
+    if (provider.about) {
+      setAbout(provider.about);
     }
-    if (translator.hourly_rate) {
-      setHourlyPrice(translator.hourly_rate);
+    if (provider.hourly_rate) {
+      setHourlyPrice(provider.hourly_rate);
     }
-    if (translator.profile_pic) {
-      setPicLink(translator.profile_pic);
+    if (provider.profile_pic) {
+      setPicLink(provider.profile_pic);
     }
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userDoc = doc(db, `/translators/${authUser.uid}`);
+    const userDoc = doc(db, `/providers/${authUser.uid}`);
     const newUser = await setDoc(
       userDoc,
       {

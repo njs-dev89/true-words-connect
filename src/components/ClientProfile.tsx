@@ -14,7 +14,7 @@ import { useFirebaseAuth } from "../context/authContext";
 function ClientProfile({ userId }) {
   const [showModal, setShowModal] = useState(false);
   // const [userLoading, setUserLoading] = useState(true);
-  // const [translator, setTranslator] = useState(null);
+  // const [provider, setProvider] = useState(null);
   const { query } = useRouter();
   const { authUser, loading } = useFirebaseAuth();
 
@@ -23,7 +23,7 @@ function ClientProfile({ userId }) {
   //   const docSnap = await getDoc(docRef);
 
   //   if (docSnap.exists()) {
-  //     setTranslator(docSnap.data());
+  //     setProvider(docSnap.data());
   //     setUserLoading(false);
   //   } else {
   //     // doc.data() will be undefined in this case
@@ -56,7 +56,7 @@ function ClientProfile({ userId }) {
                     <BiEdit className="text-2xl" />
                   </button>
                 </div>
-                <UserDetails translator={authUser.profile} />
+                <UserDetails provider={authUser.profile} />
               </>
             )}
           </div>

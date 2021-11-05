@@ -23,10 +23,10 @@ function MessagesTab() {
     if (authUser.role === "client") {
       q = query(messageRoomsCollection, where("client.id", "==", authUser.uid));
     }
-    if (authUser.role === "translator") {
+    if (authUser.role === "provider") {
       q = query(
         messageRoomsCollection,
-        where("translator.id", "==", authUser.uid)
+        where("provider.id", "==", authUser.uid)
       );
     }
 
@@ -126,7 +126,7 @@ function MessagesTab() {
                 onClick={() => {
                   const peerId =
                     authUser.role === "client"
-                      ? room.translator.id
+                      ? room.provider.id
                       : room.client.id;
                   console.log({ peerId });
                   sendMessageToPeer(msg, peerId);

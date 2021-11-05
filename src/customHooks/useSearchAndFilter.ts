@@ -23,7 +23,7 @@ export default function useSearchAndFilter() {
     if (language.length === 0) {
       delete router.query.language;
       router.push({
-        pathname: "/[translators]",
+        pathname: "/[providers]",
         query: { ...router.query },
       });
     }
@@ -105,7 +105,7 @@ export default function useSearchAndFilter() {
       console.log({ location, distance, language, hourlyPrice, avgRating });
       const queryString = qs.join("&");
       console.log(qs);
-      router.push(`/translators?${queryString}`);
+      router.push(`/providers?${queryString}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language, location, hourlyPrice, distance, avgRating]);

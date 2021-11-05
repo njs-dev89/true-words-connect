@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EditUser from "../components/EditUser";
-import OfferRequest from "../components/OfferRequest";
+import EditUser from "./EditUser";
+import OfferRequest from "./OfferRequest";
 import TabsPaneContainer from "./Tabs/TabsPaneContainer";
 import UserDetails from "./UserDetails";
 import UserOrders from "./UserOrders";
@@ -11,21 +11,21 @@ import { useRouter } from "next/router";
 import { BiEdit } from "react-icons/bi";
 import { useFirebaseAuth } from "../context/authContext";
 
-function TranslatorProfile({ userId }) {
+function ProviderProfile({ userId }) {
   const { query } = useRouter();
   const { authUser, loading } = useFirebaseAuth();
   const [showModal, setShowModal] = useState(false);
   // const [userLoading, setUserLoading] = useState(true);
-  // const [translator, setTranslator] = useState(null);
+  // const [provider, setProvider] = useState(null);
 
   // async function loadData(userId) {
-  //   const docRef = doc(db, `/translators/${userId}`);
+  //   const docRef = doc(db, `/providers/${userId}`);
   //   const docSnap = await getDoc(docRef);
 
   //   if (docSnap.exists()) {
-  //     const translator = docSnap.data();
-  //     translator.id = docSnap.id;
-  //     setTranslator(translator);
+  //     const provider = docSnap.data();
+  //     provider.id = docSnap.id;
+  //     setProvider(provider);
   //     setUserLoading(false);
   //   } else {
   //     // doc.data() will be undefined in this case
@@ -41,7 +41,7 @@ function TranslatorProfile({ userId }) {
     <div className="bg-blue-50 pb-16 pt-32 min-h-screen">
       <div className="container">
         {showModal && (
-          <EditUser setShowModal={setShowModal} translator={authUser.profile} />
+          <EditUser setShowModal={setShowModal} provider={authUser.profile} />
         )}
         <div className="grid grid-cols-4 gap-4">
           {/*========= Left Panel ========== */}
@@ -58,7 +58,7 @@ function TranslatorProfile({ userId }) {
                     <BiEdit className="text-2xl" />
                   </button>
                 </div>
-                <UserDetails translator={authUser.profile} />
+                <UserDetails provider={authUser.profile} />
               </>
             )}
           </div>
@@ -110,7 +110,7 @@ function TranslatorProfile({ userId }) {
                     }`}
                   >
                     <Link href="/profile/offerRequest">
-                      <a>Offer Request</a>
+                      <a>Offer Requests</a>
                     </Link>
                   </li>
                   <li
@@ -193,4 +193,4 @@ function TranslatorProfile({ userId }) {
   );
 }
 
-export default TranslatorProfile;
+export default ProviderProfile;

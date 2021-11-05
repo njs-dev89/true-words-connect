@@ -25,12 +25,12 @@ export default function Home() {
                   doloremque numquam aliquid itaque.
                 </p>
                 <div className="text-center md:text-left">
-                  <Link href="/translators">
+                  <Link href="/providers">
                     <a className="btn btn-yellow mr-4 shadow-xl">
                       Find Provider
                     </a>
                   </Link>
-                  <Link href="/translator-signup">
+                  <Link href="/provider-signup">
                     <a className="btn btn-outline">Start Providing</a>
                   </Link>
                 </div>

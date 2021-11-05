@@ -34,8 +34,8 @@ export default function useAuth() {
     setLoading(true);
     const token = await authState.getIdTokenResult(true);
     authState.role = token.claims.role;
-    if (token.claims.role === "translator") {
-      const docRef = doc(db, `/translators/${authState.uid}`);
+    if (token.claims.role === "provider") {
+      const docRef = doc(db, `/providers/${authState.uid}`);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -93,7 +93,7 @@ export default function useAuth() {
     }
   };
 
-  const createTranslatorApplicant = async (username, email, password) => {
+  const createProviderApplicant = async (username, email, password) => {
     try {
       const credential = await createUserWithEmailAndPassword(
         auth,
@@ -104,7 +104,7 @@ export default function useAuth() {
       console.log(e);
     }
   };
-  const addTranslatorApplicant = async (
+  const addProviderApplicant = async (
     userId,
     username,
     email,
@@ -150,8 +150,8 @@ export default function useAuth() {
     loading,
     signInUser,
     createUser,
-    createTranslatorApplicant,
-    addTranslatorApplicant,
+    createProviderApplicant,
+    addProviderApplicant,
     logOut,
   };
 }

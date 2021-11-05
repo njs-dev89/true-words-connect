@@ -28,7 +28,7 @@ function Login() {
     setError(null);
     signInUser(email, password)
       .then(() => {
-        return router.push("/translators");
+        return router.push("/providers");
       })
       .catch((error) => {
         setError(error.message);

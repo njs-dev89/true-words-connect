@@ -15,8 +15,8 @@ function OrderData({ order }) {
       <div className="grid sm:grid-cols-2 md:grid-cols-3">
         {authUser.role === "client" ? (
           <div className="flex my-4">
-            <h3 className="font-medium mr-2">Translator:</h3>
-            <p>{order.translator?.username || "John Doe"}</p>
+            <h3 className="font-medium mr-2">Provider:</h3>
+            <p>{order.provider?.username || "John Doe"}</p>
           </div>
         ) : (
           <div className="flex my-4">

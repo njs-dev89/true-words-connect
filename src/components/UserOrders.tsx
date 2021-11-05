@@ -16,8 +16,8 @@ function UserOrders() {
     if (authUser.role === "client") {
       q = query(ordersCollection, where("client.id", "==", authUser.uid));
     }
-    if (authUser.role === "translator" || authUser.role === undefined) {
-      q = query(ordersCollection, where("translator.id", "==", authUser.uid));
+    if (authUser.role === "provider" || authUser.role === undefined) {
+      q = query(ordersCollection, where("provider.id", "==", authUser.uid));
     }
 
     const unsubscribe = onSnapshot(q, {}, (querySnapshot) => {
@@ -63,7 +63,7 @@ function UserOrders() {
                     <Image
                       src={
                         authUser.role === "client"
-                          ? order.translator.profile_pic ||
+                          ? order.provider.profile_pic ||
                             "/profile-placeholder.png"
                           : order.client.profile_pic ||
                             "/profile-placeholder.png"
@@ -73,7 +73,7 @@ function UserOrders() {
                     />
                   </div>
                   {authUser.role === "client"
-                    ? order.translator.username || "John doe"
+                    ? order.provider.username || "John doe"
                     : order.client.username || "John doe"}
                 </td>
                 <td className="py-4 text-center">{order.service}</td>

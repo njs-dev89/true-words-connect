@@ -11,7 +11,7 @@ function SingleApplicant() {
   const { authUser, loading } = useFirebaseAuth();
   const [dataLoading, setDataLoading] = useState(true);
   const [applicant, setApplicant] = useState(null);
-  const addTranslatorRole = httpsCallable(functions, "addTranslatorRole");
+  const addProviderRole = httpsCallable(functions, "addProviderRole");
   useEffect(() => {
     if (!loading && !authUser) {
       router.push("/login");
@@ -36,7 +36,7 @@ function SingleApplicant() {
 
   const acceptApplication = async (e) => {
     try {
-      const userDoc = doc(db, `/translators/${router.query.id}`);
+      const userDoc = doc(db, `/providers/${router.query.id}`);
       const newUser = await setDoc(userDoc, {
         email: applicant.email,
         username: applicant.username,
@@ -45,7 +45,7 @@ function SingleApplicant() {
       });
       const docRef = doc(db, `/applicants/${router.query.id}`);
       await deleteDoc(docRef);
-      const roleMessage = await addTranslatorRole({ uid: router.query.id });
+      const roleMessage = await addProviderRole({ uid: router.query.id });
       router.push("/adminDashboard/applicants");
     } catch (e) {
       console.log(e);

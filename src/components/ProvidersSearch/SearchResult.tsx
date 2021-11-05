@@ -1,15 +1,15 @@
 import React from "react";
 import ProfileCard from "./ProfileCard";
 
-function SearchResult({ translators }) {
-  console.log(translators);
+function SearchResult({ providers }) {
+  console.log(providers);
   return (
     <div className="col-span-4 sm:col-span-3 rounded-md bg-white shadow px-8 py-8">
-      {translators?.length === 0 ? (
+      {providers?.length === 0 ? (
         <p className="text-center font-medium mt-16">No provider found</p>
       ) : (
-        translators.map((translator) => (
-          <ProfileCard key={translator.objectID} translator={translator} />
+        providers.map((provider) => (
+          <ProfileCard key={provider.objectID} provider={provider} />
         ))
       )}
     </div>

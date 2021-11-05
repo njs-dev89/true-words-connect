@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function TranslatorsPage() {
+function ProvidersPage() {
   const [openTab, setOpenTab] = useState(1);
 
   return (
@@ -65,4 +65,4 @@ function TranslatorsPage() {
   );
 }
 
-export default TranslatorsPage;
+export default ProvidersPage;
