@@ -35,9 +35,12 @@ function UserOrders() {
     return () => unsubscribe();
   }, []);
   return orders.length > 0 ? (
-    <div className="mt-8">
+    <div className="mt-8 overflow-x-auto">
       <h3 className="text-blue font-bold text-xl mb-6">Orders</h3>
-      <table className="w-full text-gray-700 table-bottom-spaced bordered-table">
+      <table
+        className="w-full text-gray-700 table-bottom-spaced bordered-table"
+        style={{ minWidth: "600px" }}
+      >
         <thead>
           <tr>
             <th className="py-4 font-medium">CLient</th>
@@ -81,7 +84,7 @@ function UserOrders() {
 
                 <td>
                   <Link href={`/profile/orders/${order.id}`}>
-                    <a className="text-yellow-600">Details</a>
+                    <a className="text-yellow">Details</a>
                   </Link>
                 </td>
               </tr>

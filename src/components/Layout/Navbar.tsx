@@ -29,21 +29,25 @@ function Navbar() {
               </Link>
             </div>
             <ul className="flex gap-2 sm:gap-6 text-blue text-sm sm:text-base">
-              <li className="font-medium">
-                <Link href="/translators">
-                  <a>Providers</a>
-                </Link>
-              </li>
-              <li className="font-medium">
-                <Link href="/translators">
-                  <a>How it works</a>
-                </Link>
-              </li>
-              <li className="font-medium">
-                <Link href="/translators">
-                  <a>Terms of Services</a>
-                </Link>
-              </li>
+              {authUser && (
+                <>
+                  <li className="font-medium">
+                    <Link href="/translators">
+                      <a>Providers</a>
+                    </Link>
+                  </li>
+                  <li className="font-medium">
+                    <Link href="/translators">
+                      <a>How it works</a>
+                    </Link>
+                  </li>
+                  <li className="font-medium">
+                    <Link href="/translators">
+                      <a>Terms of Services</a>
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 

@@ -53,7 +53,7 @@ function CreateOfferRequest({ setShowModal }) {
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
-            <div className="flex items-center justify-between py-3 mx-5 border-b border-solid border-blueGray-200 rounded-t">
+            <div className="flex items-center justify-between py-3 mx-5 border-b border-solid border-gray-200 rounded-t">
               <h3 className="text-lg text-blue font-semibold">Offer Request</h3>
               <button
                 className="ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -239,7 +239,7 @@ function CreateOfferRequest({ setShowModal }) {
                 </div>
               </div>
 
-              <button className="btn btn-green">Create Offer</button>
+              <button className="btn btn-green">Create Request</button>
             </form>
             {/*Endbody*/}
           </div>

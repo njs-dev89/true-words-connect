@@ -46,9 +46,12 @@ function UserOffers() {
     }
   };
   return offers.length > 0 ? (
-    <div className="mt-8">
+    <div className="mt-8 overflow-auto">
       <h3 className="text-blue font-bold text-xl mb-6">Orders</h3>
-      <table className="w-full text-gray-700 table-bottom-spaced bordered-table">
+      <table
+        className="w-full text-gray-700 table-bottom-spaced bordered-table"
+        style={{ minWidth: "600px" }}
+      >
         <thead>
           <tr>
             <th className="py-4 font-medium">Name</th>

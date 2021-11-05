@@ -37,9 +37,12 @@ function OfferRequest() {
     return <p>Loading...</p>;
   } else {
     return offerRequests.length > 0 ? (
-      <div className="mt-8">
+      <div className="mt-8 overflow-scroll">
         <h3 className="text-blue font-bold text-xl mb-6">Offer Requests</h3>
-        <div className="w-full text-gray-700 table-bottom-spaced bordered-table">
+        <div
+          className="w-full text-gray-700 table-bottom-spaced bordered-table"
+          style={{ minWidth: "600px" }}
+        >
           <div className="grid grid-cols-7 border-2 rounded-lg">
             <div className="py-4 font-medium text-center">Client</div>
             <div className="py-4 font-medium text-center">Service</div>
