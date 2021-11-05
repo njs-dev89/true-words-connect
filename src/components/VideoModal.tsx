@@ -18,7 +18,13 @@ const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
   return <video ref={videoRef} width={500} height={500} autoPlay controls />;
 };
 
-export default function VideoModal({ setShowModal, setVideoLink }) {
+export default function VideoModal({
+  setShowModal,
+  setVideoLink,
+  setUploadSuccess,
+  setUpload,
+  setUploadFailed,
+}) {
   const videoRef = useRef(null);
   const { authUser } = useFirebaseAuth();
   const [showPreview, setShowPreview] = useState(true);
@@ -62,9 +68,12 @@ export default function VideoModal({ setShowModal, setVideoLink }) {
         }
       },
       (error) => {
-        // Handle unsuccessful uploads
+        setUpload(false);
+        setUploadFailed(true);
       },
       () => {
+        setUpload(false);
+        setUploadSuccess(true);
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadVideo.snapshot.ref).then((downloadURL) => {
@@ -82,10 +91,10 @@ export default function VideoModal({ setShowModal, setVideoLink }) {
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
-            <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Modal Title</h3>
+            <div className="flex items-center justify-between py-3 mx-5 border-b border-solid border-gray-200 rounded-t">
+              <h3 className="text-lg text-blue font-semibold">Edit Profile</h3>
               <button
-                className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                className="ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
               >
                 <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">

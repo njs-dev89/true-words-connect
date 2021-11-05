@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 export default function useSearchAndFilter() {
   const router = useRouter();
+
   console.log(router.query);
   const [location, setLocation] = useState({
     lat: Number(router.query.lat),
@@ -12,13 +13,21 @@ export default function useSearchAndFilter() {
     minPrice: Number(router.query.min_price),
     maxPrice: Number(router.query.max_price),
   });
-  const [language, setLanguage] = useState(router.query.language);
+  const [language, setLanguage] = useState([]);
   const [distance, setDistance] = useState(Number(router.query.distance));
   const [avgRating, setAvgRating] = useState(
     Number(router.query["avg_rating>"])
   );
 
-  console.log({ location, distance, language, hourlyPrice, avgRating });
+  useEffect(() => {
+    if (language.length === 0) {
+      delete router.query.language;
+      router.push({
+        pathname: "/[translators]",
+        query: { ...router.query },
+      });
+    }
+  }, [language]);
 
   // useEffect(() => {
   //   setLocation({
@@ -84,18 +93,22 @@ export default function useSearchAndFilter() {
         `min_price=${hourlyPrice.minPrice}&max_price=${hourlyPrice.maxPrice}`
       );
     }
-    if (language && language !== "") {
-      qs.push(`language=${language}`);
+    if (language) {
+      if (language.length > 0) {
+        const langQs = language.map((lang) => lang.name);
+        qs.push(`language=${langQs.join(",")}`);
+      }
     }
 
     if (!!qs.length) {
       console.log("effect ran again");
+      console.log({ location, distance, language, hourlyPrice, avgRating });
       const queryString = qs.join("&");
       console.log(qs);
       router.push(`/translators?${queryString}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, hourlyPrice, language, distance, avgRating]);
+  }, [language, location, hourlyPrice, distance, avgRating]);
   return {
     language,
     location,

@@ -37,7 +37,7 @@ function OfferRequest() {
     return <p>Loading...</p>;
   } else {
     return offerRequests.length > 0 ? (
-      <div className="mt-8 overflow-scroll">
+      <div className="mt-8 overflow-auto">
         <h3 className="text-blue font-bold text-xl mb-6">Offer Requests</h3>
         <div
           className="w-full text-gray-700 table-bottom-spaced bordered-table"

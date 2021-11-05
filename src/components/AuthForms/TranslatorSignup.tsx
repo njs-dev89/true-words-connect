@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useFirebaseAuth } from "../../context/authContext";
 import LeftImagePanel from "./LeftImagePanel";
 import SignupForm from "./SignupForm";
-import LanguageCheckbox from "../FormElements/LanguageCheckbox";
 import ResumeUpload from "../FormElements/ResumeUpload";
 import SkillTest from "./SkillTest";
 import PassportUpload from "../FormElements/PassportUpload";
@@ -94,7 +93,7 @@ function TranslatorSignup() {
 
   useEffect(() => {
     if (authUser && authUser.role !== undefined) {
-      router.push("/profile/overview");
+      router.push("/translators");
     }
     if (authUser && step === 1) {
       setStep(2);

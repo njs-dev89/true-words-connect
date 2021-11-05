@@ -13,10 +13,7 @@ function UserDetails({ translator }) {
           />
         </div>
         <h3 className="font-bold text-lg mt-4 mb-2">{translator.username}</h3>
-        <p className="text-center text-sm">
-          Tag line Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Nihil?
-        </p>
+        <p className="text-center text-sm">Add something about yourself</p>
         <p className="text-gray-700 mt-4">Not rated Yet</p>
       </div>
       <div className="px-4 mt-4">

@@ -5,9 +5,13 @@ function SearchResult({ translators }) {
   console.log(translators);
   return (
     <div className="col-span-4 sm:col-span-3 rounded-md bg-white shadow px-8 py-8">
-      {translators.map((translator) => (
-        <ProfileCard key={translator.objectID} translator={translator} />
-      ))}
+      {translators?.length === 0 ? (
+        <p className="text-center font-medium mt-16">No provider found</p>
+      ) : (
+        translators.map((translator) => (
+          <ProfileCard key={translator.objectID} translator={translator} />
+        ))
+      )}
     </div>
   );
 }

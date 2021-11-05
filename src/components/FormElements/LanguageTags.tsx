@@ -3,8 +3,8 @@ import ReactTags from "react-tag-autocomplete";
 
 function LanguageTags({ langs, setLangs }) {
   const [suggestions, setSuggestions] = useState([
-    { id: 1, name: "Akan" },
-    { id: 2, name: "Ewe" },
+    { id: 1, name: "akan" },
+    { id: 2, name: "ewe" },
   ]);
 
   const reactTags = useRef();

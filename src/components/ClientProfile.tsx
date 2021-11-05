@@ -1,51 +1,50 @@
-import { doc, getDoc } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
-import EditUser from "../components/EditUser";
+import React, { useState } from "react";
+import EditClient from "../components/EditClient";
 import TabsPaneContainer from "./Tabs/TabsPaneContainer";
 import UserDetails from "./UserDetails";
 import UserOrders from "./UserOrders";
 import UserReviews from "./UserReviews";
-import { db } from "../config/firebaseConfig";
 import MessagesTab from "./MessagesTab";
 import UserOffers from "./UserOffers";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { BiEdit } from "react-icons/bi";
+import { useFirebaseAuth } from "../context/authContext";
 
 function ClientProfile({ userId }) {
-  const [openTab, setOpenTab] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [userLoading, setUserLoading] = useState(true);
-  const [translator, setTranslator] = useState(null);
+  // const [userLoading, setUserLoading] = useState(true);
+  // const [translator, setTranslator] = useState(null);
   const { query } = useRouter();
+  const { authUser, loading } = useFirebaseAuth();
 
-  async function loadData(userId) {
-    const docRef = doc(db, `/clients/${userId}`);
-    const docSnap = await getDoc(docRef);
+  // async function loadData(userId) {
+  //   const docRef = doc(db, `/clients/${userId}`);
+  //   const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      setTranslator(docSnap.data());
-      setUserLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
+  //   if (docSnap.exists()) {
+  //     setTranslator(docSnap.data());
+  //     setUserLoading(false);
+  //   } else {
+  //     // doc.data() will be undefined in this case
+  //     console.log("No such document!");
+  //   }
+  // }
 
-  useEffect(() => {
-    loadData(userId);
-  }, []);
+  // useEffect(() => {
+  //   loadData(userId);
+  // }, []);
 
   return (
     <div className="bg-blue-50 pb-16 pt-32 min-h-screen">
       <div className="container">
         {showModal && (
-          <EditUser setShowModal={setShowModal} translator={translator} />
+          <EditClient setShowModal={setShowModal} client={authUser.profile} />
         )}
         <div className="grid grid-cols-4 gap-4">
           {/*========= Left Panel ========== */}
           <div className="col-span-4 sm:col-span-1 bg-white py-6 shadow-md rounded-xl">
-            {userLoading ? (
+            {loading ? (
               <p>loading...</p>
             ) : (
               <>
@@ -57,7 +56,7 @@ function ClientProfile({ userId }) {
                     <BiEdit className="text-2xl" />
                   </button>
                 </div>
-                <UserDetails translator={translator} />
+                <UserDetails translator={authUser.profile} />
               </>
             )}
           </div>

@@ -10,7 +10,7 @@ const client = algoliasearch(
 );
 const index = client.initIndex("translators");
 
-function TranslatorsPage({ query , hits }) {
+function TranslatorsPage({ query, hits }) {
   console.log(hits);
   return (
     <SearchProvider>
@@ -19,7 +19,7 @@ function TranslatorsPage({ query , hits }) {
           <SearchBar query={query} />
           <div className="grid grid-cols-4 gap-4  mt-16">
             <FilterSidebar query={query} />
-            <SearchResult translators={hits.hits}/>
+            <SearchResult translators={hits.hits} />
           </div>
         </div>
       </div>
@@ -40,7 +40,9 @@ export const getServerSideProps = async (context) => {
     aroundRadius = `${Number(context.query.distance * 1000)}`;
   }
   if (context.query.language) {
-    filtArray.push(`languages:${context.query.language}`);
+    context.query.language
+      .split(",")
+      .forEach((lang) => filtArray.push(`languages.language:${lang}`));
   }
   if (context.query["avg_rating>"]) {
     filtArray.push(`avg_rating >= ${Number(context.query["avg_rating>"])}`);

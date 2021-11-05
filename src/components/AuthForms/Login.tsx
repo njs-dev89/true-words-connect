@@ -12,6 +12,7 @@ function Login() {
   const [error, setError] = useState(null);
   const { signInUser } = useFirebaseAuth();
   const router = useRouter();
+  const { authUser } = useFirebaseAuth();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +28,7 @@ function Login() {
     setError(null);
     signInUser(email, password)
       .then(() => {
-        router.push("/");
+        return router.push("/translators");
       })
       .catch((error) => {
         setError(error.message);

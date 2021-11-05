@@ -1,55 +1,52 @@
-import { doc, getDoc } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EditUser from "../components/EditUser";
 import OfferRequest from "../components/OfferRequest";
-import Tab from "./Tabs/Tab";
-import TabPane from "./Tabs/TabPane";
 import TabsPaneContainer from "./Tabs/TabsPaneContainer";
 import UserDetails from "./UserDetails";
 import UserOrders from "./UserOrders";
 import UserReviews from "./UserReviews";
-import { db } from "../config/firebaseConfig";
 import MessagesTab from "./MessagesTab";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BiEdit } from "react-icons/bi";
+import { useFirebaseAuth } from "../context/authContext";
 
 function TranslatorProfile({ userId }) {
   const { query } = useRouter();
-  const [openTab, setOpenTab] = useState(1);
+  const { authUser, loading } = useFirebaseAuth();
   const [showModal, setShowModal] = useState(false);
-  const [userLoading, setUserLoading] = useState(true);
-  const [translator, setTranslator] = useState(null);
+  // const [userLoading, setUserLoading] = useState(true);
+  // const [translator, setTranslator] = useState(null);
 
-  async function loadData(userId) {
-    const docRef = doc(db, `/translators/${userId}`);
-    const docSnap = await getDoc(docRef);
+  // async function loadData(userId) {
+  //   const docRef = doc(db, `/translators/${userId}`);
+  //   const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const translator = docSnap.data();
-      translator.id = docSnap.id;
-      setTranslator(translator);
-      setUserLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
+  //   if (docSnap.exists()) {
+  //     const translator = docSnap.data();
+  //     translator.id = docSnap.id;
+  //     setTranslator(translator);
+  //     setUserLoading(false);
+  //   } else {
+  //     // doc.data() will be undefined in this case
+  //     console.log("No such document!");
+  //   }
+  // }
 
-  useEffect(() => {
-    loadData(userId);
-  }, []);
+  // useEffect(() => {
+  //   loadData(userId);
+  // }, []);
 
   return (
     <div className="bg-blue-50 pb-16 pt-32 min-h-screen">
       <div className="container">
         {showModal && (
-          <EditUser setShowModal={setShowModal} translator={translator} />
+          <EditUser setShowModal={setShowModal} translator={authUser.profile} />
         )}
         <div className="grid grid-cols-4 gap-4">
           {/*========= Left Panel ========== */}
           <div className="col-span-4 sm:col-span-1 bg-white py-6 shadow-md rounded-xl">
-            {userLoading ? (
+            {loading ? (
               <p>loading...</p>
             ) : (
               <>
@@ -61,7 +58,7 @@ function TranslatorProfile({ userId }) {
                     <BiEdit className="text-2xl" />
                   </button>
                 </div>
-                <UserDetails translator={translator} />
+                <UserDetails translator={authUser.profile} />
               </>
             )}
           </div>
@@ -133,7 +130,7 @@ function TranslatorProfile({ userId }) {
                 <TabsPaneContainer>
                   {query.handle === "overview" && (
                     <div>
-                      {userLoading ? (
+                      {loading ? (
                         <p>Loading...</p>
                       ) : (
                         <>
@@ -143,8 +140,8 @@ function TranslatorProfile({ userId }) {
                               Hourly Price
                             </h3>
                             <p className="text-sm mt-2">
-                              {translator.hourly_rate
-                                ? `$${translator.hourly_rate}`
+                              {authUser.profile.hourly_rate
+                                ? `$${authUser.profile.hourly_rate}`
                                 : "Rate Not set yet"}
                             </p>
                           </div>
@@ -153,8 +150,8 @@ function TranslatorProfile({ userId }) {
                               About
                             </h3>
                             <p className="p-4 mt-4 pb-8 border rounded">
-                              {translator.about
-                                ? translator.about
+                              {authUser.profile.about
+                                ? authUser.profile.about
                                 : "Please add something about yourself to show here"}
                             </p>
                           </div>
@@ -163,12 +160,15 @@ function TranslatorProfile({ userId }) {
                               Languages
                             </h3>
                             <ul className="list-disc list-inside mt-4">
-                              {translator.languages.map((lang, idx) => (
+                              {authUser.profile.languages.map((lang, idx) => (
                                 <li
                                   key={idx}
                                   className="flex items-baseline mb-2"
                                 >
-                                  {lang.language}
+                                  <span className="font-medium mr-2">
+                                    {lang.language}
+                                  </span>
+                                  ({lang.proficiency})
                                 </li>
                               ))}
                             </ul>

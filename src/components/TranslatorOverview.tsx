@@ -10,9 +10,6 @@ function TranslatorOverview({ translator }) {
   const { authUser } = useFirebaseAuth();
   const [showModal, setShowModal] = useState(false);
   const createMessage = async (client, translator) => {
-    if (!authUser) {
-      return router.push("/login");
-    }
     const messageRoomsCollection = collection(db, `/messageRooms`);
     try {
       const msgRoomDocRef = await addDoc(messageRoomsCollection, {
@@ -56,6 +53,9 @@ function TranslatorOverview({ translator }) {
               className="btn-small btn-blue"
               onClick={() => {
                 console.log(translator);
+                if (!authUser) {
+                  return router.push("/login");
+                }
                 createMessage(
                   {
                     id: authUser?.uid,
@@ -81,7 +81,8 @@ function TranslatorOverview({ translator }) {
         <ul className="list-disc list-inside mt-4">
           {translator.languages.map((lang, idx) => (
             <li key={idx} className="flex items-baseline mb-2">
-              {lang.language}
+              <span className="font-medium mr-2">{lang.language}</span>(
+              {lang.proficiency})
             </li>
           ))}
         </ul>

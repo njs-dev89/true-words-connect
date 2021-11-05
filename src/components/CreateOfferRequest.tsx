@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFirebaseAuth } from "../context/authContext";
-import { doc, collection, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
 function CreateOfferRequest({ setShowModal }) {
@@ -160,7 +160,7 @@ function CreateOfferRequest({ setShowModal }) {
                     </div>
                     <input
                       type="number"
-                      min="0"
+                      min={0}
                       name="hours"
                       id="hours"
                       value={hrs}

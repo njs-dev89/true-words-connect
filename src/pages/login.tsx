@@ -8,7 +8,7 @@ export default function LoginPage() {
   const { loading, authUser } = useFirebaseAuth();
 
   useEffect(() => {
-    if (!loading && authUser) router.push("/");
+    if (!loading && authUser) router.push("/translators");
   }, [authUser, loading, router]);
   return <Login />;
 }

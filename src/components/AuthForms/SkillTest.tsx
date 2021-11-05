@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { FcHighPriority, FcOk } from "react-icons/fc";
 import VideoModal from "../VideoModal";
 // import { IoMdVideocam } from "react-icons/io";
 
 function SkillTest({ setVideoLink }) {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [upload, setUpload] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadFailed, setUploadFailed] = useState(false);
 
   return (
     <div>
@@ -19,13 +23,21 @@ function SkillTest({ setVideoLink }) {
         onClick={() => setShowModal(true)}
       >
         {/* <IoMdVideocam /> */}
-        Record your video
+        <span className="mr-2">Record your video</span>
+        {!upload && uploadSuccess && <FcOk className="text-xl" />}
+        {!upload && uploadFailed && <FcHighPriority className="text-xl" />}
       </button>
       <p className="mt-3">
         Crete a video while reading this text and upload for review process
       </p>
       {showModal && (
-        <VideoModal setShowModal={setShowModal} setVideoLink={setVideoLink} />
+        <VideoModal
+          setShowModal={setShowModal}
+          setVideoLink={setVideoLink}
+          setUpload={setUpload}
+          setUploadSuccess={setUploadSuccess}
+          setUploadFailed={setUploadFailed}
+        />
       )}
     </div>
   );

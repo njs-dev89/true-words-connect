@@ -43,6 +43,7 @@ function VideoCall(props: {
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
         console.log("subscribe success");
+        console.log({ user });
         if (mediaType === "video") {
           setUsers((prevUsers) => {
             return [...prevUsers, user];

@@ -62,19 +62,23 @@ function Navbar() {
                 </Link>
               </>
             )}
+
             {authUser && (
               <div className="flex items-center gap-1 sm:gap-2">
                 <div className="relative h-10 w-10 overflow-hidden rounded-full">
                   {" "}
                   <Image
-                    src={authUser.profile.profile_pic}
+                    src={
+                      authUser.profile?.profile_pic ||
+                      "/profile-placeholder.png"
+                    }
                     layout="fill"
                     alt=""
                   />
                 </div>
                 <div className="flex items-end">
                   <p className="text-sm sm:text-base">
-                    {authUser.profile.username}
+                    {authUser.profile?.username || "Guest user"}
                   </p>
                   <button onClick={() => setShowDropDown(!showDropdown)}>
                     <TiArrowSortedDown className="ml-0 sm:ml-1 text-xl" />

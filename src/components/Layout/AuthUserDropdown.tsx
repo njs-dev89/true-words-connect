@@ -20,7 +20,22 @@ function AuthUserDropdown({ showDropdown }) {
                 <a>Profile</a>
               </Link>
             </li>
-            <li className="text-gray-500 py-2">Messages</li>
+            <li className="text-gray-500 py-2">
+              <Link href="/profile/messages">
+                <a>Messages</a>
+              </Link>
+            </li>
+            <li className="text-gray-500 py-2">
+              <Link
+                href={`${
+                  authUser.role === "translator"
+                    ? "/profile/orders"
+                    : "/profile/offers"
+                }`}
+              >
+                {authUser.role === "translator" ? <a>Orders</a> : <a>Offers</a>}
+              </Link>
+            </li>
             <li className="text-gray-500 py-2">
               <Link href="/adminDashboard/applicants">
                 <a>Applicants</a>

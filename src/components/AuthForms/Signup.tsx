@@ -36,7 +36,7 @@ function Signup() {
     createUser(username, email, password)
       .then(() => {
         console.log("Success. The user is created in Firebase");
-        router.push("/");
+        router.push("/translators");
       })
       .catch((error) => {
         setError(error.message);
