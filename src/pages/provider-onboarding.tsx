@@ -3,7 +3,7 @@ import ProviderOnboarding from "../components/AuthForms/ProviderOnboarding";
 import { useFirebaseAuth } from "../context/authContext";
 import { useRouter } from "next/router";
 
-function providerOnboardingPage() {
+function ProviderOnboardingPage() {
   const { authUser, loading } = useFirebaseAuth();
   const router = useRouter();
   useEffect(() => {
@@ -12,4 +12,4 @@ function providerOnboardingPage() {
   return <ProviderOnboarding />;
 }
 
-export default providerOnboardingPage;
+export default ProviderOnboardingPage;

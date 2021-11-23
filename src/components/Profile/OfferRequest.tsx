@@ -110,7 +110,7 @@ function OfferRequest() {
           offerRequests.length > 0 &&
           offerRequests.map((req) => {
             return (
-              <div className=" border-2 p-4 rounded-lg mb-8">
+              <div className=" border-2 p-4 rounded-lg mb-8" key={req.id}>
                 <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:items-end mb-4">
                   <div className="flex gap-4">
                     <h3 className="font-medium text-lg">Client:</h3>
