@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { useFirebaseAuth } from "../../context/authContext";
 import AuthUserDropdown from "./AuthUserDropdown";
@@ -9,17 +10,24 @@ import { TiArrowSortedDown } from "react-icons/ti";
 function Navbar() {
   const { authUser, loading } = useFirebaseAuth();
   const [showDropdown, setShowDropDown] = useState(false);
+  const router = useRouter();
 
   return (
     <div
       className={`${
-        authUser ? "bg-white shadow-sm" : "bg-transparent"
+        authUser && router.pathname !== "/"
+          ? "bg-white shadow-sm"
+          : "bg-transparent"
       } absolute w-full top-0`}
     >
       <div className="container">
         <div className="flex justify-between pt-1 items-center">
           <div className="flex items-center gap-4 sm:gap-16">
-            <div className="logo relative w-16 h-12 sm:w-24 sm:h-16">
+            <div
+              className={`logo relative ${
+                router.pathname === "/" ? "w-28 h-20" : "w-24 h-16"
+              }`}
+            >
               {" "}
               <Link href="/">
                 <a>

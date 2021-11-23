@@ -48,7 +48,7 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <div className="col-span-5 sm:col-span-3 mx-auto grid grid-cols-3">
+        <div className="col-span-5 sm:col-span-3 mx-auto grid grid-cols-3 gap-6">
           <div className="col-span-1 flex flex-col gap-4">
             <h3 className="font-bold">What we do</h3>
             <Link href="/">

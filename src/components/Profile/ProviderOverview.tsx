@@ -1,4 +1,12 @@
-import { addDoc, collection, getDoc } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+} from "@firebase/firestore";
+import { where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { db } from "../../config/firebaseConfig";
@@ -11,21 +19,38 @@ function ProviderOverview({ provider }) {
   const [showModal, setShowModal] = useState(false);
   const createMessage = async (client, provider) => {
     const messageRoomsCollection = collection(db, `/messageRooms`);
+
     try {
-      const msgRoomDocRef = await addDoc(messageRoomsCollection, {
-        client: {
-          id: client.id,
-          username: client.username,
-          profile_pic: client.profile_pic,
-        },
-        provider: {
-          id: provider.id,
-          username: provider.username,
-          profile_pic: provider.profile_pic,
-        },
-      });
-      const msgRoomSnap = await getDoc(msgRoomDocRef);
-      router.push(`/profile/messages?room=${msgRoomSnap.id}`);
+      const q = query(
+        messageRoomsCollection,
+        where("client.id", "==", client.id),
+        where("provider.id", "==", provider.id)
+      );
+      const roomsSnap = await getDocs(q);
+      if (roomsSnap.empty) {
+        const msgRoomDocRef = await addDoc(messageRoomsCollection, {
+          client: {
+            id: client.id,
+            username: client.username,
+            profile_pic: client.profile_pic,
+            email: client.email,
+          },
+          provider: {
+            id: provider.id,
+            username: provider.username,
+            profile_pic: provider.profile_pic,
+            email: provider.email,
+          },
+        });
+        const msgRoomSnap = await getDoc(msgRoomDocRef);
+        return router.push(`/profile/messages?room=${msgRoomSnap.id}`);
+      } else {
+        let roomId;
+        roomsSnap.forEach((r) => {
+          roomId = r.id;
+        });
+        return router.push(`/profile/messages?room=${roomId}`);
+      }
     } catch (error) {
       console.error(error);
     }

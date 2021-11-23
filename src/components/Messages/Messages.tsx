@@ -15,6 +15,7 @@ import { useFirebaseAuth } from "../../context/authContext";
 import dayjs from "dayjs";
 import ScrollableFeed from "react-scrollable-feed";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { useRouter } from "next/router";
 
 dayjs.extend(relativeTime);
 
@@ -22,11 +23,12 @@ function Messages({ room }) {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState(null);
   const { authUser } = useFirebaseAuth();
+  const router = useRouter();
   //   const mesgRef = useRef<any>();
 
   useEffect(() => {
     const q = query(
-      collection(db, `/messageRooms/${room.id}/messages`),
+      collection(db, `/messageRooms/${router.query.room}/messages`),
       limitToLast(50),
       orderBy("time", "asc")
     );
@@ -44,7 +46,7 @@ function Messages({ room }) {
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (messages) {
