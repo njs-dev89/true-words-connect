@@ -1,8 +1,19 @@
 import React, { useState } from "react";
+import { useAgora } from "../context/agoraContextNoSsr";
+import { useFirebaseAuth } from "../context/authContext";
 import VideoCall from "./VideoCall";
 
-function VideoChatAgora({ channelName }) {
-  const [inCall, setInCall] = useState(false);
+function VideoChatAgora({ channelName, order }) {
+  const { createCallInvitation, inCall, setInCall } = useAgora();
+  const { authUser } = useFirebaseAuth();
+
+  const sendCallInvitation = () => {
+    const calleeId =
+      authUser.role === "client" ? order.provider.id : order.client.id;
+    const localInvitation = createCallInvitation(calleeId);
+    localInvitation.content = channelName;
+    localInvitation.send();
+  };
   return (
     <div
       className={`${
@@ -14,12 +25,7 @@ function VideoChatAgora({ channelName }) {
       ) : (
         <div className="bg-white px-4 py-4 rounded-lg shadow-md">
           <div className="px-16 sm:px-32 py-16 border-2 border-dotted rounded-lg">
-            <button
-              className="btn btn-yellow"
-              onClick={(e) => {
-                setInCall(true);
-              }}
-            >
+            <button className="btn btn-yellow" onClick={sendCallInvitation}>
               Start video call
             </button>
           </div>

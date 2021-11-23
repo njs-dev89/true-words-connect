@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { RatingView } from "react-simple-star-rating";
 
 function ProfileCard({ provider }) {
   return (
@@ -9,7 +10,13 @@ function ProfileCard({ provider }) {
         <div className="relative w-20 h-20 rounded-full overflow-hidden">
           <Image src={provider.profile_pic} alt="" layout="fill" />
         </div>
-        <p className="mt-4 text-sm">Not Rated yet</p>
+        <p className="mt-4 text-sm">
+          {provider.rating ? (
+            <RatingView ratingValue={provider.rating} size={15} />
+          ) : (
+            "Not Rated yet"
+          )}
+        </p>
       </div>
       <div className="flex-grow">
         <div className="flex justify-between items-baseline">

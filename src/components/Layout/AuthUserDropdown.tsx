@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Link from "next/link";
+import { useAgora } from "../../context/agoraContextNoSsr";
 
 function AuthUserDropdown({ showDropdown }) {
   const { logOut, authUser } = useFirebaseAuth();
+  const { logOutFromAgora } = useAgora();
   return (
     <div className="relative">
       {showDropdown && (
@@ -41,8 +43,22 @@ function AuthUserDropdown({ showDropdown }) {
                 <a>Applicants</a>
               </Link>
             </li>
+            {authUser.role === "client" && (
+              <li className="text-gray-500 py-2">
+                <Link href="/provider-onboarding">
+                  <a>Become a Provider</a>
+                </Link>
+              </li>
+            )}
             <li className="text-gray-500 py-2">
-              <button onClick={logOut}>Logout</button>
+              <button
+                onClick={() => {
+                  logOut();
+                  logOutFromAgora();
+                }}
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </div>

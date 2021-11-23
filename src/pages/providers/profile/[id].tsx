@@ -5,10 +5,10 @@ import { db } from "../../../config/firebaseConfig";
 import Tab from "../../../components/Tabs/Tab";
 import TabPane from "../../../components/Tabs/TabPane";
 import TabsPaneContainer from "../../../components/Tabs/TabsPaneContainer";
-import UserDetails from "../../../components/UserDetails";
-import UserReviews from "../../../components/UserReviews";
+import UserDetails from "../../../components/Profile/UserDetails";
+import UserReviews from "../../../components/Profile/UserReviews";
 import { useFirebaseAuth } from "../../../context/authContext";
-import ProviderOverview from "../../../components/ProviderOverview";
+import ProviderOverview from "../../../components/Profile/ProviderOverview";
 
 function ProviderProfilePage() {
   const { query } = useRouter();

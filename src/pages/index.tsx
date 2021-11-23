@@ -1,6 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import AvailableServices from "../components/LandingPage/AvailableServices";
+import FeaturedProviders from "../components/LandingPage/FeaturedProviders";
+import Testimonials from "../components/LandingPage/Testimonials";
+import Footer from "../components/LandingPage/Footer";
+import HowItWorks from "../components/LandingPage/HowItWorks";
 
 export default function Home() {
   return (
@@ -11,18 +16,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="bg-light-blue">
         <div className="home-banner">
           <div className="container">
-            <div className="grid grid-cols-11">
+            <div className="grid grid-cols-11 flex items-end">
               <div className="col-span-11 md:col-span-6">
                 <h1 className="headline text-center md:text-left">
-                  Connecting and preserving the world through languages
+                  Connecting the world through languages
                 </h1>
                 <p className="mb-12 text-center md:text-left">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis quisquam cupiditate nihil corporis commodi animi sint
-                  doloremque numquam aliquid itaque.
+                  Where there is a Language, you will find People, a Community,
+                  Culture, and Identity. All your language needs, one -platform
+                  for Translation, Localization, and Learning.
                 </p>
                 <div className="text-center md:text-left">
                   <Link href="/providers">
@@ -35,7 +40,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="col-span-11 md:col-span-5">
+              <div className="col-span-11 md:col-span-5 hidden md:block">
                 <div className="relative h-96">
                   <Image src="/home.svg" alt="" layout="fill" />
                 </div>
@@ -43,7 +48,20 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="container py-32">
+          <AvailableServices />
+        </div>
+        <div className="container py-32">
+          <HowItWorks />
+        </div>
+        <div className="container py-32">
+          <FeaturedProviders />
+        </div>
+        <div className="container py-32">
+          <Testimonials />
+        </div>
       </main>
+      <Footer />
     </div>
   );
 }

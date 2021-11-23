@@ -31,7 +31,6 @@ export default function useAuth() {
       return;
     }
 
-    setLoading(true);
     const token = await authState.getIdTokenResult(true);
     authState.role = token.claims.role;
     if (token.claims.role === "provider") {
@@ -58,7 +57,6 @@ export default function useAuth() {
       }
     }
     var formattedUser = formatAuthUser(authState);
-    console.log(formattedUser);
     setAuthUser(formattedUser);
     setLoading(false);
   };
@@ -136,12 +134,9 @@ export default function useAuth() {
   // listen for Firebase state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);
-    const unsub = onIdTokenChanged(auth, (token) => {
-      console.log(token);
-    });
+
     return () => {
       unsubscribe();
-      unsub();
     };
   }, []);
 

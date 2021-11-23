@@ -3,9 +3,10 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { doc, getDoc } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import UserDetails from "./UserDetails";
+import UserDetails from "./Profile/UserDetails";
 import { useFirebaseAuth } from "../context/authContext";
 import OrderData from "./OrderData";
+import OrderReviews from "./OrderReviews";
 
 const VideoChatNoSSR = dynamic(() => import("./VideoChatAgora"), {
   ssr: false,
@@ -47,7 +48,12 @@ function OrderDetails() {
           </div>
           <div className=" col-span-4 sm:col-span-3">
             {orderLoading ? <p>Loading...</p> : <OrderData order={order} />}
-            <VideoChatNoSSR channelName={router.query.id} />
+            {!orderLoading && order.status === "active" && (
+              <OrderReviews order={order} />
+            )}
+            {!orderLoading && order.status === "active" && (
+              <VideoChatNoSSR channelName={router.query.id} order={order} />
+            )}
           </div>
         </div>
       </div>

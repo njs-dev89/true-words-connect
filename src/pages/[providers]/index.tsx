@@ -30,7 +30,7 @@ function ProvidersPage({ query, hits }) {
 export default ProvidersPage;
 
 export const getServerSideProps = async (context) => {
-  let filtArray = [];
+  let filtArray = ["isProfileComplete=1", "isStripeOnboardingComplete=1"];
   let filters, aroundLatLng, aroundRadius;
   // console.log(context);
   if (context.query.lat) {

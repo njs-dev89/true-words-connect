@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { RatingView } from "react-simple-star-rating";
 
 function UserDetails({ provider }) {
   return (
@@ -14,7 +15,13 @@ function UserDetails({ provider }) {
         </div>
         <h3 className="font-bold text-lg mt-4 mb-2">{provider.username}</h3>
         <p className="text-center text-sm">Add something about yourself</p>
-        <p className="text-gray-700 mt-4">Not rated Yet</p>
+        <p className="text-gray-700 mt-4">
+          {provider.rating ? (
+            <RatingView ratingValue={provider.rating} />
+          ) : (
+            "Not Rated yet"
+          )}
+        </p>
       </div>
       <div className="px-4 mt-4">
         <h3 className="text-blue font-bold ">Personal Information</h3>

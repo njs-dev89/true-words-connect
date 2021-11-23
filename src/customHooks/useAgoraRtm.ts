@@ -1,37 +1,59 @@
 import { httpsCallable } from "@firebase/functions";
-import { useEffect, useState } from "react";
+import AgoraRTM from "agora-rtm-sdk";
+import { useCallback, useEffect, useState } from "react";
 import { functions } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 
-const genRtmToken = httpsCallable(functions, "genRtmToken");
+const client = AgoraRTM.createInstance(process.env.NEXT_PUBLIC_AGORA_APP_ID);
 
-export default function useAgoraRtm(client) {
+export default function useAgoraRtm() {
   const { authUser } = useFirebaseAuth();
-  const [messages, setMessages] = useState([]);
-  async function loginToAgoraRtm(uid, token) {
-    try {
-      await client.login({
-        token,
-        uid,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    // await client.setLocalUserAttributes({
-    //   name: username,
-    //   img: picUrl,
-    // });
+  const [message, setMessage] = useState(null);
+  const [onlineStatus, setOnlineStatus] = useState(null);
+  const [localInvitation, setLocalInvitation] = useState(null);
+  const [remoteInvitation, setRemoteInvitation] = useState(null);
+  const [localCallNotification, setLocalCallNotification] = useState(false);
+  const [remoteCallNotification, setRemoteCallNotification] = useState(false);
+  const [inCall, setInCall] = useState(false);
+  const [agoraLoginStatus, setAgoraLoginStatus] = useState("disconnected");
+
+  const loginToAgoraRtm = useCallback(
+    async (uid) => {
+      try {
+        setAgoraLoginStatus("connecting");
+        const genRtmToken = httpsCallable(functions, "genRtmToken");
+        const token = await genRtmToken({ uid });
+        await client.login({
+          uid,
+          token: token.data as string,
+        });
+
+        await client.setLocalUserAttributes({
+          username: authUser.profile.username,
+          profile_pic: authUser.profile.profile_pic,
+        });
+      } catch (error) {
+        setAgoraLoginStatus("disconnected");
+        console.log(error);
+      }
+    },
+    [authUser]
+  );
+
+  function logOutFromAgora() {
+    client.logout();
   }
 
+  async function getUserAttributes(userId, callBack) {
+    const attributes = await client.getUserAttributes(userId);
+    console.log(attributes);
+    callBack(attributes);
+  }
   function createCallInvitation(calleeId) {
     const localInvitation = client.createLocalInvitation(calleeId);
+    setLocalInvitation(localInvitation);
     return localInvitation;
   }
-  const agoraLogin = async (uid) => {
-    const token = await genRtmToken({ uid });
-    console.log(token);
-    loginToAgoraRtm(uid, token.data);
-  };
 
   async function sendMessageToPeer(message, peerId) {
     await client
@@ -39,8 +61,8 @@ export default function useAgoraRtm(client) {
         enableOfflineMessaging: true,
       })
       .then((sendResult) => {
-        if (sendResult.hasPeerRecieved) {
-          setMessages((prevMessages) => [...prevMessages, message]);
+        if (sendResult.hasPeerReceived) {
+          console.log("Message Recieved");
         } else {
           console.log("User is offline");
         }
@@ -50,21 +72,60 @@ export default function useAgoraRtm(client) {
       });
   }
 
+  const peersOnline = (peerIds) => {
+    client.subscribePeersOnlineStatus(peerIds);
+  };
+
+  useEffect(() => {
+    if (authUser && agoraLoginStatus === "disconnected") {
+      loginToAgoraRtm(authUser.uid);
+    }
+  }, [authUser, agoraLoginStatus]);
+
   useEffect(() => {
     client.on("MessageFromPeer", function (message, peerId) {
-      setMessages([message, ...messages]);
-      console.log(message);
+      getUserAttributes(peerId, (attributes) => {
+        setMessage({ attributes, message });
+      });
     });
     client.on("ConnectionStateChanged", function (newState, reason) {
       console.log(newState, reason);
+      if (newState === "CONNECTED") {
+        setAgoraLoginStatus("connected");
+      }
       if (newState === "DISCONNECTED") {
-        if (authUser) {
-          // agoraLogin(authUser.uid);
-        }
+        console.log("Agora disconnected");
+        setAgoraLoginStatus("disconnected");
       }
     });
-    // client.on("RemoteInvitationRecieved", function (remoteInvitation) {});
+
+    client.on("PeersOnlineStatusChanged", (status) => {
+      console.log(status);
+      setOnlineStatus(status);
+    });
+    client.on("RemoteInvitationReceived", (RemoteInvitation) => {
+      setRemoteInvitation(RemoteInvitation);
+      setRemoteCallNotification(true);
+    });
   }, []);
 
-  return { messages, sendMessageToPeer, loginToAgoraRtm, createCallInvitation };
+  return {
+    message,
+    sendMessageToPeer,
+    loginToAgoraRtm,
+    createCallInvitation,
+    peersOnline,
+    logOutFromAgora,
+    onlineStatus,
+    localCallNotification,
+    setLocalCallNotification,
+    remoteCallNotification,
+    setRemoteCallNotification,
+    inCall,
+    setInCall,
+    localInvitation,
+    remoteInvitation,
+    getUserAttributes,
+    agoraLoginStatus,
+  };
 }

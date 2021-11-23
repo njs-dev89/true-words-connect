@@ -52,12 +52,12 @@ function ProfilePicUpload({ setPicLink }) {
     );
   };
   return (
-    <div className=" mt-4">
+    <div className=" mt-2">
       <label className="w-full flex items-center justify-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide cursor-pointer ease-linear transition-all duration-150">
-        <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
+        <div className="relative h-4 w-4 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
         </div>
-        <div className="text-base ml-2">Upload Profile Pic</div>
+        <div className="text-sm font-medium ml-2">Upload Profile Pic</div>
         {upload && (
           <ProgressRing radius={12} stroke={2} progress={picProgress} />
         )}

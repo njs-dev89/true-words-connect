@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { storage } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
+import ModalContainer from "./ModalContainer";
 
 const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -85,69 +86,49 @@ export default function VideoModal({
     );
   };
   return (
-    <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl">
-          {/*content*/}
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            {/*header*/}
-            <div className="flex items-center justify-between py-3 mx-5 border-b border-solid border-gray-200 rounded-t">
-              <h3 className="text-lg text-blue font-semibold">Edit Profile</h3>
-              <button
-                className="ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={() => setShowModal(false)}
-              >
-                <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  x
-                </span>
-              </button>
-            </div>
-            {/*body*/}
-            <div>
-              <div className="p-4">
-                {showPreview && <VideoPreview stream={previewStream} />}
-                {!showPreview && status === "stopped" && (
-                  <video src={mediaBlobUrl} controls autoPlay loop />
-                )}
-                {status === "recording" && (
-                  <button
-                    onClick={() => {
-                      setShowPreview(false);
-                      stopRecording();
-                    }}
-                    type="button"
-                    className="btn btn-blue mt-4 mb-4"
-                  >
-                    Stop Recording
-                  </button>
-                )}
-                {status === "stopped" && (
-                  <button
-                    onClick={() => {
-                      setShowPreview(true);
-                      startRecording();
-                    }}
-                    type="button"
-                    className="btn btn-yellow m-4 mr-4"
-                  >
-                    Recording again
-                  </button>
-                )}
-                {blob && status === "stopped" && (
-                  <button
-                    type="button"
-                    className="btn btn-green"
-                    onClick={uploadVideo}
-                  >
-                    Upload now
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
+    <ModalContainer title="Record you video" setShowModal={setShowModal}>
+      {/*body*/}
+      <div>
+        <div className="p-4">
+          {showPreview && <VideoPreview stream={previewStream} />}
+          {!showPreview && status === "stopped" && (
+            <video src={mediaBlobUrl} controls autoPlay loop />
+          )}
+          {status === "recording" && (
+            <button
+              onClick={() => {
+                setShowPreview(false);
+                stopRecording();
+              }}
+              type="button"
+              className="btn btn-blue mt-4 mb-4"
+            >
+              Stop Recording
+            </button>
+          )}
+          {status === "stopped" && (
+            <button
+              onClick={() => {
+                setShowPreview(true);
+                startRecording();
+              }}
+              type="button"
+              className="btn btn-yellow m-4 mr-4"
+            >
+              Recording again
+            </button>
+          )}
+          {blob && status === "stopped" && (
+            <button
+              type="button"
+              className="btn btn-green"
+              onClick={uploadVideo}
+            >
+              Upload now
+            </button>
+          )}
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-    </>
+    </ModalContainer>
   );
 }

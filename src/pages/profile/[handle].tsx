@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import ClientProfile from "../../components/ClientProfile";
-import ProviderProfile from "../../components/ProviderProfile";
+import ClientProfile from "../../components/Profile/ClientProfile";
+import ProviderProfile from "../../components/Profile/ProviderProfile";
 import { useFirebaseAuth } from "../../context/authContext";
 
 function ProfilePage() {

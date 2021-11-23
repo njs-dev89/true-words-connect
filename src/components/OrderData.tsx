@@ -1,11 +1,34 @@
-import React from "react";
+import { doc, setDoc } from "@firebase/firestore";
+import React, { useState } from "react";
+import { db } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
+import ModalContainer from "./ModalContainer";
 
 function OrderData({ order }) {
   const { authUser } = useFirebaseAuth();
+  const [showModal, setShowModal] = useState(false);
   console.log({ order });
+  const cancelOrder = async () => {
+    await setDoc(
+      doc(db, `/orders/${order.id}`),
+      { status: "cancelled" },
+      { merge: true }
+    );
+    setShowModal(false);
+  };
   return (
     <div className="bg-white shadow-md mb-16 px-6 py-4 rounded-md">
+      {showModal && (
+        <ModalContainer setShowModal={setShowModal} title="Cancel Order">
+          <p>Are you sure you want to cancel the order?</p>
+          <button onClick={cancelOrder} className="btn btn-yellow">
+            Yes
+          </button>
+          <button onClick={() => setShowModal(false)} className="btn btn-blue">
+            Cancel
+          </button>
+        </ModalContainer>
+      )}
       <div className="flex justify-between items-baseline border-b">
         <h3 className="text-blue font-bold text-xl mb-8 mt-4">Order Details</h3>
         <button className="px-4 py-2 rounded text-white bg-red-500 shadow-md">

@@ -10,12 +10,32 @@
 }
 
 .home-banner {
-  @apply w-full bg-blue-50 sm:py-60 py-36;
+  @apply w-full bg-blue-50 flex items-center;
+  height: 100vh;
+  max-height: 800px;
+}
+.bg-brown {
+  background-color: #f6f4f1;
+}
+
+.bg-brown-dark {
+  background-color: #f1ecc9;
 }
 
 .bg-yellow {
   background-color: #e2be2d;
 }
+.bg-light-blue {
+  background-color: #f7fcff;
+}
+.bg-blue {
+  background-color: #3e69b3;
+}
+
+.bg-green {
+  background-color: #69bd45;
+}
+
 .border-yellow {
   border-color: #e2be2d;
 }

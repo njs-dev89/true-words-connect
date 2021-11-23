@@ -1,8 +1,8 @@
 import { addDoc, collection, getDoc } from "@firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { db } from "../config/firebaseConfig";
-import { useFirebaseAuth } from "../context/authContext";
+import { db } from "../../config/firebaseConfig";
+import { useFirebaseAuth } from "../../context/authContext";
 import CreateOfferRequest from "./CreateOfferRequest";
 
 function ProviderOverview({ provider }) {
@@ -61,11 +61,13 @@ function ProviderOverview({ provider }) {
                     id: authUser?.uid,
                     username: authUser.profile.username,
                     profile_pic: authUser.profile.profile_pic,
+                    email: authUser.profile.email,
                   },
                   {
                     id: provider.id,
                     username: provider.username,
                     profile_pic: provider.profile_pic,
+                    email: provider.email,
                   }
                 );
               }}

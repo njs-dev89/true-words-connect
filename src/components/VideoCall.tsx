@@ -18,9 +18,7 @@ const config: ClientConfig = {
   codec: "vp8",
 };
 
-const appId: string = process.env.NEXT_PUBLIC_AGORA_APP_ID; //ENTER APP ID HERE
-// const token: string | null =
-//   "006238b4a95e2de433586fb623c85efc6b0IAAwntpEBl/+aeEouDvG+yMAdHwao4vVvMn8NEtENK/ufEXaoR0AAAAAEAAb/oIXnnSDYQEAAQCddINh";
+const appId: string = process.env.NEXT_PUBLIC_AGORA_APP_ID;
 
 const useClient = createClient(config);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
@@ -40,6 +38,7 @@ function VideoCall(props: {
     // function to initialise the SDK
     let init = async (name: string) => {
       console.log("init", name);
+      client.on("connectionStateChanged", () => {});
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
         console.log("subscribe success");

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { deleteDoc, doc, getDoc, setDoc } from "@firebase/firestore";
 import { db, functions } from "../../../config/firebaseConfig";
@@ -41,6 +41,7 @@ function SingleApplicant() {
         email: applicant.email,
         username: applicant.username,
         languages: applicant.languages,
+        isProfileComplete: false,
         profile_pic: "/profile-placeholder.png",
       });
       const docRef = doc(db, `/applicants/${router.query.id}`);

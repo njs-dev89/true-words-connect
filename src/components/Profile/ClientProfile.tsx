@@ -1,39 +1,60 @@
-import React, { useState } from "react";
-import EditClient from "../components/EditClient";
-import TabsPaneContainer from "./Tabs/TabsPaneContainer";
+import React, { useEffect, useState } from "react";
+import EditClient from "./EditClient";
+import TabsPaneContainer from "../Tabs/TabsPaneContainer";
 import UserDetails from "./UserDetails";
 import UserOrders from "./UserOrders";
 import UserReviews from "./UserReviews";
-import MessagesTab from "./MessagesTab";
+import MessagesTab from "../Messages/MessagesTab";
 import UserOffers from "./UserOffers";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { BiEdit } from "react-icons/bi";
-import { useFirebaseAuth } from "../context/authContext";
+import { useFirebaseAuth } from "../../context/authContext";
+import { collection, onSnapshot, query, where } from "@firebase/firestore";
+import { db } from "../../config/firebaseConfig";
 
 function ClientProfile({ userId }) {
   const [showModal, setShowModal] = useState(false);
-  // const [userLoading, setUserLoading] = useState(true);
-  // const [provider, setProvider] = useState(null);
-  const { query } = useRouter();
+  const [roomsLoading, setRoomsLoading] = useState(true);
+  const [rooms, setRooms] = useState([]);
+  const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
+  const router = useRouter();
   const { authUser, loading } = useFirebaseAuth();
 
-  // async function loadData(userId) {
-  //   const docRef = doc(db, `/clients/${userId}`);
-  //   const docSnap = await getDoc(docRef);
+  useEffect(() => {
+    const messageRoomsCollection = collection(db, `/messageRooms`);
+    const q = query(
+      messageRoomsCollection,
+      where("client.id", "==", authUser.uid)
+    );
 
-  //   if (docSnap.exists()) {
-  //     setProvider(docSnap.data());
-  //     setUserLoading(false);
-  //   } else {
-  //     // doc.data() will be undefined in this case
-  //     console.log("No such document!");
-  //   }
-  // }
+    const unsubscribe = onSnapshot(q, {}, (querySnapshot) => {
+      const rooms = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        data["id"] = doc.id;
+        rooms.push(data);
+      });
+      console.log(rooms);
+      setRooms(rooms);
+      setRoomsLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
-  // useEffect(() => {
-  //   loadData(userId);
-  // }, []);
+  useEffect(() => {
+    if (rooms.length > 0) {
+      const noOfRooms = rooms.filter(
+        (room) => room.client.hasUnreadMessages
+      ).length;
+      if (noOfRooms > 0) {
+        setHasUnreadMessages(true);
+      }
+      if (noOfRooms === 0) {
+        setHasUnreadMessages(false);
+      }
+    }
+  }, [rooms]);
 
   return (
     <div className="bg-blue-50 pb-16 pt-32 min-h-screen">
@@ -73,7 +94,7 @@ function ClientProfile({ userId }) {
                 >
                   <li
                     className={`-mb-px font-medium px-1 sm:px-2 py-2 sm:text-base text-xs ${
-                      query.handle === "orders" &&
+                      router.query.handle === "orders" &&
                       "text-yellow border-b-2 border-yellow"
                     }`}
                   >
@@ -84,17 +105,22 @@ function ClientProfile({ userId }) {
 
                   <li
                     className={`-mb-px font-medium px-1 sm:px-2 py-2 sm:text-base text-xs ${
-                      query.handle === "messages" &&
+                      router.query.handle === "messages" &&
                       "text-yellow border-b-2 border-yellow"
                     }`}
                   >
                     <Link href="/profile/messages">
-                      <a>Messages</a>
+                      <a>
+                        Messages{" "}
+                        {hasUnreadMessages && (
+                          <span className="w-1 rounded relative -top-2 inline-block h-1 bg-blue-600"></span>
+                        )}
+                      </a>
                     </Link>
                   </li>
                   <li
                     className={`-mb-px font-medium px-1 sm:px-2 py-2 sm:text-base text-xs ${
-                      query.handle === "offers" &&
+                      router.query.handle === "offers" &&
                       "text-yellow border-b-2 border-yellow"
                     }`}
                   >
@@ -105,7 +131,7 @@ function ClientProfile({ userId }) {
 
                   <li
                     className={`-mb-px font-medium px-1 sm:px-2 py-2 sm:text-base text-xs ${
-                      query.handle === "reviews" &&
+                      router.query.handle === "reviews" &&
                       "text-yellow border-b-2 border-yellow"
                     }`}
                   >
@@ -118,11 +144,13 @@ function ClientProfile({ userId }) {
 
                 {/*========Tabs Pane========== */}
                 <TabsPaneContainer>
-                  {query.handle === "orders" && <UserOrders />}
+                  {router.query.handle === "orders" && <UserOrders />}
 
-                  {query.handle === "messages" && <MessagesTab />}
-                  {query.handle === "offers" && <UserOffers />}
-                  {query.handle === "reviews" && <UserReviews />}
+                  {router.query.handle === "messages" && (
+                    <MessagesTab loading={roomsLoading} rooms={rooms} />
+                  )}
+                  {router.query.handle === "offers" && <UserOffers />}
+                  {router.query.handle === "reviews" && <UserReviews />}
                 </TabsPaneContainer>
                 {/*========Tabs Pane End========== */}
               </div>
