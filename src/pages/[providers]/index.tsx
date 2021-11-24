@@ -3,6 +3,8 @@ import SearchBar from "../../components/ProvidersSearch/SearchBar";
 import SearchResult from "../../components/ProvidersSearch/SearchResult";
 import algoliasearch from "algoliasearch/lite";
 import { SearchProvider } from "../../context/searchAndFilterContext";
+import Head from "next/head";
+import { useEffect, useState } from "react";
 
 const client = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
@@ -11,15 +13,55 @@ const client = algoliasearch(
 const index = client.initIndex("providers");
 
 function ProvidersPage({ query, hits }) {
-  console.log(hits);
+  const [currentPosition, setCurrentPosition] = useState({
+    lat: Number(query.lat),
+    lng: Number(query.lng),
+  });
+
+  useEffect(() => {
+    if (!!query.lng) {
+      setCurrentPosition({
+        lat: Number(query.lat),
+        lng: Number(query.lng),
+      });
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrentPosition({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {}
+      );
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <SearchProvider>
-      <div className="bg-blue-50 pb-16">
+      <div className="bg-light-blue pb-16">
+        <Head>
+          <title>Providers | TWC</title>
+          <meta
+            name="description"
+            content="List of providers on true words connect"
+          />
+          <link rel="icon" href="/logo.svg" />
+        </Head>
         <div className="container">
-          <SearchBar query={query} />
+          <SearchBar
+            query={query}
+            currentPosition={currentPosition}
+            setCurrentPosition={setCurrentPosition}
+          />
           <div className="grid grid-cols-4 gap-4  mt-16">
             <FilterSidebar query={query} />
-            <SearchResult providers={hits.hits} />
+            <SearchResult
+              providers={hits.hits}
+              currentPosition={currentPosition}
+            />
           </div>
         </div>
       </div>
@@ -64,7 +106,7 @@ export const getServerSideProps = async (context) => {
     aroundRadius,
     filters: filters,
   });
-  console.log(hits);
+
   return {
     props: {
       hits,

@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import Map from "./Map";
 import Geocode from "react-geocode";
-import { useRouter } from "next/router";
 import { useSearch } from "../../context/searchAndFilterContext";
 import ModalContainer from "../ModalContainer";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
@@ -17,12 +17,9 @@ const libraries: (
   | "visualization"
 )[] = ["places"];
 
-function SearchBar({ query }) {
+function SearchBar({ query, currentPosition, setCurrentPosition }) {
   const { location, setLocation } = useSearch();
-  const [currentPosition, setCurrentPosition] = useState({
-    lat: Number(query.lat),
-    lng: Number(query.lng),
-  });
+
   const [showModal, setShowModal] = useState(false);
   const [autocomplete, setAutocomplete] = useState(null);
   const [place, setPlace] = useState("");
@@ -32,29 +29,6 @@ function SearchBar({ query }) {
 
     setAutocomplete(autocomplete);
   };
-
-  useEffect(() => {
-    if (!!query.lng) {
-      console.log(location);
-      setCurrentPosition({
-        lat: Number(query.lat),
-        lng: Number(query.lng),
-      });
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log("I ran");
-          setCurrentPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {}
-      );
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
@@ -68,21 +42,6 @@ function SearchBar({ query }) {
       console.log("Autocomplete is not loaded yet!");
     }
   };
-
-  // useEffect(() => {
-  //   Geocode.fromLatLng(currentPosition.lat, currentPosition.lng).then(
-  //     (response) => {
-  //       const address = response.results[0].formatted_address;
-  //       setPlace(
-  //         response.results[0].formatted_address.split(" ").slice(1).join(" ")
-  //       );
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [currentPosition]);
 
   return (
     <LoadScript
@@ -108,7 +67,7 @@ function SearchBar({ query }) {
                   ref={placeRef}
                   onChange={(e) => setPlace(e.target.value)}
                   type="text"
-                  className="form-input rounded-full w-96 py-3 border"
+                  className="rounded-full w-96 py-3 border-2 border-gray-300"
                   placeholder="Enter Location"
                 />
                 {place !== "" && (
@@ -128,9 +87,12 @@ function SearchBar({ query }) {
             <button
               type="button"
               onClick={() => setShowModal(true)}
-              className="btn-rounded px-6 py-3 border-2 mx-4 bg-white"
+              className="btn-rounded px-6 py-3 border-2 border-gray-300 mx-4 bg-white"
             >
-              Search on the map
+              <span className="flex items-center gap-2">
+                <FaMapMarkerAlt className="text-gray-600" />
+                Search on the map
+              </span>
             </button>
             <button className="btn btn-yellow btn-rounded">Search</button>
           </div>

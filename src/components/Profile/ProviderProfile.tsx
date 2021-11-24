@@ -124,7 +124,7 @@ function ProviderProfile({ userId }) {
   }, [rooms]);
 
   return (
-    <div className="bg-blue-50 pb-16 pt-32 min-h-screen">
+    <div className="bg-light-blue pb-16 pt-32 min-h-screen">
       <div className="container">
         {showModal && (
           <EditUser setShowModal={setShowModal} provider={authUser.profile} />

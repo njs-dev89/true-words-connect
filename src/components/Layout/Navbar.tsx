@@ -36,22 +36,22 @@ function Navbar() {
                 </a>
               </Link>
             </div>
-            <ul className="flex gap-2 sm:gap-6 text-blue text-sm sm:text-base">
+            <ul className="flex gap-2 sm:gap-6  text-sm sm:text-base">
               {authUser && (
                 <>
                   <li className="font-medium">
                     <Link href="/providers">
-                      <a>Providers</a>
+                      <a>Find Provider</a>
                     </Link>
                   </li>
                   <li className="font-medium">
                     <Link href="/providers">
-                      <a>How it works</a>
+                      <a>About Us</a>
                     </Link>
                   </li>
                   <li className="font-medium">
                     <Link href="/providers">
-                      <a>Terms of Services</a>
+                      <a>Contact Us</a>
                     </Link>
                   </li>
                 </>
@@ -84,15 +84,17 @@ function Navbar() {
                     alt=""
                   />
                 </div>
-                <div className="flex items-end">
-                  <p className="text-sm sm:text-base">
+
+                {/* <p className="text-sm sm:text-base">
                     {authUser.profile?.username || "Guest user"}
                   </p>
                   <button onClick={() => setShowDropDown(!showDropdown)}>
                     <TiArrowSortedDown className="ml-0 sm:ml-1 text-xl" />
                   </button>
-                  <AuthUserDropdown showDropdown={showDropdown} />
-                </div>
+                  <AuthUserDropdown showDropdown={showDropdown} /> */}
+                <AuthUserDropdown
+                  username={authUser.profile?.username || "Guest user"}
+                />
               </div>
             )}
           </div>

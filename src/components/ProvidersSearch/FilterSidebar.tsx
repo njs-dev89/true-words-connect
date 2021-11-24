@@ -35,37 +35,6 @@ function FilterSidebar({ query }) {
             langs={language ? language : []}
             setLangs={setLanguage}
           />
-
-          {/* <div className="flex flex-row-reverse items-center ">
-            <input
-              type="radio"
-              name="language"
-              checked={language === "akan"}
-              value="akan"
-              onChange={(e) => {
-                setLanguage(e.target.value);
-              }}
-              className="h-4 w-4 text-gray-600 appearance-none"
-            />
-            <label className="flex justify-between items-center flex-grow">
-              Akan
-            </label>
-          </div>
-          <div className="flex flex-row-reverse items-center">
-            <input
-              type="radio"
-              name="language"
-              checked={language === "ewe"}
-              value="ewe"
-              onChange={(e) => {
-                setLanguage(e.target.value);
-              }}
-              className="h-4 w-4 text-gray-600"
-            />
-            <label className="flex justify-between items-center mt-3 flex-grow">
-              Ewe
-            </label>
-          </div> */}
         </div>
         <h3 className="font-bold text-sm mb-2">Filter by hourly rate</h3>
         <MultiRangeSlider
@@ -79,15 +48,7 @@ function FilterSidebar({ query }) {
           }}
         />
         <h3 className="font-bold text-sm mb-4 mt-4">Filter by distance</h3>
-        {/* <MultiRangeSlider
-          min={0}
-          max={50}
-          minValue={Number(query.min_distance)}
-          maxValue={Number(query.max_distance)}
-          onChange={({ min, max }: { min: number; max: number }) => {
-            setDistance({ min, max });
-          }}
-        /> */}
+
         <SingleRangeSlider
           min={0}
           max={100}

@@ -2,8 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RatingView } from "react-simple-star-rating";
+import haversine from "haversine-distance";
 
-function ProfileCard({ provider }) {
+function ProfileCard({ provider, currentPosition }) {
   return (
     <div className="flex flex-col sm:flex-row gap-8 border rounded-lg px-6 pt-4 pb-12 mt-4 relative">
       <div className="flex flex-col items-center">
@@ -26,7 +27,10 @@ function ProfileCard({ provider }) {
             <a className="btn btn-yellow  sm:relative">See Profile</a>
           </Link>
         </div>
-        <p className="text-sm font-medium text-gray-500">5Km</p>
+        <p className="text-sm font-medium text-gray-500">
+          {(haversine(provider._geoloc, currentPosition) / 1000).toPrecision(2)}
+          Km
+        </p>
         <div className="flex flex-col sm:flex-row mt-6">
           <p className="font-medium text-gray-700">
             <span className="font-bold text-black">Hourly Rate:</span> $

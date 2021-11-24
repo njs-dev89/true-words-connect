@@ -67,10 +67,10 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   return (
     <>
       <div className="slider relative w-full">
-        <div className="slider__track absolute h-px w-full bg-gray-300"></div>
+        <div className="slider__track absolute h-px w-full bg-gray-300 z-10"></div>
         <div
           ref={range}
-          className="slider__range absolute bg-gray-500 h-px"
+          className="slider__range absolute bg-gray-500 h-px z-20"
         ></div>
         <div className="slider__left-value absolute left-2">{minVal}</div>
         <div className="slider__right-value absolute -right-2">{maxVal}</div>
