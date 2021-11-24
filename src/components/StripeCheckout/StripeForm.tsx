@@ -9,7 +9,7 @@ import { httpsCallable } from "@firebase/functions";
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
-  "pk_test_51JxQuyE3fIKpY5oeLY1wnTndUObcZiwgFml9FtEoWD1oaQuQRmGSmVBBVnlgmfX5iOS4XgJ343J9kTGHclx7mYTT00fQpUnKJD"
+  "pk_live_51JxQuyE3fIKpY5oeFKRBasxSUDA2ei9wcU7fvmO5g0R90JK2aWahjQp6pmWBz4ZUGg2BxMkndQNRpsP6ISsNPJJB00mZinO79Q"
 );
 const createPaymentIntent = httpsCallable(functions, "createPaymentIntent");
 
