@@ -23,28 +23,31 @@ const SingleStep = ({ iconLink, step, description }) => {
 
 function HowItWorks() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-32">
-      <SingleStep
-        step="Sign up"
-        iconLink="/signup.svg"
-        description="Complete sign up process to avail our awesome services"
-      />
-      <SingleStep
-        step="Search Provider"
-        iconLink="/signup.svg"
-        description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
-      />
+    <div className="">
+      <h1 className="font-bold text-3xl text-center mb-16">How it works</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-32">
+        <SingleStep
+          step="Sign up"
+          iconLink="/signup.svg"
+          description="Complete sign up process to avail our awesome services"
+        />
+        <SingleStep
+          step="Search Provider"
+          iconLink="/signup.svg"
+          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+        />
 
-      <SingleStep
-        step="Get a quote"
-        iconLink="/signup.svg"
-        description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
-      />
-      <SingleStep
-        step="Accept offer"
-        iconLink="/signup.svg"
-        description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
-      />
+        <SingleStep
+          step="Get a quote"
+          iconLink="/signup.svg"
+          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+        />
+        <SingleStep
+          step="Accept offer"
+          iconLink="/signup.svg"
+          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+        />
+      </div>
     </div>
   );
 }

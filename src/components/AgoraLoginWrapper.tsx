@@ -33,7 +33,6 @@ function AgoraLoginWrapper({ children }) {
       draggable: true,
       progress: undefined,
     });
-    // toast(Msg) would also work
   };
   const { authUser, loading } = useFirebaseAuth();
   const router = useRouter();

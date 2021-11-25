@@ -39,13 +39,12 @@ function Footer() {
                 </span>
               </a>
             </Link>
-            <Link href="/">
-              <a>
-                <span className="bg-yellow w-8 h-8 rounded-full flex items-center justify-center">
-                  <FaInstagram className="text-white" />
-                </span>
-              </a>
-            </Link>
+
+            <a href="https://www.instagram.com/truewordsconnect">
+              <span className="bg-yellow w-8 h-8 rounded-full flex items-center justify-center">
+                <FaInstagram className="text-white" />
+              </span>
+            </a>
           </div>
         </div>
         <div className="col-span-5 sm:col-span-3 mx-auto grid grid-cols-3 gap-6">
@@ -72,7 +71,7 @@ function Footer() {
             <Link href="/">
               <a className="text-blue">Terms and Conditions</a>
             </Link>
-            <Link href="/">
+            <Link href="/privacy-policy">
               <a className="text-blue">Privacy</a>
             </Link>
             <Link href="/">
@@ -84,7 +83,7 @@ function Footer() {
           </div>
           <div className="col-span-1 flex flex-col gap-4">
             <h3 className="font-bold">Company</h3>
-            <Link href="/">
+            <Link href="/about-us">
               <a className="text-blue">About us</a>
             </Link>
             <Link href="/">

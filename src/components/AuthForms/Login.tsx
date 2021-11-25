@@ -4,33 +4,41 @@ import React, { ChangeEvent, useState } from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
+import Image from "next/image";
 import validator from "validator";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { signInUser } = useFirebaseAuth();
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     if (validator.isEmpty(email)) {
+      setLoading(false);
       return setError("Email field is empty");
     }
     if (!validator.isEmail(email)) {
+      setLoading(false);
       return setError("Invalid email address");
     }
     if (!validator.isLength(password, { min: 6, max: undefined })) {
+      setLoading(false);
       return setError("Password must be atleast 6 characters long");
     }
     setError(null);
     signInUser(email, password)
       .then(() => {
+        setLoading(false);
         return router.push("/providers");
       })
       .catch((error) => {
+        setLoading(false);
         setError(error.message);
       });
   };
@@ -65,14 +73,33 @@ function Login() {
             }}
           />
           <div>
-            <button className="btn btn-yellow w-full">Login</button>
+            <button
+              className={`btn  w-full flex justify-center ${
+                loading ? "bg-yellow-dark" : "btn-yellow"
+              }`}
+            >
+              {loading ? (
+                <div className="relative w-6 h-6">
+                  <Image src="/loading.gif" layout="fill" />
+                </div>
+              ) : (
+                "Login"
+              )}
+            </button>
           </div>
         </form>
-        <div className="text-blue-900 font-bold mt-6">
-          don&apos;t have an account?{" "}
-          <Link href="/signup">
-            <a className="text-red-400">Signup</a>
-          </Link>
+        <div className="flex justify-between">
+          <div className="text-blue-900 font-bold mt-6">
+            don&apos;t have an account?{" "}
+            <Link href="/signup">
+              <a className="text-red-400">Signup</a>
+            </Link>
+          </div>
+          <div className="text-blue-900 font-bold mt-6">
+            <Link href="/forgot-password">
+              <a className="">Forgot Password?</a>
+            </Link>
+          </div>
         </div>
       </div>
     </LeftImagePanel>

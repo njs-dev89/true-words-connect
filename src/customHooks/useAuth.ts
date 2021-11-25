@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  onIdTokenChanged,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
 } from "firebase/auth";
 import app, { db, functions } from "../config/firebaseConfig";
 import { collection, doc, getDoc, setDoc } from "@firebase/firestore";
@@ -129,6 +130,14 @@ export default function useAuth() {
     }
   };
 
+  const forgotPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  const resetPassword = (oobCode, newPassword) => {
+    return confirmPasswordReset(auth, oobCode, newPassword);
+  };
+
   const logOut = () => signOut(auth).then(clear);
 
   // listen for Firebase state change
@@ -147,6 +156,8 @@ export default function useAuth() {
     createUser,
     createProviderApplicant,
     addProviderApplicant,
+    forgotPassword,
+    resetPassword,
     logOut,
   };
 }

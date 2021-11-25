@@ -25,6 +25,11 @@
 .bg-yellow {
   background-color: #e2be2d;
 }
+
+.bg-yellow-dark {
+  background-color: #c8a828;
+}
+
 .bg-light-blue {
   background-color: #f7fcff;
 }

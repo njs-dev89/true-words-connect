@@ -5,11 +5,9 @@ import { useRouter } from "next/router";
 
 import { useFirebaseAuth } from "../../context/authContext";
 import AuthUserDropdown from "./AuthUserDropdown";
-import { TiArrowSortedDown } from "react-icons/ti";
 
 function Navbar() {
   const { authUser, loading } = useFirebaseAuth();
-  const [showDropdown, setShowDropDown] = useState(false);
   const router = useRouter();
 
   return (
@@ -45,7 +43,7 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="font-medium">
-                    <Link href="/providers">
+                    <Link href="/about-us">
                       <a>About Us</a>
                     </Link>
                   </li>
