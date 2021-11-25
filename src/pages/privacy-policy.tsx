@@ -45,9 +45,10 @@ function PrivacyPolicyPage() {
 
               <p className="leading-7 mb-4">
                 <span className="font-bold">Company </span>
-                (referred to as either "the Company", "We", "Us" or "Our" in
-                this Agreement) refers to Truewords Connect, 285 Windrow
-                Crescent SW, Airdrie, Alberta T4B4K2.
+                (referred to as either &quot;the Company&quot;, &quot;We&quot;,
+                &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to
+                Truewords Connect, 285 Windrow Crescent SW, Airdrie, Alberta
+                T4B4K2.
               </p>
 
               <p className="leading-7 mb-4">
