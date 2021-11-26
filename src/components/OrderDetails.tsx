@@ -43,7 +43,7 @@ function OrderDetails() {
           {/*========= Left Panel ========== */}
           <div className="col-span-4 sm:col-span-1 bg-white py-6 shadow-md rounded-xl">
             <>
-              <UserDetails provider={authUser?.profile} />
+              <UserDetails provider={authUser?.profile} self={true} />
             </>
           </div>
           <div className=" col-span-4 sm:col-span-3">
