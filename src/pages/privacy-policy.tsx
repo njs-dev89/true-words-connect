@@ -140,7 +140,7 @@ function PrivacyPolicyPage() {
                 Usage Data is collected automatically when using the Service.
               </p>
               <p className="leading-7 mb-4">
-                Usage Data may include information such as Your Device's
+                Usage Data may include information such as Your Device&apos;s
                 Internet Protocol address (e.g. IP address), browser type,
                 browser version, the pages of our Service that You visit, the
                 time and date of Your visit, the time spent on those pages,
@@ -186,8 +186,9 @@ function PrivacyPolicyPage() {
                   preferences or Your activity on our Service. Flash Cookies are
                   not managed by the same browser settings as those used for
                   Browser Cookies. For more information on how You can delete
-                  Flash Cookies, please read "Where can I change the settings
-                  for disabling, or deleting local shared objects?" available at
+                  Flash Cookies, please read &quot;Where can I change the
+                  settings for disabling, or deleting local shared
+                  objects?&quot; available at
                   https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_
                 </li>
                 <li>
@@ -202,11 +203,11 @@ function PrivacyPolicyPage() {
                 </li>
               </ul>
               <p className="leading-7 mb-4">
-                Cookies can be "Persistent" or "Session" Cookies. Persistent
-                Cookies remain on Your personal computer or mobile device when
-                You go offline, while Session Cookies are deleted as soon as You
-                close Your web browser. Learn more about cookies: Cookies: What
-                Do They Do?.
+                Cookies can be &quot;Persistent&quot; or &quot;Session&quot;
+                Cookies. Persistent Cookies remain on Your personal computer or
+                mobile device when You go offline, while Session Cookies are
+                deleted as soon as You close Your web browser. Learn more about
+                cookies: Cookies: What Do They Do?.
               </p>
               <p className="leading-7 mb-4">
                 We use both Session and Persistent Cookies for the purposes set
