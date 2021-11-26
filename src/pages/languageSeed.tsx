@@ -1,6 +1,7 @@
 import { addDoc, collection } from "@firebase/firestore";
+import { httpsCallable } from "@firebase/functions";
 import React from "react";
-import { db } from "../config/firebaseConfig";
+import { db, functions } from "../config/firebaseConfig";
 
 const languages = [
   "Arabic,Gulf-Spoken",
@@ -248,6 +249,8 @@ const languages = [
   "Vietnamese",
 ];
 
+const addAdminRole = httpsCallable(functions, "addAdminRole");
+const addClientRole = httpsCallable(functions, "addClientRole");
 function languageSeed() {
   const handleClick = () => {
     const langCollection = collection(db, "/languages");
@@ -257,8 +260,16 @@ function languageSeed() {
   };
   return (
     <div>
-      <button className="btn btn-blue mt-32" onClick={handleClick}>
+      {/* <button className="btn btn-blue mt-32" onClick={handleClick}>
         Add languages
+      </button> */}
+      <button
+        className="btn btn-blue mt-32"
+        onClick={() => {
+          addAdminRole({ uid: "PxrDoqH4ZiS3vIrvWtyLmpKwr8I3" });
+        }}
+      >
+        Add admin role
       </button>
     </div>
   );

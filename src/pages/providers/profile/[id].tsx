@@ -7,7 +7,7 @@ import Tab from "../../../components/Tabs/Tab";
 import TabPane from "../../../components/Tabs/TabPane";
 import TabsPaneContainer from "../../../components/Tabs/TabsPaneContainer";
 import UserDetails from "../../../components/Profile/UserDetails";
-import UserReviews from "../../../components/Profile/UserReviews";
+import Reviews from "../../../components/ProvidersSearch/Reviews";
 import { useFirebaseAuth } from "../../../context/authContext";
 import ProviderOverview from "../../../components/Profile/ProviderOverview";
 
@@ -90,7 +90,7 @@ function ProviderProfilePage() {
                     )}
                   </TabPane>
                   <TabPane openTab={openTab} tabNo={2}>
-                    <UserReviews />
+                    <Reviews />
                   </TabPane>
                 </TabsPaneContainer>
 

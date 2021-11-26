@@ -123,11 +123,13 @@ function AuthUserDropdown({ username }) {
                     )}
                   </Link>
                 </Menu.Item>
-                <Menu.Item>
-                  <Link href="/adminDashboard/applicants">
-                    <a className="py-1">Applicants</a>
-                  </Link>
-                </Menu.Item>
+                {authUser.isAdmin && (
+                  <Menu.Item>
+                    <Link href="/adminDashboard/applicants">
+                      <a className="py-1">Applicants</a>
+                    </Link>
+                  </Menu.Item>
+                )}
                 {authUser.role === "client" && (
                   <Menu.Item>
                     <Link href="/provider-onboarding">

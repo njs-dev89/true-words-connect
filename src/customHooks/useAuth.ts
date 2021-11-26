@@ -17,6 +17,7 @@ const formatAuthUser = (user) => ({
   uid: user.uid,
   email: user.email,
   role: user.role,
+  isAdmin: user.isAdmin,
   profile: user.profile,
 });
 
@@ -34,6 +35,7 @@ export default function useAuth() {
 
     const token = await authState.getIdTokenResult(true);
     authState.role = token.claims.role;
+    authState.isAdmin = token.claims.isAdmin ? true : false;
     if (token.claims.role === "provider") {
       const docRef = doc(db, `/providers/${authState.uid}`);
       const docSnap = await getDoc(docRef);
@@ -57,6 +59,7 @@ export default function useAuth() {
         console.log("No such document!");
       }
     }
+    console.log(authState);
     var formattedUser = formatAuthUser(authState);
     setAuthUser(formattedUser);
     setLoading(false);
