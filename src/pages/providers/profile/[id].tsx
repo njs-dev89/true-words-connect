@@ -52,7 +52,11 @@ function ProviderProfilePage() {
         <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
           {/*========= Left Panel ========== */}
           <div className="col-span-4 sm:col-span-1 bg-white py-6 shadow-md rounded-xl">
-            {loading ? <p>loading...</p> : <UserDetails provider={provider} />}
+            {loading ? (
+              <p>loading...</p>
+            ) : (
+              <UserDetails provider={provider} self={false} />
+            )}
           </div>
           {/*========= Left Panel End ========== */}
 

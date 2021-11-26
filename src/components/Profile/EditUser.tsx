@@ -14,6 +14,7 @@ function EditUser({ setShowModal, provider }) {
   const [username, setUsername] = useState(provider.username);
   const [fullname, setFullname] = useState("");
   const [hourlyPrice, setHourlyPrice] = useState(null);
+  const [tagline, setTagline] = useState("");
   const [about, setAbout] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -30,6 +31,10 @@ function EditUser({ setShowModal, provider }) {
     }
     if (provider.fullname) {
       setFullname(provider.fullname);
+    }
+
+    if (provider.tagline) {
+      setTagline(provider.tagline);
     }
 
     if (provider.about) {
@@ -52,6 +57,9 @@ function EditUser({ setShowModal, provider }) {
     }
     if (validator.isEmpty(fullname)) {
       return setError("Please set your full name");
+    }
+    if (validator.isEmpty(tagline)) {
+      return setError("Please write your tagline");
     }
     if (validator.isEmpty(String(hourlyPrice))) {
       return setError("Please enter your hourly price");
@@ -82,6 +90,7 @@ function EditUser({ setShowModal, provider }) {
       {
         username,
         fullname,
+        tagline,
         hourly_rate: Number(hourlyPrice),
         isProfileComplete: true,
         address: {
@@ -143,6 +152,19 @@ function EditUser({ setShowModal, provider }) {
                 className="form-input border-gray-200 h-10 rounded text-sm"
               />
             </div>
+            <div className="flex flex-col">
+              <label htmlFor="tagline" className="text-sm mb-4 font-bold">
+                Short status
+              </label>
+              <input
+                type="text"
+                name="tagline"
+                value={tagline}
+                onChange={(e) => setTagline(e.target.value)}
+                className="form-input border-gray-200 h-10 rounded text-sm"
+              />
+            </div>
+
             <div className="flex flex-col">
               <label htmlFor="hourly_price" className="text-sm mb-4 font-bold">
                 Hourly Price

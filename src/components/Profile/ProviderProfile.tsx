@@ -159,7 +159,7 @@ function ProviderProfile({ userId }) {
                     </button>
                   )}
                 </div>
-                <UserDetails provider={authUser.profile} />
+                <UserDetails provider={authUser.profile} self={true} />
               </>
             )}
           </div>

@@ -12,6 +12,7 @@ function EditUser({ setShowModal, client }) {
   const { authUser } = useFirebaseAuth();
   const [username, setUsername] = useState(client.username);
   const [fullname, setFullname] = useState("");
+  const [tagline, setTagline] = useState("");
 
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -26,6 +27,9 @@ function EditUser({ setShowModal, client }) {
     }
     if (client.fullname) {
       setFullname(client.fullname);
+    }
+    if (client.tagline) {
+      setTagline(client.tagline);
     }
 
     if (client.profile_pic) {
@@ -42,6 +46,7 @@ function EditUser({ setShowModal, client }) {
       {
         username,
         fullname,
+        tagline,
 
         address: {
           city,
@@ -95,6 +100,18 @@ function EditUser({ setShowModal, client }) {
             name="fullname"
             value={fullname}
             onChange={(e) => setFullname(e.target.value)}
+            className="form-input border-gray-200 h-10 rounded text-sm"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="tagline" className="text-sm mb-4 font-bold">
+            Short status
+          </label>
+          <input
+            type="text"
+            name="tagline"
+            value={tagline}
+            onChange={(e) => setTagline(e.target.value)}
             className="form-input border-gray-200 h-10 rounded text-sm"
           />
         </div>
