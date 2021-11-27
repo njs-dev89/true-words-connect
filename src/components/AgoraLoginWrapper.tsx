@@ -7,6 +7,7 @@ import ModalContainer from "./ModalContainer";
 import RemoteCallNotification from "./RemoteCallNotification";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import LocalCallNotification from "./LocalCallNotification";
 
 const Msg = ({ msg, attributes }) => (
   <div>
@@ -120,17 +121,21 @@ function AgoraLoginWrapper({ children }) {
       )}
 
       {localCallNotification && (
-        <ModalContainer setShowModal={setLocalCallNotification} title="Calling">
-          <div className="w-96 p-6">
-            <p>You are calling someone</p>
-            <button
-              onClick={() => localInvitation.cancel()}
-              className="px-4 py-2 rounded text-white bg-red-500 shadow-md"
-            >
-              Cancel
-            </button>
-          </div>
-        </ModalContainer>
+        <LocalCallNotification
+          localInvitation={localInvitation}
+          setLocalCallNotification={setLocalCallNotification}
+        />
+        // <ModalContainer setShowModal={setLocalCallNotification} title="Calling">
+        //   <div className="w-96 p-6">
+        //     <p>You are calling someone</p>
+        //     <button
+        //       onClick={() => localInvitation.cancel()}
+        //       className="px-4 py-2 rounded text-white bg-red-500 shadow-md"
+        //     >
+        //       Cancel
+        //     </button>
+        //   </div>
+        // </ModalContainer>
       )}
       <ToastContainer
         position="bottom-right"
