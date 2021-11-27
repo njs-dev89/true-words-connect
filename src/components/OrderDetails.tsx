@@ -48,7 +48,7 @@ function OrderDetails() {
           </div>
           <div className=" col-span-4 sm:col-span-3">
             {orderLoading ? <p>Loading...</p> : <OrderData order={order} />}
-            {!orderLoading && order.status === "active" && (
+            {!orderLoading && order.status === "completed" && (
               <OrderReviews order={order} />
             )}
             {!orderLoading && order.status === "active" && (
