@@ -6,6 +6,7 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
+import { useAgora } from "../../context/agoraContextNoSsr";
 
 function CreateOffer({ setShowModal, room }) {
   const [service, setService] = useState("teaching");
@@ -14,10 +15,11 @@ function CreateOffer({ setShowModal, room }) {
   const [language, setLanguage] = useState("akan");
   const [hrs, setHrs] = useState(0);
   const [days, setDays] = useState(0);
-  const [budget, setBudget] = useState(0.0);
-  const [startDate, setStartDate] = useState(null);
+  const [budget, setBudget] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
   const { query } = useRouter();
   const { authUser } = useFirebaseAuth();
+  const { sendMessageToPeer } = useAgora();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +52,10 @@ function CreateOffer({ setShowModal, room }) {
 
     const offersCollection = collection(db, `/offers`);
     const offersDocRef = await addDoc(offersCollection, formData);
+    sendMessageToPeer(
+      `OFFER;You have recieved a new offer from ${authUser.profile.username}`,
+      formData.client.id
+    );
     setShowModal(false);
   };
   return (
@@ -153,7 +159,7 @@ function CreateOffer({ setShowModal, room }) {
                 min={0}
                 name="hours"
                 id="hours"
-                value={hrs}
+                value={hrs === 0 ? "" : hrs}
                 onChange={(e) => setHrs(Number(e.target.value))}
                 className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-6 sm:text-sm border-gray-300 rounded-md"
                 placeholder="0"
@@ -180,7 +186,7 @@ function CreateOffer({ setShowModal, room }) {
                   min="0"
                   name="days"
                   id="days"
-                  value={days}
+                  value={days === 0 ? "" : days}
                   onChange={(e) => setDays(Number(e.target.value))}
                   className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-6 sm:text-sm border-gray-300 rounded-md"
                   placeholder="0"
@@ -221,7 +227,7 @@ function CreateOffer({ setShowModal, room }) {
               min="0"
               name="price"
               id="price"
-              value={budget}
+              value={budget === 0 ? "" : budget}
               onChange={(e) => setBudget(Number(e.target.value))}
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"

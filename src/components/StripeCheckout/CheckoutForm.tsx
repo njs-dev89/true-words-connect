@@ -5,17 +5,19 @@ import {
   CardElement,
   PaymentElement,
 } from "@stripe/react-stripe-js";
+import { useAgora } from "../../context/agoraContextNoSsr";
+import { useFirebaseAuth } from "../../context/authContext";
 
 // import CardSection from "./CardSection";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ providerId }) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
+  const { authUser } = useFirebaseAuth();
+  const { sendMessageToPeer } = useAgora();
 
   const handleSubmit = async (event) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -38,6 +40,10 @@ export default function CheckoutForm() {
       // details incomplete)
       setError(error.message);
     } else {
+      sendMessageToPeer(
+        `ORDER;You have received a new order from ${authUser.profile.username}`,
+        providerId
+      );
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.

@@ -6,11 +6,12 @@ import {
   IAgoraRTCRemoteUser,
 } from "agora-rtc-react";
 import React, { useEffect, useState } from "react";
-import { functions } from "../config/firebaseConfig";
+import { db, functions } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import AgoraControls from "./AgoraControls";
 import AgoraVideos from "./AgoraVideo";
 import { useRouter } from "next/router";
+import { doc, setDoc } from "@firebase/firestore";
 
 const genRtcToken = httpsCallable(functions, "genRtcToken");
 const config: ClientConfig = {
@@ -25,10 +26,12 @@ const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 function VideoCall(props: {
   setInCall: React.Dispatch<React.SetStateAction<boolean>>;
   channelName: string;
+  order;
 }) {
-  const { setInCall, channelName } = props;
+  const { setInCall, channelName, order } = props;
   const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
   const [start, setStart] = useState<boolean>(false);
+  const [timer, setTimer] = useState(0);
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const { authUser } = useFirebaseAuth();
@@ -38,7 +41,68 @@ function VideoCall(props: {
     // function to initialise the SDK
     let init = async (name: string) => {
       console.log("init", name);
-      client.on("connectionStateChanged", () => {});
+      let tenMinuteTimer;
+      let perSecondTimer;
+      client.on("connection-state-change", async (newState, oldState) => {
+        console.log(newState);
+        if (newState === "CONNECTED") {
+          let countDownStartTime =
+            new Date().getTime() + order.time_remaining_secs * 1000;
+          perSecondTimer = setInterval(async () => {
+            let now = new Date().getTime();
+            let distance = countDownStartTime - now;
+            setTimer(distance);
+            if (distance < 0) {
+              clearInterval(perSecondTimer);
+              await setDoc(
+                doc(db, `/orders/${channelName}`),
+                { time_remaining_secs: 0, status: "completed" },
+                { merge: true }
+              );
+            }
+          }, 1000);
+          if (authUser.role === "client") {
+            tenMinuteTimer = setInterval(async () => {
+              await setDoc(
+                doc(db, `/orders/${channelName}`),
+                {
+                  time_remaining_secs:
+                    order.time_remaining_secs -
+                    client.getRTCStats().Duration +
+                    order.last_duration,
+                  last_duration: client.getRTCStats().Duration,
+                },
+                { merge: true }
+              );
+            }, 600000);
+          }
+        }
+        if (newState === "DISCONNECTED") {
+          clearInterval(tenMinuteTimer);
+          clearInterval(perSecondTimer);
+          console.log(client.getRTCStats());
+          if (authUser.role === "client") {
+            await setDoc(
+              doc(db, `/orders/${channelName}`),
+              {
+                time_remaining_secs:
+                  order.time_remaining_secs -
+                  client.getRTCStats().Duration +
+                  order.last_duration,
+                last_duration: 0,
+              },
+              { merge: true }
+            );
+            // const timeRemaining =
+            //   order.time_remaining_secs - client.getRTCStats().Duration;
+            // await setDoc(
+            //   doc(db, `/orders/${channelName}`),
+            //   { time_remaining_secs: timeRemaining },
+            //   { merge: true }
+            // );
+          }
+        }
+      });
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
         console.log("subscribe success");
@@ -93,12 +157,21 @@ function VideoCall(props: {
     <div className="w-full h-full">
       {start && tracks && <AgoraVideos users={users} tracks={tracks} />}
       {ready && tracks && (
-        <AgoraControls
-          tracks={tracks}
-          setStart={setStart}
-          setInCall={setInCall}
-          client={client}
-        />
+        <>
+          <p
+            className={`text-center mt-4 text-xl font-semibold ${
+              timer < 60000 ? "text-red-600" : ""
+            }`}
+          >{`${Math.floor(timer / (1000 * 60 * 60))}h ${Math.floor(
+            (timer % (1000 * 60 * 60)) / (1000 * 60)
+          )}m ${Math.floor((timer % (1000 * 60)) / 1000)}s`}</p>
+          <AgoraControls
+            tracks={tracks}
+            setStart={setStart}
+            setInCall={setInCall}
+            client={client}
+          />
+        </>
       )}
     </div>
   );

@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 );
 const createPaymentIntent = httpsCallable(functions, "createPaymentIntent");
 
-function StripeForm({ offerId }) {
+function StripeForm({ offerId, providerId }) {
   const [loading, setLoading] = useState(true);
   const [clientSecret, setClientSecret] = useState(null);
   useEffect(() => {
@@ -26,7 +26,7 @@ function StripeForm({ offerId }) {
     <p>Loading...</p>
   ) : (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <CheckoutForm />
+      <CheckoutForm providerId={providerId} />
     </Elements>
   );
 }

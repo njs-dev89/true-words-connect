@@ -7,6 +7,7 @@ import UserDetails from "./Profile/UserDetails";
 import { useFirebaseAuth } from "../context/authContext";
 import OrderData from "./OrderData";
 import OrderReviews from "./OrderReviews";
+import { onSnapshot } from "firebase/firestore";
 
 const VideoChatNoSSR = dynamic(() => import("./VideoChatAgora"), {
   ssr: false,
@@ -18,22 +19,36 @@ function OrderDetails() {
   const [order, setOrder] = useState(null);
   const [orderLoading, setOrderLoading] = useState(true);
 
-  async function loadData() {
-    const docRef = doc(db, `/orders/${router.query.id}`);
-    const docSnap = await getDoc(docRef);
+  // async function loadData() {
+  //   const docRef = doc(db, `/orders/${router.query.id}`);
+  //   const unsub =  onSnapshot(docRef, (docSnap) => {
+  //     if (docSnap.exists()) {
+  //       const data = docSnap.data();
+  //       data.id = docSnap.id;
+  //       setOrder(data);
+  //       setOrderLoading(false);
+  //     } else {
+  //       // doc.data() will be undefined in this case
+  //       console.log("No such document!");
+  //     }
+  //   });
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      data.id = docSnap.id;
-      setOrder(data);
-      setOrderLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
+  // }
   useEffect(() => {
-    loadData();
+    // loadData();
+    const docRef = doc(db, `/orders/${router.query.id}`);
+    const unsub = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        data.id = docSnap.id;
+        setOrder(data);
+        setOrderLoading(false);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    });
+    return () => unsub();
   }, []);
 
   return (

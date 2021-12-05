@@ -74,6 +74,12 @@ function UserOrders() {
           Cancelled
         </button>
         <button
+          className={`btn ${filter === "delivered" ? "bg-gray-200" : ""}`}
+          onClick={() => setFilter("delivered")}
+        >
+          Delivered
+        </button>
+        <button
           className={`btn ${filter === "completed" ? "bg-gray-200" : ""}`}
           onClick={() => setFilter("completed")}
         >

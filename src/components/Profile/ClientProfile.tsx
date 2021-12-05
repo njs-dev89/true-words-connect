@@ -77,7 +77,11 @@ function ClientProfile({ userId }) {
                     <BiEdit className="text-2xl" />
                   </button>
                 </div>
-                <UserDetails provider={authUser.profile} self={true} />
+                <UserDetails
+                  provider={authUser.profile}
+                  self={true}
+                  setShowModal={setShowModal}
+                />
               </>
             )}
           </div>

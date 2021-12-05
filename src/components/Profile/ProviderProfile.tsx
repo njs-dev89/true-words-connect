@@ -159,7 +159,11 @@ function ProviderProfile({ userId }) {
                     </button>
                   )}
                 </div>
-                <UserDetails provider={authUser.profile} self={true} />
+                <UserDetails
+                  provider={authUser.profile}
+                  self={true}
+                  setShowModal={setShowModal}
+                />
               </>
             )}
           </div>

@@ -12,7 +12,7 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import OfferRequestToOffer from "./OfferRequestToOffer";
 import Image from "next/image";
-import TableRowCollapse from "../TableRowCollapse";
+import { useAgora } from "../../context/agoraContextNoSsr";
 
 function OfferRequest() {
   const { authUser } = useFirebaseAuth();
@@ -20,6 +20,7 @@ function OfferRequest() {
   const [requestData, setRequestData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [offerRequests, setOfferRequests] = useState(null);
+  const { sendMessageToPeer } = useAgora();
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
@@ -59,6 +60,10 @@ function OfferRequest() {
     const offerCollection = collection(db, `/offers`);
     try {
       const offerDocRef = await addDoc(offerCollection, req);
+      sendMessageToPeer(
+        `OFFER;You have received a new offer from ${authUser.profile.username}`,
+        req.client.id
+      );
       await setDoc(
         doc(db, `/providers/${authUser.uid}/offerRequest`, req.id),
         { status: "offer sent" },
@@ -141,7 +146,7 @@ function OfferRequest() {
                       Create Offer
                     </button>
                     <button
-                      disabled={req.satatus !== "active"}
+                      disabled={req.status !== "active"}
                       className={`btn-small mr-2 ${
                         req.status === "active"
                           ? "btn-blue"

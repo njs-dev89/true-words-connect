@@ -21,7 +21,11 @@ function VideoChatAgora({ channelName, order }) {
       } flex  justify-center`}
     >
       {inCall ? (
-        <VideoCall setInCall={setInCall} channelName={channelName} />
+        <VideoCall
+          setInCall={setInCall}
+          channelName={channelName}
+          order={order}
+        />
       ) : (
         <div className="bg-white px-4 py-4 rounded-lg shadow-md">
           <div className="px-16 sm:px-32 py-16 border-2 border-dotted rounded-lg">

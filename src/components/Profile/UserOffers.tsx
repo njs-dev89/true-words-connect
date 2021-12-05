@@ -12,14 +12,17 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import StripeForm from "../StripeCheckout/StripeForm";
 import ModalContainer from "../ModalContainer";
+import { useAgora } from "../../context/agoraContextNoSsr";
 
 function UserOffers() {
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
   const [offerId, setOfferId] = useState(null);
+  const [providerId, setProviderId] = useState(null);
   const [filter, setFilter] = useState("all");
   const { authUser } = useFirebaseAuth();
   const [showModal, setShowModal] = useState(false);
+  const { sendMessageToPeer } = useAgora();
 
   useEffect(() => {
     setLoading(true);
@@ -49,12 +52,16 @@ function UserOffers() {
     return () => unsubscribe();
   }, [filter]);
 
-  const rejectOffer = async (id) => {
+  const rejectOffer = async (id, provider) => {
     try {
       const offerDocRef = await setDoc(
         doc(db, `/offers/${id}`),
         { status: "rejected" },
         { merge: true }
+      );
+      sendMessageToPeer(
+        `OFFER_REJECTED;Your offer has been rejected by ${authUser.profile.username}`,
+        provider
       );
     } catch (error) {
       console.error(error);
@@ -65,7 +72,7 @@ function UserOffers() {
       <h3 className="text-blue font-bold text-xl mb-6">Offers</h3>
       {showModal && (
         <ModalContainer setShowModal={setShowModal} title="Pay Now">
-          <StripeForm offerId={offerId} />
+          <StripeForm offerId={offerId} providerId={providerId} />
         </ModalContainer>
       )}
       <div className="gap-3 flex justify-end mb-8">
@@ -131,6 +138,7 @@ function UserOffers() {
                     }`}
                     onClick={() => {
                       setOfferId(offer.id);
+                      setProviderId(offer.provider.id);
                       setShowModal(true);
                     }}
                   >
@@ -144,7 +152,7 @@ function UserOffers() {
                         : "bg-gray-200 text-gray-400 cursor-default"
                     }`}
                     onClick={(e) => {
-                      rejectOffer(offer.id);
+                      rejectOffer(offer.id, offer.provider.id);
                     }}
                   >
                     Reject

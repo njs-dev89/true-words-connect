@@ -3,25 +3,35 @@ import React, { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useAgora } from "../context/agoraContextNoSsr";
 import { useFirebaseAuth } from "../context/authContext";
-import ModalContainer from "./ModalContainer";
 import RemoteCallNotification from "./RemoteCallNotification";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import LocalCallNotification from "./LocalCallNotification";
 
-const Msg = ({ msg, attributes }) => (
-  <div>
-    <h3 className="font-bold text-lg text-blue mb-4">New Message!</h3>
-    <div className="flex items-center">
-      <div className="relative h-10 w-10 overflow-hidden rounded-full mr-2">
-        {" "}
-        <Image src={attributes?.profile_pic} layout="fill" alt="" />
+const Msg = ({ msg, attributes }) => {
+  let heading;
+
+  const msgContent = msg.split(";");
+  if (msgContent[0] === "MESSAGE") heading = "New Message!";
+  if (msgContent[0] === "OFFER") heading = "New Offer!";
+  if (msgContent[0] === "OFFER_REQUEST") heading = "New Offer Request!";
+  if (msgContent[0] === "ORDER") heading = "New Order!";
+  if (msgContent[0] === "REVIEW") heading = "User Review!";
+  if (msgContent[0] === "OFFER_REJECTED") heading = "Offer rejected!";
+  return (
+    <div>
+      <h3 className="font-bold text-lg text-blue mb-4">{heading}</h3>
+      <div className="flex items-center">
+        <div className="relative h-10 w-10 overflow-hidden rounded-full mr-2">
+          {" "}
+          <Image src={attributes?.profile_pic} layout="fill" alt="" />
+        </div>
+        <p className="font-semibold">{attributes.username}</p>
       </div>
-      <p className="font-semibold">{attributes.username}</p>
+      <p className="ml-12">{msgContent[1]}</p>
     </div>
-    <p className="ml-12">{msg}</p>
-  </div>
-);
+  );
+};
 
 function AgoraLoginWrapper({ children }) {
   const displayMsg = (msg, attributes) => {
@@ -38,8 +48,6 @@ function AgoraLoginWrapper({ children }) {
   const { authUser, loading } = useFirebaseAuth();
   const router = useRouter();
   const {
-    loginToAgoraRtm,
-    logOutFromAgora,
     localInvitation,
     remoteInvitation,
     setInCall,
@@ -48,18 +56,7 @@ function AgoraLoginWrapper({ children }) {
     localCallNotification,
     remoteCallNotification,
     message,
-    agoraLoginStatus,
   } = useAgora();
-
-  // useEffect(() => {
-  //   if (window !== undefined) {
-  //     window.onload = () => {
-  //       if (authUser && authUser.uid && agoraLoginStatus === "disconnected") {
-  //         loginToAgoraRtm(authUser.uid);
-  //       }
-  //     };
-  //   }
-  // }, [authUser, agoraLoginStatus]);
 
   useEffect(() => {
     if (message) {
@@ -125,17 +122,6 @@ function AgoraLoginWrapper({ children }) {
           localInvitation={localInvitation}
           setLocalCallNotification={setLocalCallNotification}
         />
-        // <ModalContainer setShowModal={setLocalCallNotification} title="Calling">
-        //   <div className="w-96 p-6">
-        //     <p>You are calling someone</p>
-        //     <button
-        //       onClick={() => localInvitation.cancel()}
-        //       className="px-4 py-2 rounded text-white bg-red-500 shadow-md"
-        //     >
-        //       Cancel
-        //     </button>
-        //   </div>
-        // </ModalContainer>
       )}
       <ToastContainer
         position="bottom-right"

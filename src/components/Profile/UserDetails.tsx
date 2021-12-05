@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { RatingView } from "react-simple-star-rating";
 
-function UserDetails({ provider, self }) {
+function UserDetails({ provider, self, setShowModal = null }) {
   return (
     <>
       <div className="flex flex-col items-center px-4 pb-4 border-b">
@@ -15,7 +15,18 @@ function UserDetails({ provider, self }) {
         </div>
         <h3 className="font-bold text-lg mt-4 mb-2">{provider.username}</h3>
         <p className="text-center text-sm">
-          {provider.tagline || "Add something about yourself"}
+          {provider.tagline
+            ? provider.tagline
+            : self
+            ? setShowModal && (
+                <button
+                  className="text-blue underline hover:text-blue-700 font-medium"
+                  onClick={() => setShowModal(true)}
+                >
+                  Add short status
+                </button>
+              )
+            : ""}
         </p>
         <p className="text-gray-700 mt-4">
           {provider.rating ? (

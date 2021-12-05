@@ -16,6 +16,8 @@ import dayjs from "dayjs";
 import ScrollableFeed from "react-scrollable-feed";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useRouter } from "next/router";
+import { HiDownload } from "react-icons/hi";
+import { writeFile } from "fs-web";
 
 dayjs.extend(relativeTime);
 
@@ -25,6 +27,39 @@ function Messages({ room }) {
   const { authUser } = useFirebaseAuth();
   const router = useRouter();
   //   const mesgRef = useRef<any>();
+
+  const downloadFile = (url, name) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+      if (window !== undefined) {
+        var saveBlob = (function () {
+          let a = document.createElement("a");
+          document.body.appendChild(a);
+
+          return function (blob, fileName) {
+            var url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+          };
+        })();
+
+        saveBlob(blob, name);
+      }
+      // writeFile(name, blob)
+      //   .then((data) => {
+      //     console.log(data);
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  };
 
   useEffect(() => {
     const q = query(
@@ -111,6 +146,22 @@ function Messages({ room }) {
                   </div>
                   <div className="bg-gray-300 p-4 rounded-xl text-sm mb-4 inline-block">
                     <p>{message.text}</p>
+                    {message.attachements ? (
+                      <ol className="text-green font-medium ml-0">
+                        {message.attachements.map((attach, idx) => (
+                          <li key={idx + 1}>
+                            <button
+                              className="flex items-center"
+                              onClick={() =>
+                                downloadFile(attach.downloadUrl, attach.name)
+                              }
+                            >
+                              {attach.name} <HiDownload />
+                            </button>
+                          </li>
+                        ))}
+                      </ol>
+                    ) : null}
                   </div>
                 </div>
               </div>

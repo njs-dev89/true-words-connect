@@ -4,10 +4,12 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { doc, collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
+import { useAgora } from "../../context/agoraContextNoSsr";
 
 function OfferRequestToOffer({ setShowModal, reqData }) {
   const [offerAmount, setOfferAmount] = useState(0);
   const { authUser } = useFirebaseAuth();
+  const { sendMessageToPeer } = useAgora();
   console.log(authUser);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,10 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
     const offerCollection = collection(db, `/offers`);
     try {
       const offerDocRef = await addDoc(offerCollection, reqData);
+      sendMessageToPeer(
+        `OFFER;You have received a new offer from ${authUser.profile.username}`,
+        reqData.client.id
+      );
       await setDoc(
         doc(db, `/providers/${authUser.uid}/offerRequest`, reqData.id),
         { status: "offer Sent" },
@@ -53,10 +59,10 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
             </div>
             <input
               type="number"
-              min="0"
+              min={0}
               name="price"
               id="price"
-              value={offerAmount}
+              value={offerAmount === 0 ? "" : offerAmount}
               onChange={(e) => setOfferAmount(Number(e.target.value))}
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
