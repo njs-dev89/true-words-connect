@@ -30,7 +30,7 @@ export default function CheckoutForm({ providerId }) {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: process.env.NEXT_STRIPE_ORDER_RETURN_URL,
+        return_url: process.env.NEXT_PUBLIC_STRIPE_ORDER_RETURN_URL,
       },
     });
 
