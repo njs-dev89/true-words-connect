@@ -28,8 +28,12 @@ function ProfileCard({ provider, currentPosition }) {
           </Link>
         </div>
         <p className="text-sm font-medium text-gray-500">
-          {(haversine(provider._geoloc, currentPosition) / 1000).toPrecision(2)}
-          Km
+          {console.log(currentPosition)}
+          {provider._geoloc && currentPosition
+            ? `${(
+                haversine(provider._geoloc, currentPosition) / 1000
+              ).toPrecision(2)} Km`
+            : " "}
         </p>
         <div className="flex flex-col sm:flex-row mt-6">
           <p className="font-medium text-gray-700">

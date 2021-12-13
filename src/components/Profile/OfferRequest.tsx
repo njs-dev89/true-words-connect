@@ -98,15 +98,6 @@ function OfferRequest() {
         </button>
       </div>
       <div className="w-full text-gray-700 table-bottom-spaced bordered-table">
-        {/* <div className="grid grid-cols-7 border-2 rounded-lg">
-            <div className="py-4 font-medium text-center">Client</div>
-            <div className="py-4 font-medium text-center">Service</div>
-            <div className="py-4 font-medium text-center">Budget</div>
-            <div className="py-4 font-medium text-center">Contract</div>
-            <div className="py-4 font-medium text-center">Duration</div>
-            <div className="py-4 font-medium text-center">Type</div>
-            <div className="py-4 font-medium col-span-1"></div>
-          </div> */}
         {loading && <p>Loading...</p>}
         {!loading && offerRequests.length === 0 && (
           <p>No {filter === "all" ? "" : filter} offer requests to show</p>
@@ -209,53 +200,6 @@ function OfferRequest() {
                   </div>
                 </div>
               </div>
-              // <TableRowCollapse
-              //   key={req.id}
-              //   rowItems={[
-              //     req.client.username,
-              //     req.service,
-              //     `$${req.budget}`,
-              //     req.contractType,
-              //     req.contractType === "hourly"
-              //       ? `${req.hours} hrs`
-              //       : `${req.days} days`,
-              //     req.serviceType,
-              //   ]}
-              // >
-              //   <div className="ml-12">
-              //     {req.contractType === "fullDay" ? (
-              //       <div className="flex">
-              //         <h3>Start Day:</h3>
-              //         <p>{req.startDate.seconds}</p>
-              //       </div>
-              //     ) : (
-              //       ""
-              //     )}
-              //     <div className="flex">
-              //       <h3>Language:</h3>
-              //       <p>{req.language}</p>
-              //     </div>
-              //     <button
-              //       disabled={req.satatus === "offer sent"}
-              //       className="btn btn-green"
-              //       onClick={() => {
-              //         setRequestData(req);
-              //         setShowModal(true);
-              //       }}
-              //     >
-              //       Create Offer
-              //     </button>
-              //     <button
-              //       disabled={req.satatus === "offer sent"}
-              //       className="btn btn-blue"
-              //       onClick={(e) => {
-              //         acceptRequest(req);
-              //       }}
-              //     >
-              //       Accept
-              //     </button>
-              //   </div>
-              // </TableRowCollapse>
             );
           })}
         {showModal && (
@@ -267,19 +211,6 @@ function OfferRequest() {
       </div>
     </div>
   );
-  //  : authUser.role === "client" ? (
-  //   <div className="col-span-3 mt-16">
-  //     <p className="text-center">
-  //       You haven&apos;t received any offer request yet
-  //     </p>
-  //   </div>
-  // ) : (
-  //   <div className="col-span-3 mt-16">
-  //     <p className="text-center">
-  //       You haven&apos;t recieved any offer request yet
-  //     </p>
-  //   </div>
-  // );
 }
 
 export default OfferRequest;

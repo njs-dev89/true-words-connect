@@ -13,10 +13,7 @@ const client = algoliasearch(
 const index = client.initIndex("providers");
 
 function ProvidersPage({ query, hits }) {
-  const [currentPosition, setCurrentPosition] = useState({
-    lat: Number(query.lat),
-    lng: Number(query.lng),
-  });
+  const [currentPosition, setCurrentPosition] = useState(null);
 
   useEffect(() => {
     if (!!query.lng) {
@@ -27,6 +24,7 @@ function ProvidersPage({ query, hits }) {
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          console.log(position);
           setCurrentPosition({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
