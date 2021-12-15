@@ -22,21 +22,21 @@ export default function Home() {
             <div className="grid grid-cols-11 flex items-end">
               <div className="col-span-11 md:col-span-6">
                 <h1 className="headline text-center md:text-left">
-                  Connecting the world through languages
+                  Connecting People Through Languages
                 </h1>
                 <p className="mb-12 text-center md:text-left">
-                  Where there is a Language, you will find People, a Community,
-                  Culture, and Identity. All your language needs, one -platform
-                  for Translation, Localization, and Learning.
+                  Where there is language, you will find a community, a culture, and an identity. From translation
+                  and language learning to localization, Truewords Connect has all your language needs, all on one
+                  platform.
                 </p>
                 <div className="text-center md:text-left">
                   <Link href="/providers">
                     <a className="btn btn-yellow mr-4 shadow-xl">
-                      Find Provider
+                      Find a Provider
                     </a>
                   </Link>
                   <Link href="/provider-signup">
-                    <a className="btn btn-outline">Start Providing</a>
+                    <a className="btn btn-outline">Become A Provider</a>
                   </Link>
                 </div>
               </div>

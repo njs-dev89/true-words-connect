@@ -53,7 +53,7 @@ function ProviderSignup() {
           setEmail={setEmail}
           password={password}
           setPassword={setPassword}
-          btnText="Signup"
+          btnText="Sign Up"
           onSubmit={onSubmit}
           error={error}
         />

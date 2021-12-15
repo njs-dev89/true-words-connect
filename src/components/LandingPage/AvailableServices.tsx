@@ -26,32 +26,32 @@ function AvailableServices() {
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8">
         <SingleService
           serviceTitle="Translation"
-          description="Become a freelance translator or translate your document by any of our freelance Providers"
+          description="Have your documents and work translated one on one by our freelance providers."
           iconLink="/translation.svg"
         />
         <SingleService
           serviceTitle="Interpretation"
-          description="Sign up to provide or receive in person or online services."
+          description="Receive in person or online intertpretation services."
           iconLink="/translation.svg"
         />
         <SingleService
           serviceTitle="Localization"
-          description="Businesses and Marketers can get services to develop local market content."
+          description="Businesses can receive services to develop local product and marketing content."
           iconLink="/translation.svg"
         />
         <SingleService
           serviceTitle="Language Learning"
-          description="Be a tutor, practice or learn any of our 240 languages in person or online."
+          description="Become a tutor or practice and learn any of over 240 languages in person or online."
           iconLink="/translation.svg"
         />
         <SingleService
-          serviceTitle="Subtitling or Dubbing"
-          description="Subtitle or Dub all your social media content for a local audience i.e. Youtube, Instagram, Weibo, WeChat etc."
+          serviceTitle="Content Subtitling"
+          description="Have your social media content subtitled, written, and dubbed for your local audience. Offered for Instagram, YouTube, Weibo, WeChat, and more.or Dub all your social media content for a local audience i.e. Youtube, Instagram, Weibo, WeChat etc."
           iconLink="/translation.svg"
         />
         <SingleService
-          serviceTitle="Proofread"
-          description="Get local professionals to proofread your work."
+          serviceTitle="Proofreading"
+          description="Hire local professionals to proofread and edit your work and other documents."
           iconLink="/translation.svg"
         />
       </div>

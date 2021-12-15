@@ -39,7 +39,7 @@ function Navbar() {
                 <>
                   <li className="font-medium">
                     <Link href="/providers">
-                      <a>Find Provider</a>
+                      <a>Find a Provider</a>
                     </Link>
                   </li>
                   <li className="font-medium">
@@ -64,7 +64,7 @@ function Navbar() {
                   <a className="btn btn-blue mr-2">Login</a>
                 </Link>
                 <Link href="/signup">
-                  <a className="btn btn-yellow">Signup</a>
+                  <a className="btn btn-yellow">Sign Up</a>
                 </Link>
               </>
             )}
