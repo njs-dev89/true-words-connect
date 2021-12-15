@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFirebaseAuth } from "../../context/authContext";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
 import { useAgora } from "../../context/agoraContextNoSsr";
@@ -12,14 +12,26 @@ function CreateOfferRequest({ setShowModal }) {
   const [service, setService] = useState("teaching");
   const [contractType, setContractType] = useState("hourly");
   const [serviceType, setServiceType] = useState("online");
-  const [language, setLanguage] = useState("akan");
+  const [language, setLanguage] = useState("");
   const [hrs, setHrs] = useState(0);
   const [days, setDays] = useState(0);
   const [budget, setBudget] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
-  const { query } = useRouter();
+  const [langOptions, setLangOptions] = useState([]);
+  const router = useRouter();
   const { authUser } = useFirebaseAuth();
   const { sendMessageToPeer } = useAgora();
+
+  useEffect(() => {
+    let suggst = [];
+    const q = query(collection(db, "/languages"));
+    getDocs(q).then((snap) => {
+      snap.forEach((langSnap) => {
+        suggst.push(langSnap.data().language);
+      });
+      setLangOptions(suggst);
+    });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,12 +58,12 @@ function CreateOfferRequest({ setShowModal }) {
 
     const offerRequestCollection = collection(
       db,
-      `/providers/${query.id}/offerRequest`
+      `/providers/${router.query.id}/offerRequest`
     );
     const offerReqDocRef = await addDoc(offerRequestCollection, formData);
     sendMessageToPeer(
       `OFFER_REQUEST;New offer request recieved from ${authUser.profile.username}`,
-      query.id
+      router.query.id
     );
     setShowModal(false);
   };
@@ -78,6 +90,11 @@ function CreateOfferRequest({ setShowModal }) {
           >
             <option value="teaching">Teaching</option>
             <option value="translation">Translation</option>
+            <option value="interpretation">Interpretation</option>
+            <option value="subtitling">Subtitling</option>
+            <option value="proofreading">Proofreading</option>
+            <option value="dubbing">Dubbing</option>
+            <option value="localization">Localization</option>
           </select>
         </div>
 
@@ -125,18 +142,21 @@ function CreateOfferRequest({ setShowModal }) {
             htmlFor="language"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Select Language
+            Set Language
           </label>
-          <select
+          <input
             name="language"
-            id=""
+            id="language"
+            list="languages"
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="form-input border-gray-200 h-10 rounded text-sm"
-          >
-            <option value="akan">Akan</option>
-            <option value="ewe">Ewe</option>
-          </select>
+            className="form-input border focus:border-blue-500 px-4 border-gray-200 h-10 rounded text-sm"
+          />
+          <datalist id="languages">
+            {langOptions.map((opt, idx) => (
+              <option value={opt} key={idx + 5} />
+            ))}
+          </datalist>
         </div>
 
         {contractType === "hourly" && (

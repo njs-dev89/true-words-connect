@@ -197,7 +197,7 @@ function EditUser({ setShowModal, provider }) {
         )}
         {step === 2 && (
           <>
-            <div className="flex flex-col">
+            <div className="flex flex-col mb-4">
               <label htmlFor="about" className="text-sm mb-4 font-bold">
                 About
               </label>
@@ -206,7 +206,7 @@ function EditUser({ setShowModal, provider }) {
                 name="about"
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
-                className="form-input border-gray-200 h-10 rounded text-sm"
+                className="form-input border-gray-200 h-20 rounded text-sm"
               ></textarea>
             </div>
             <div className="flex flex-col">

@@ -17,7 +17,6 @@ import ScrollableFeed from "react-scrollable-feed";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useRouter } from "next/router";
 import { HiDownload } from "react-icons/hi";
-import { writeFile } from "fs-web";
 
 dayjs.extend(relativeTime);
 
@@ -118,7 +117,7 @@ function Messages({ room }) {
       <div className="h-64 overflow-auto mb-4">
         <ScrollableFeed>
           {messages &&
-            messages.reverse().map((message) => (
+            messages.map((message) => (
               <div className="grid grid-cols-12" key={message.id}>
                 <div className="col-span-1 w-8 h-8 relative rounded-full overflow-hidden mt-4">
                   <Image
@@ -144,7 +143,13 @@ function Messages({ room }) {
                       {dayjs(message.time.toDate()).fromNow()}
                     </p>
                   </div>
-                  <div className="bg-gray-300 p-4 rounded-xl text-sm mb-4 inline-block">
+                  <div
+                    className={`p-4 rounded-xl text-sm mb-4 inline-block ${
+                      authUser.uid === message.senderId
+                        ? "bg-gray-100"
+                        : "bg-gray-300"
+                    }`}
+                  >
                     <p>{message.text}</p>
                     {message.attachements ? (
                       <ol className="text-green font-medium ml-0">
