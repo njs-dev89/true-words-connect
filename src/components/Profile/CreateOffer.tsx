@@ -15,7 +15,7 @@ function CreateOffer({ setShowModal, room }) {
   const [language, setLanguage] = useState("akan");
   const [hrs, setHrs] = useState(0);
   const [days, setDays] = useState(0);
-  const [budget, setBudget] = useState(0);
+  const [price, setPrice] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [langOptions, setLangOptions] = useState([]);
   const router = useRouter();
@@ -41,7 +41,7 @@ function CreateOffer({ setShowModal, room }) {
       serviceType,
       language,
       status: "active",
-      budget,
+      price,
       client: {
         id: room.client.id,
         username: room.client.username,
@@ -247,8 +247,8 @@ function CreateOffer({ setShowModal, room }) {
               min="0"
               name="price"
               id="price"
-              value={budget === 0 ? "" : budget}
-              onChange={(e) => setBudget(Number(e.target.value))}
+              value={price === 0 ? "" : price}
+              onChange={(e) => setPrice(Number(e.target.value))}
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
             />
