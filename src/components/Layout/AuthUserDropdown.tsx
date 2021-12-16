@@ -145,7 +145,7 @@ function AuthUserDropdown({ username }) {
                       logOutFromAgora();
                     }}
                   >
-                    Logout
+                    Sign Out
                   </a>
                 </Menu.Item>
               </div>

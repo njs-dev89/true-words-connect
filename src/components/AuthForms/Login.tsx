@@ -92,7 +92,7 @@ function Login() {
           <div className="text-blue-900 font-bold mt-6">
             don&apos;t have an account?{" "}
             <Link href="/signup">
-              <a className="text-red-400">Signup</a>
+              <a className="text-red-400">Sign Up</a>
             </Link>
           </div>
           <div className="text-blue-900 font-bold mt-6">

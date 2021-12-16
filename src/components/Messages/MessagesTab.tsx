@@ -196,7 +196,7 @@ function MessagesTab({ loading, rooms }) {
         </>
       ) : authUser.role === "client" ? (
         <div className="col-span-3 mt-16">
-          <p className="text-center">You haven&apos;t started any chat yet</p>
+          <p className="text-center">No Current Messages</p>
         </div>
       ) : (
         <div className="col-span-3 mt-16">

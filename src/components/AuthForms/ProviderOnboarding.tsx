@@ -85,7 +85,7 @@ function ProviderOnboarding() {
       {step === 2 && (
         <div>
           <h3 className="text-3xl text-yellow-300 font-bold mb-6">
-            Select your languages proficiency
+            Select languages you are proficient in
           </h3>
           <LanguageProficiency
             langs={langs}

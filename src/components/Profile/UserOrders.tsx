@@ -224,7 +224,7 @@ function UserOrders() {
       // </table> */}
       {orders.length === 0 && (
         <p className="text-center mt-4">
-          No {filter === "all" ? "" : filter} Orders to show
+          No {filter === "all" ? "" : filter} 
         </p>
       )}
     </div>
