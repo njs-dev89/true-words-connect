@@ -41,7 +41,7 @@ function ProfileCard({ provider, currentPosition }) {
             {provider.hourly_rate}
           </p>
           <p className="sm:ml-32 mt-4 sm:mt-0 font-medium text-gray-700">
-            <span className="font-bold text-black">Language Skills:</span>{" "}
+            <span className="font-bold text-black">Language Offered:</span>{" "}
             {provider.languages.map((lang) => lang.language).join(",")}
           </p>
         </div>

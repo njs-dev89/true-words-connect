@@ -30,7 +30,7 @@ function FilterSidebar({ query }) {
     <div className="col-span-4 sm:col-span-1">
       <div className="shadow bg-white p-4 rounded-md">
         <div className="mt-8 mb-4">
-          <h3 className="font-bold text-sm mb-2">Filter by Language Offered</h3>
+          <h3 className="font-bold text-sm mb-2">Filter Offered</h3>
           <LanguageTags
             langs={language ? language : []}
             setLangs={setLanguage}

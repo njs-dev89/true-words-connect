@@ -48,7 +48,7 @@ function LanguageTags({ langs, setLangs }) {
     <ReactTags
       ref={reactTags}
       tags={langs}
-      placeholderText="Add new Language"
+      placeholderText="Search Languages"
       suggestions={suggestions}
       onDelete={onDelete}
       onAddition={onAddition}

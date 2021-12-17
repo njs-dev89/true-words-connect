@@ -61,7 +61,7 @@ function PassportUpload({ setPassportLink, setError }) {
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
         </div>
-        <div className="text-base ml-2 mr-2">Upload Scanned passport</div>
+        <div className="text-base ml-2 mr-2">Upload Verified Photo ID</div>
         {upload && (
           <ProgressRing radius={12} stroke={2} progress={passportProgress} />
         )}

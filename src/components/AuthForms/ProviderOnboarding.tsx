@@ -60,11 +60,8 @@ function ProviderOnboarding() {
     <LeftImagePanel imgSrc="/applicant.svg">
       {step === 1 && (
         <div>
-          <h3 className="text-3xl text-yellow-300 font-bold mb-6">Step 2</h3>
+          <h3 className="text-3xl text-yellow-300 font-bold mb-6">Select languages you are proficient in</h3>
           <form onSubmit={onDetailsSubmit}>
-            <h3 className="font-bold text-lg mb-4">
-              Select languages you are proficient in
-            </h3>
             <LanguageTags langs={langs} setLangs={setLangs} />
             {/* <LanguageCheckbox
               languages={languages}

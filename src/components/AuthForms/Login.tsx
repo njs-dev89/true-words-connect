@@ -97,7 +97,7 @@ function Login() {
           </div>
           <div className="text-blue-900 font-bold mt-6">
             <Link href="/forgot-password">
-              <a className="">Forgot Password?</a>
+              <a className="">forgot password?</a>
             </Link>
           </div>
         </div>
