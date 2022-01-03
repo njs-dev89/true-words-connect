@@ -61,6 +61,18 @@ function Footer() {
             </Link>
           </div>
           <div className="col-span-1 flex flex-col gap-4">
+            <h3 className="font-bold">Our Company</h3>
+            <Link href="/about-us">
+              <a className="text-blue">About us</a>
+            </Link>
+            <Link href="/">
+              <a className="text-blue">Become a partner</a>
+            </Link>
+            <Link href="/">
+              <a className="text-blue">Subscribe</a>
+            </Link>
+          </div>
+          <div className="col-span-1 flex flex-col gap-4">
             <h3 className="font-bold">Quick Links</h3>
             <Link href="/">
               <a className="text-blue">FAQ</a>
@@ -73,18 +85,6 @@ function Footer() {
             </Link>
             <Link href="/">
               <a className="text-blue">Support</a>
-            </Link>
-          </div>
-          <div className="col-span-1 flex flex-col gap-4">
-            <h3 className="font-bold">Our Company</h3>
-            <Link href="/about-us">
-              <a className="text-blue">About us</a>
-            </Link>
-            <Link href="/">
-              <a className="text-blue">Become a partner</a>
-            </Link>
-            <Link href="/">
-              <a className="text-blue">Subscribe</a>
             </Link>
           </div>
         </div>

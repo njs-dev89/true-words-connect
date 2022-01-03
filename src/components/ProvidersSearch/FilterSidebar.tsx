@@ -30,13 +30,15 @@ function FilterSidebar({ query }) {
     <div className="col-span-4 sm:col-span-1">
       <div className="shadow bg-white p-4 rounded-md">
         <div className="mt-8 mb-4">
-          <h3 className="font-bold text-sm mb-2">Filter Offered</h3>
+          <h2 className="font-bold text-lg mb-4">Filter Preferences</h2>
+          <h3 className="font-bold text-sm mb-2">Languages Offered</h3>
           <LanguageTags
             langs={language ? language : []}
             setLangs={setLanguage}
+            placeholder="Search Languages"
           />
         </div>
-        <h3 className="font-bold text-sm mb-2">Filter by Hourly Rate</h3>
+        <h3 className="font-bold text-sm mb-2">Hourly Rate</h3>
         <MultiRangeSlider
           min={0}
           max={500}
@@ -47,7 +49,7 @@ function FilterSidebar({ query }) {
             setHourlyPrice({ minPrice: min, maxPrice: max });
           }}
         />
-        <h3 className="font-bold text-sm mb-4 mt-4">Filter by distance</h3>
+        <h3 className="font-bold text-sm mb-4 mt-4">Distance</h3>
 
         <SingleRangeSlider
           min={0}

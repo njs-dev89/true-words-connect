@@ -212,7 +212,9 @@ function UserOffers() {
         })}
 
       {offers.length === 0 && (
-        <p className="text-center mt-4">No {filter} offers to Show</p>
+        <p className="text-center mt-4 capitalize">
+          No {filter === "all" ? "" : filter} offers
+        </p>
       )}
     </div>
   );

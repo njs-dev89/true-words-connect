@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAgora } from "../../context/agoraContextNoSsr";
 import { useRouter } from "next/router";
 import { addDoc, collection, doc, setDoc } from "@firebase/firestore";
-import { db, storage } from "../../config/firebaseConfig";
+import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import MessageRooms from "./MessageRooms";
 import { IoMdSend } from "react-icons/io";
@@ -10,8 +10,8 @@ import Messages from "./Messages";
 import CreateOffer from "../Profile/CreateOffer";
 import { AiOutlinePaperClip } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
-import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import AttachementUpload from "./AttachementUpload";
+import Link from "next/link";
 
 function MessagesTab({ loading, rooms }) {
   const router = useRouter();
@@ -151,12 +151,6 @@ function MessagesTab({ loading, rooms }) {
                         <div className="text-3xl text-green">
                           <AiOutlinePaperClip />
                         </div>
-                        {/* <div className="text-base ml-2 mr-2">Upload Scanned Id Card</div>
-        {upload && (
-          <ProgressRing radius={12} stroke={2} progress={idCardProgress} />
-        )}
-        {!upload && uploadSuccess && <FcOk className="text-xl" />}
-        {!upload && uploadFailed && <FcHighPriority className="text-xl" />} */}
 
                         <input
                           type="file"
@@ -168,13 +162,8 @@ function MessagesTab({ loading, rooms }) {
                         />
                       </label>
                     </div>
-                    {/* <button type="button" className="text-green text-3xl mr-3" onClick={attachFiles}>
-                      <AiOutlinePaperClip />
-                    </button> */}
-                    <button
-                      className=" text-yellow  mr-4 "
-                      // onClick={sendMessage}
-                    >
+
+                    <button className=" text-yellow  mr-4 ">
                       <IoMdSend className="text-3xl" />
                     </button>
                   </div>
@@ -195,12 +184,18 @@ function MessagesTab({ loading, rooms }) {
           </div>
         </>
       ) : authUser.role === "client" ? (
-        <div className="col-span-3 mt-16">
+        <div className="col-span-3 mt-16 text-center">
+          <Link href="/">
+            <a className="btn btn-blue">Find a Provider</a>
+          </Link>
           <p className="text-center">No Current Messages</p>
         </div>
       ) : (
-        <div className="col-span-3 mt-16">
-          <p className="text-center">No one has contacted you yet</p>
+        <div className="col-span-3 mt-16 text-center">
+          <Link href="/">
+            <a className="btn btn-blue">Find a Provider</a>
+          </Link>
+          <p className="text-center">No Current Messages</p>
         </div>
       )}
     </div>

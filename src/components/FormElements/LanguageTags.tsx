@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactTags from "react-tag-autocomplete";
 import { db } from "../../config/firebaseConfig";
 
-function LanguageTags({ langs, setLangs }) {
+function LanguageTags({ langs, setLangs, placeholder }) {
   const [suggestions, setSuggestions] = useState([]);
 
   // { id: 1, name: "Akan" },
@@ -48,7 +48,7 @@ function LanguageTags({ langs, setLangs }) {
     <ReactTags
       ref={reactTags}
       tags={langs}
-      placeholderText="Search Languages"
+      placeholderText={placeholder}
       suggestions={suggestions}
       onDelete={onDelete}
       onAddition={onAddition}

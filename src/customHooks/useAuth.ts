@@ -113,7 +113,6 @@ export default function useAuth() {
     languages,
     resumeLink,
     passportLink,
-    idCardLink,
     videoLink
   ) => {
     try {
@@ -125,7 +124,6 @@ export default function useAuth() {
         languages,
         resume_link: resumeLink,
         passport_link: passportLink,
-        id_card_link: idCardLink,
         video_link: videoLink,
       });
     } catch (e) {

@@ -19,6 +19,13 @@ const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
   return <video ref={videoRef} width={500} height={500} autoPlay controls />;
 };
 
+const Button = ({ setRecordingStarted }) => (
+  <button className="btn btn-blue" onClick={() => setRecordingStarted(true)}>
+    {" "}
+    Start Recording
+  </button>
+);
+
 export default function VideoModal({
   setShowModal,
   setVideoLink,
@@ -30,6 +37,7 @@ export default function VideoModal({
   const { authUser } = useFirebaseAuth();
   const [showPreview, setShowPreview] = useState(true);
   const [blob, setBlob] = useState(null);
+  const [recordingStarted, setRecordingStarted] = useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl, previewStream } =
     useReactMediaRecorder({
       video: true,
@@ -39,13 +47,15 @@ export default function VideoModal({
     });
 
   useEffect(() => {
-    startRecording();
+    if (recordingStarted) {
+      startRecording();
+    }
 
     return () => {
       stopRecording();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [recordingStarted]);
 
   const uploadVideo = () => {
     const storageRef = ref(storage, `skill-test/${authUser.uid}`);
@@ -87,48 +97,78 @@ export default function VideoModal({
   };
   return (
     <ModalContainer title="Record you video" setShowModal={setShowModal}>
-      {/*body*/}
-      <div>
-        <div className="p-4">
-          {showPreview && <VideoPreview stream={previewStream} />}
-          {!showPreview && status === "stopped" && (
-            <video src={mediaBlobUrl} controls autoPlay loop />
-          )}
-          {status === "recording" && (
-            <button
-              onClick={() => {
-                setShowPreview(false);
-                stopRecording();
-              }}
-              type="button"
-              className="btn btn-blue mt-4 mb-4"
-            >
-              Stop Recording
-            </button>
-          )}
-          {status === "stopped" && (
-            <button
-              onClick={() => {
-                setShowPreview(true);
-                startRecording();
-              }}
-              type="button"
-              className="btn btn-yellow m-4 mr-4"
-            >
-              Recording again
-            </button>
-          )}
-          {blob && status === "stopped" && (
-            <button
-              type="button"
-              className="btn btn-green"
-              onClick={uploadVideo}
-            >
-              Upload now
-            </button>
-          )}
+      {recordingStarted ? (
+        <div>
+          <div className="p-4">
+            {showPreview && <VideoPreview stream={previewStream} />}
+            {!showPreview && status === "stopped" && (
+              <video src={mediaBlobUrl} controls autoPlay loop />
+            )}
+            {status === "recording" && (
+              <button
+                onClick={() => {
+                  setShowPreview(false);
+                  stopRecording();
+                }}
+                type="button"
+                className="btn btn-blue mt-4 mb-4"
+              >
+                Stop Recording
+              </button>
+            )}
+            {status === "stopped" && (
+              <button
+                onClick={() => {
+                  setShowPreview(true);
+                  startRecording();
+                }}
+                type="button"
+                className="btn btn-yellow m-4 mr-4"
+              >
+                Record Again
+              </button>
+            )}
+            {blob && status === "stopped" && (
+              <button
+                type="button"
+                className="btn btn-green"
+                onClick={uploadVideo}
+              >
+                Upload Now
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="px-4 py-6">
+          <h3 className="text-xl font-bold mb-6">
+            Translate given sentences in the languages you selected and repeat
+            while recording.
+          </h3>
+          <ol className="list-decimal ml-8 mb-4 leading-8">
+            <li>
+              Please make sure that you collect all your belongings and take
+              them with you.
+            </li>
+            <li>
+              This year, you will not need a textbook because all required
+              readings will be posted in the student portal.
+            </li>
+            <li>
+              When my sister bought five apples from the supermarket, she let my
+              niece and nephew ate three of them.
+            </li>
+            <li>
+              Today I have been able to clean my whole house in under an hour
+              while still being able to finish my assignment by 5 pm.
+            </li>
+            <li>What were you doing today?</li>
+          </ol>
+          <div className="text-right">
+            <Button setRecordingStarted={setRecordingStarted} />
+          </div>
+        </div>
+      )}
     </ModalContainer>
   );
 }

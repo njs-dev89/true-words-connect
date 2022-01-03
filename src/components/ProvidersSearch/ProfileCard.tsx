@@ -15,7 +15,7 @@ function ProfileCard({ provider, currentPosition }) {
           {provider.rating ? (
             <RatingView ratingValue={provider.rating} size={15} />
           ) : (
-            "Not Rated yet"
+            "Not Rated Yet"
           )}
         </p>
       </div>

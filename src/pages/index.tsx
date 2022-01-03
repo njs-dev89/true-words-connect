@@ -25,9 +25,10 @@ export default function Home() {
                   Connecting People Through Languages
                 </h1>
                 <p className="mb-12 text-center md:text-left">
-                  Where there is language, you will find a community, a culture, and an identity. From translation
-                  and language learning to localization, Truewords Connect has all your language needs, all on one
-                  platform.
+                  Where there is language, you will find a community, a culture,
+                  and an identity. From translation and language learning to
+                  localization, Truewords Connect has all your language needs,
+                  all on one platform.
                 </p>
                 <div className="text-center md:text-left">
                   <Link href="/providers">
@@ -36,13 +37,13 @@ export default function Home() {
                     </a>
                   </Link>
                   <Link href="/provider-signup">
-                    <a className="btn btn-outline">Become A Provider</a>
+                    <a className="btn btn-outline">Become a Provider</a>
                   </Link>
                 </div>
               </div>
               <div className="col-span-11 md:col-span-5 hidden md:block">
                 <div className="relative h-96">
-                  <Image src="/home.svg" alt="" layout="fill" />
+                  <Image src="/home2.svg" alt="" layout="fill" />
                 </div>
               </div>
             </div>

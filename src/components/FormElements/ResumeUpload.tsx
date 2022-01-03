@@ -6,7 +6,7 @@ import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import { FcHighPriority, FcOk } from "react-icons/fc";
 
-function ResumeUpload({ setResumeLink, setError }) {
+function ResumeUpload({ setResumeLink, setError, title }) {
   const { authUser } = useFirebaseAuth();
   const [upload, setUpload] = useState(false);
   const [resumeProgress, setResumeProgress] = useState(0);
@@ -61,7 +61,7 @@ function ResumeUpload({ setResumeLink, setError }) {
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
         </div>
-        <div className="text-base ml-2 mr-2">Upload Resume (PDF)</div>
+        <div className="text-base ml-2 mr-2">{title}</div>
         {upload && (
           <ProgressRing radius={12} stroke={2} progress={resumeProgress} />
         )}

@@ -46,7 +46,7 @@ function AvailableServices() {
         />
         <SingleService
           serviceTitle="Content Subtitling"
-          description="Have your social media content subtitled, written, and dubbed for your local audience. Offered for Instagram, YouTube, Weibo, WeChat, and more.or Dub all your social media content for a local audience i.e. Youtube, Instagram, Weibo, WeChat etc."
+          description="Have your social media content subtitled, written, and dubbed for your local audience. Offered for Instagram, YouTube, Weibo, WeChat, and more."
           iconLink="/translation.svg"
         />
         <SingleService

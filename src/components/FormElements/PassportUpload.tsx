@@ -6,7 +6,7 @@ import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import { FcHighPriority, FcOk } from "react-icons/fc";
 
-function PassportUpload({ setPassportLink, setError }) {
+function PassportUpload({ setPassportLink, setError, title }) {
   const { authUser } = useFirebaseAuth();
   const [upload, setUpload] = useState(false);
   const [passportProgress, setPassportProgress] = useState(0);
@@ -61,7 +61,7 @@ function PassportUpload({ setPassportLink, setError }) {
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
           <Image src="/cloud.svg" alt="" layout="fill" className="" />
         </div>
-        <div className="text-base ml-2 mr-2">Upload Verified Photo ID</div>
+        <div className="text-base ml-2 mr-2">{title}</div>
         {upload && (
           <ProgressRing radius={12} stroke={2} progress={passportProgress} />
         )}

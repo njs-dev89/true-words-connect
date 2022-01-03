@@ -5,70 +5,6 @@ import { useAgora } from "../../context/agoraContextNoSsr";
 import { Menu, Transition } from "@headlessui/react";
 import { TiArrowSortedDown } from "react-icons/ti";
 
-// function AuthUserDropdown({ showDropdown }) {
-//   const { logOut, authUser } = useFirebaseAuth();
-//   const { logOutFromAgora } = useAgora();
-//   return (
-//     <div className="relative">
-//       {showDropdown && (
-//         <div className="absolute top-4 right-0 bg-gray-50 w-36 rounded px-4 py-4 z-50">
-//           <ul>
-//             <li className="text-gray-500 py-2">
-//               <Link
-//                 href={`${
-//                   authUser.role === "provider"
-//                     ? "/profile/overview"
-//                     : "/profile/orders"
-//                 }`}
-//               >
-//                 <a>Profile</a>
-//               </Link>
-//             </li>
-//             <li className="text-gray-500 py-2">
-//               <Link href="/profile/messages">
-//                 <a>Messages</a>
-//               </Link>
-//             </li>
-//             <li className="text-gray-500 py-2">
-//               <Link
-//                 href={`${
-//                   authUser.role === "provider"
-//                     ? "/profile/orders"
-//                     : "/profile/offers"
-//                 }`}
-//               >
-//                 {authUser.role === "provider" ? <a>Orders</a> : <a>Offers</a>}
-//               </Link>
-//             </li>
-//             <li className="text-gray-500 py-2">
-//               <Link href="/adminDashboard/applicants">
-//                 <a>Applicants</a>
-//               </Link>
-//             </li>
-//             {authUser.role === "client" && (
-//               <li className="text-gray-500 py-2">
-//                 <Link href="/provider-onboarding">
-//                   <a>Become a Provider</a>
-//                 </Link>
-//               </li>
-//             )}
-//             <li className="text-gray-500 py-2">
-//               <button
-//                 onClick={() => {
-//                   logOut();
-//                   logOutFromAgora();
-//                 }}
-//               >
-//                 Logout
-//               </button>
-//             </li>
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
 function AuthUserDropdown({ username }) {
   const { logOut, authUser } = useFirebaseAuth();
   const { logOutFromAgora } = useAgora();
@@ -76,9 +12,8 @@ function AuthUserDropdown({ username }) {
     <div className="">
       <Menu as="div" className="relative text-left">
         <div>
-          <Menu.Button className="inline-flex justify-center w-full px-2 py-2 text-sm font-medium  rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            {username}
-            <TiArrowSortedDown className="ml-0 sm:ml-1 text-xl" />
+          <Menu.Button className=" px-2 py-2   bg-blue-100  hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 rounded-full">
+            <TiArrowSortedDown className=" text-2xl text-blue" />
           </Menu.Button>
           <Transition
             as={Fragment}
