@@ -161,6 +161,7 @@ function ProviderOnboarding() {
             <a
               href={resumeLink}
               target="_blank"
+              rel="noreferrer"
               className="flex items-center gap-2 text-blue"
             >
               Resume <FaCheck className="text-green" />
@@ -177,6 +178,7 @@ function ProviderOnboarding() {
             <a
               href={passportLink}
               target="_blank"
+              rel="noreferrer"
               className="flex items-center gap-2 text-blue"
             >
               Verified Photo ID <FaCheck className="text-green" />

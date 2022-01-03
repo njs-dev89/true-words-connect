@@ -77,7 +77,10 @@ function NotificationDropdown() {
               <div className="flex flex-col px-4 py-4 bg-gray-50">
                 {!notificationsLoading &&
                   notifications.map((notification) => (
-                    <SingleNotification notification={notification} />
+                    <SingleNotification
+                      notification={notification}
+                      key={notification.id}
+                    />
                   ))}
               </div>
             </Menu.Items>
