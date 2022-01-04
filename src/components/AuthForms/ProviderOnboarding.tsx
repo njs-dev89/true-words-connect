@@ -8,6 +8,7 @@ import LeftImagePanel from "./LeftImagePanel";
 import SkillTest from "./SkillTest";
 import { useRouter } from "next/router";
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
+import InfoPopover from "./InfoPopover";
 
 function ProviderOnboarding() {
   const [step, setStep] = useState(1);
@@ -61,6 +62,7 @@ function ProviderOnboarding() {
           <h3 className="text-3xl text-yellow-300 font-bold mb-6">
             Select languages you specialize in
           </h3>
+          <InfoPopover />
           <form onSubmit={onDetailsSubmit}>
             <LanguageTags
               langs={langs}

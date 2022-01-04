@@ -12,7 +12,6 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import OfferRequestToOffer from "./OfferRequestToOffer";
 import Image from "next/image";
-import { useAgora } from "../../context/agoraContextNoSsr";
 
 function OfferRequest() {
   const { authUser } = useFirebaseAuth();
@@ -20,7 +19,7 @@ function OfferRequest() {
   const [requestData, setRequestData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [offerRequests, setOfferRequests] = useState(null);
-  const { sendMessageToPeer } = useAgora();
+
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
@@ -56,14 +55,13 @@ function OfferRequest() {
       id: authUser.uid,
       username: authUser.profile.username,
       profile_pic: authUser.profile.profile_pic,
+      email: authUser.profile.email,
     };
     const offerCollection = collection(db, `/offers`);
+
     try {
       const offerDocRef = await addDoc(offerCollection, req);
-      sendMessageToPeer(
-        `OFFER;You have received a new offer from ${authUser.profile.username}`,
-        req.client.id
-      );
+
       await setDoc(
         doc(db, `/providers/${authUser.uid}/offerRequest`, req.id),
         { status: "offer sent" },

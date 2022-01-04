@@ -6,7 +6,9 @@ import {
   onSnapshot,
   query,
   setDoc,
+  addDoc,
   where,
+  serverTimestamp,
 } from "@firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
@@ -59,10 +61,17 @@ function UserOffers() {
         { status: "rejected" },
         { merge: true }
       );
-      sendMessageToPeer(
-        `OFFER_REJECTED;Your offer has been rejected by ${authUser.profile.username}`,
-        provider
+      const notCollection = collection(
+        db,
+        `/providers/${provider}/notifications`
       );
+      await addDoc(notCollection, {
+        title: "Offer Rejected",
+        createdAt: serverTimestamp(),
+        message: `Your offer has been rejected by ${authUser.profile.username}`,
+        hasNotified: false,
+        hasRead: false,
+      });
     } catch (error) {
       console.error(error);
     }

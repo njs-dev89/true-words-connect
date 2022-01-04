@@ -6,7 +6,6 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { collection, addDoc, query, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
-import { useAgora } from "../../context/agoraContextNoSsr";
 
 function CreateOffer({ setShowModal, room }) {
   const [service, setService] = useState("teaching");
@@ -20,7 +19,6 @@ function CreateOffer({ setShowModal, room }) {
   const [langOptions, setLangOptions] = useState([]);
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const { sendMessageToPeer } = useAgora();
 
   useEffect(() => {
     let suggst = [];
@@ -64,10 +62,7 @@ function CreateOffer({ setShowModal, room }) {
 
     const offersCollection = collection(db, `/offers`);
     const offersDocRef = await addDoc(offersCollection, formData);
-    sendMessageToPeer(
-      `OFFER;You have recieved a new offer from ${authUser.profile.username}`,
-      formData.client.id
-    );
+
     setShowModal(false);
   };
   return (

@@ -15,11 +15,8 @@ const Msg = ({ msg, attributes }) => {
 
   const msgContent = msg.split(";");
   if (msgContent[0] === "MESSAGE") heading = "New Message!";
-  if (msgContent[0] === "OFFER") heading = "New Offer!";
-  if (msgContent[0] === "OFFER_REQUEST") heading = "New Offer Request!";
-  if (msgContent[0] === "ORDER") heading = "New Order!";
   if (msgContent[0] === "REVIEW") heading = "User Review!";
-  if (msgContent[0] === "OFFER_REJECTED") heading = "Offer rejected!";
+
   return (
     <div>
       <h3 className="font-bold text-lg text-blue mb-4">{heading}</h3>

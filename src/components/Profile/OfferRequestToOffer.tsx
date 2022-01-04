@@ -4,12 +4,11 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { doc, collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
-import { useAgora } from "../../context/agoraContextNoSsr";
 
 function OfferRequestToOffer({ setShowModal, reqData }) {
   const [offerAmount, setOfferAmount] = useState(0);
   const { authUser } = useFirebaseAuth();
-  const { sendMessageToPeer } = useAgora();
+
   console.log(authUser);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +24,7 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
     const offerCollection = collection(db, `/offers`);
     try {
       const offerDocRef = await addDoc(offerCollection, reqData);
-      sendMessageToPeer(
-        `OFFER;You have received a new offer from ${authUser.profile.username}`,
-        reqData.client.id
-      );
+
       await setDoc(
         doc(db, `/providers/${authUser.uid}/offerRequest`, reqData.id),
         { status: "offer Sent" },
