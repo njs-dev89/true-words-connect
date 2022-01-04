@@ -91,7 +91,7 @@ function SearchBar({ query, currentPosition, setCurrentPosition }) {
             >
               <span className="flex items-center gap-2">
                 <FaMapMarkerAlt className="text-gray-600" />
-                Search on the map
+                Location Search
               </span>
             </button>
             <button className="btn btn-yellow btn-rounded">Search</button>

@@ -45,7 +45,7 @@ function Signup() {
   return (
     <LeftImagePanel imgSrc="/client-signup.svg">
       <div>
-        <h3 className="text-3xl text-yellow-300 font-bold mb-6">Signup</h3>
+        <h3 className="text-3xl text-yellow-300 font-bold mb-6">Sign Up</h3>
         <SignupForm
           username={username}
           setUsername={setUsername}
@@ -53,7 +53,7 @@ function Signup() {
           setEmail={setEmail}
           password={password}
           setPassword={setPassword}
-          btnText="Signup"
+          btnText="Sign Up"
           onSubmit={onSubmit}
           error={error}
         />

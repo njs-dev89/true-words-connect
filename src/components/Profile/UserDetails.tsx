@@ -32,7 +32,7 @@ function UserDetails({ provider, self, setShowModal = null }) {
           {provider.rating ? (
             <RatingView ratingValue={provider.rating} />
           ) : (
-            "Not Rated yet"
+            "Not Rated Yet"
           )}
         </p>
       </div>
@@ -52,7 +52,7 @@ function UserDetails({ provider, self, setShowModal = null }) {
             <p className="my-3">
               {provider?.address?.city
                 ? provider.address?.city
-                : "Add your city"}
+                : "Add your location"}
             </p>
           </div>
         </div>

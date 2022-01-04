@@ -24,28 +24,29 @@ const SingleStep = ({ iconLink, step, description }) => {
 function HowItWorks() {
   return (
     <div className="">
-      <h1 className="font-bold text-3xl text-center mb-16">How it works</h1>
+      <h1 className="font-bold text-3xl text-center mb-16">How It Works</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-32">
         <SingleStep
-          step="Sign up"
+          step="Sign Up"
           iconLink="/signup.svg"
-          description="Complete sign up process to avail our awesome services"
+          description="Sign Up with us to access freelanced language services available across the globe."
         />
         <SingleStep
-          step="Search Provider"
+          step="Find Your Provider"
           iconLink="/signup.svg"
-          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+          description="Search through our verified providers to find one that fits you and your needs."
         />
 
         <SingleStep
-          step="Get a quote"
+          step="Get a Quote"
           iconLink="/signup.svg"
-          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+          description="Get in contact with your selected provider to discuss rates, skills, and location."
         />
         <SingleStep
-          step="Accept offer"
+          step="Start Learning!"
           iconLink="/signup.svg"
-          description="Search our verified providers on the search page using their skills, hourly rate, rating or location."
+          description="Start your learning! Whether it is translation, localization, interpretation, or simply learning a
+          new language, our service providers will be here to support you along the way."
         />
       </div>
     </div>

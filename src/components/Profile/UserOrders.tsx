@@ -223,8 +223,8 @@ function UserOrders() {
       {/* </tbody>
       // </table> */}
       {orders.length === 0 && (
-        <p className="text-center mt-4">
-          No {filter === "all" ? "" : filter} Orders to show
+        <p className="text-center mt-4 capitalize">
+          No {filter === "all" ? "Current" : filter} Orders
         </p>
       )}
     </div>

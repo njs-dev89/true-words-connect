@@ -51,16 +51,25 @@ function Footer() {
           <div className="col-span-1 flex flex-col gap-4">
             <h3 className="font-bold">What we do</h3>
             <Link href="/">
-              <a className="text-blue">How it works</a>
+              <a className="text-blue">The Learning Process</a>
             </Link>
             <Link href="/">
               <a className="text-blue">Features</a>
             </Link>
             <Link href="/">
-              <a className="text-blue">Download</a>
+              <a className="text-blue">Blog</a>
+            </Link>
+          </div>
+          <div className="col-span-1 flex flex-col gap-4">
+            <h3 className="font-bold">Our Company</h3>
+            <Link href="/about-us">
+              <a className="text-blue">About us</a>
             </Link>
             <Link href="/">
-              <a className="text-blue">Blogs</a>
+              <a className="text-blue">Become a partner</a>
+            </Link>
+            <Link href="/">
+              <a className="text-blue">Subscribe</a>
             </Link>
           </div>
           <div className="col-span-1 flex flex-col gap-4">
@@ -68,26 +77,14 @@ function Footer() {
             <Link href="/">
               <a className="text-blue">FAQ</a>
             </Link>
-            <Link href="/">
-              <a className="text-blue">Terms and Conditions</a>
-            </Link>
             <Link href="/privacy-policy">
               <a className="text-blue">Privacy</a>
             </Link>
             <Link href="/">
+              <a className="text-blue">Terms and Conditions</a>
+            </Link>
+            <Link href="/">
               <a className="text-blue">Support</a>
-            </Link>
-            <Link href="/">
-              <a className="text-blue">Subscription</a>
-            </Link>
-          </div>
-          <div className="col-span-1 flex flex-col gap-4">
-            <h3 className="font-bold">Company</h3>
-            <Link href="/about-us">
-              <a className="text-blue">About us</a>
-            </Link>
-            <Link href="/">
-              <a className="text-blue">Be a partner</a>
             </Link>
           </div>
         </div>
@@ -97,7 +94,7 @@ function Footer() {
           <Image src="/copyright.svg" layout="fill" />
         </div>
         <p className="text-center text-blue">
-          All Right Reserved By Truerwordsconnect
+          All Right Reserved By Truewords Connect
         </p>
       </div>
     </footer>

@@ -69,7 +69,7 @@ function ForgetPassword() {
     <LeftImagePanel imgSrc="/client-signup.svg">
       <div>
         <h3 className="text-3xl text-yellow-300 font-bold mb-6">
-          Forgot Password?
+          forgot password?
         </h3>
         <form className="" onSubmit={handleSubmit}>
           {error && <div className="text-red-600 text-sm">*{error}</div>}

@@ -30,13 +30,15 @@ function FilterSidebar({ query }) {
     <div className="col-span-4 sm:col-span-1">
       <div className="shadow bg-white p-4 rounded-md">
         <div className="mt-8 mb-4">
-          <h3 className="font-bold text-sm mb-2">Filter by Language skills</h3>
+          <h2 className="font-bold text-lg mb-4">Filter Preferences</h2>
+          <h3 className="font-bold text-sm mb-2">Languages Offered</h3>
           <LanguageTags
             langs={language ? language : []}
             setLangs={setLanguage}
+            placeholder="Search Languages"
           />
         </div>
-        <h3 className="font-bold text-sm mb-2">Filter by hourly rate</h3>
+        <h3 className="font-bold text-sm mb-2">Hourly Rate</h3>
         <MultiRangeSlider
           min={0}
           max={500}
@@ -47,7 +49,7 @@ function FilterSidebar({ query }) {
             setHourlyPrice({ minPrice: min, maxPrice: max });
           }}
         />
-        <h3 className="font-bold text-sm mb-4 mt-4">Filter by distance</h3>
+        <h3 className="font-bold text-sm mb-4 mt-4">Distance</h3>
 
         <SingleRangeSlider
           min={0}
@@ -58,7 +60,7 @@ function FilterSidebar({ query }) {
           }}
         />
         <div className="">
-          <h3 className="font-bold text-sm mb-2 mt-4">Filter by avg. rating</h3>
+          <h3 className="font-bold text-sm mb-2 mt-4">Ratings</h3>
           <div className="flex flex-row-reverse items-center ">
             <input
               type="radio"
@@ -71,7 +73,7 @@ function FilterSidebar({ query }) {
               className="h-4 w-4 text-gray-600 appearance-none"
             />
             <label className="flex justify-between items-center flex-grow">
-              5 Star
+              5 Stars
             </label>
           </div>
           <div className="flex flex-row-reverse items-center">
@@ -86,7 +88,7 @@ function FilterSidebar({ query }) {
               className="h-4 w-4 text-gray-600"
             />
             <label className="flex justify-between items-center mt-3 flex-grow">
-              4 Star
+              4 Stars
             </label>
           </div>
 
@@ -102,7 +104,7 @@ function FilterSidebar({ query }) {
               className="h-4 w-4 text-gray-600"
             />
             <label className="flex justify-between items-center mt-3 flex-grow">
-              3 Star
+              3 Stars
             </label>
           </div>
 
@@ -118,7 +120,7 @@ function FilterSidebar({ query }) {
               className="h-4 w-4 text-gray-600"
             />
             <label className="flex justify-between items-center mt-3 flex-grow">
-              2 Star
+              2 Stars
             </label>
           </div>
 
@@ -150,7 +152,7 @@ function FilterSidebar({ query }) {
               className="h-4 w-4 text-gray-600"
             />
             <label className="flex justify-between items-center mt-3 flex-grow">
-              Not rated yet
+              Include Unrated Providers
             </label>
           </div>
         </div>

@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 
 import { useFirebaseAuth } from "../../context/authContext";
 import AuthUserDropdown from "./AuthUserDropdown";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { TiMessages } from "react-icons/ti";
+import NotificationDropdown from "./NotificationDropdown";
 
 function Navbar() {
   const { authUser, loading } = useFirebaseAuth();
@@ -39,7 +42,7 @@ function Navbar() {
                 <>
                   <li className="font-medium">
                     <Link href="/providers">
-                      <a>Find Provider</a>
+                      <a>Find a Provider</a>
                     </Link>
                   </li>
                   <li className="font-medium">
@@ -64,7 +67,7 @@ function Navbar() {
                   <a className="btn btn-blue mr-2">Login</a>
                 </Link>
                 <Link href="/signup">
-                  <a className="btn btn-yellow">Signup</a>
+                  <a className="btn btn-yellow">Sign Up</a>
                 </Link>
               </>
             )}
@@ -90,6 +93,11 @@ function Navbar() {
                     <TiArrowSortedDown className="ml-0 sm:ml-1 text-xl" />
                   </button>
                   <AuthUserDropdown showDropdown={showDropdown} /> */}
+                {authUser.profile?.username}
+                {/* <button className="rounded-full bg-blue-100 p-2">
+                  <TiMessages className="text-2xl text-blue" />
+                </button> */}
+                <NotificationDropdown />
                 <AuthUserDropdown
                   username={authUser.profile?.username || "Guest user"}
                 />

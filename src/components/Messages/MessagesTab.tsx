@@ -7,7 +7,9 @@ import MessageRooms from "./MessageRooms";
 
 import Messages from "./Messages";
 import CreateOffer from "../Profile/CreateOffer";
+
 import CreateMessage from "./CreateMessage";
+
 
 function MessagesTab({ loading, rooms }) {
   const router = useRouter();
@@ -34,19 +36,27 @@ function MessagesTab({ loading, rooms }) {
           <div className="col-span-3 md:col-span-2">
             {room && <Messages room={room} />}
 
+
             <CreateMessage room={room} setShowModal={setShowModal} />
+
             {showModal && (
               <CreateOffer setShowModal={setShowModal} room={room} />
             )}
           </div>
         </>
       ) : authUser.role === "client" ? (
-        <div className="col-span-3 mt-16">
-          <p className="text-center">You haven&apos;t started any chat yet</p>
+        <div className="col-span-3 mt-16 text-center">
+          <Link href="/">
+            <a className="btn btn-blue">Find a Provider</a>
+          </Link>
+          <p className="text-center">No Current Messages</p>
         </div>
       ) : (
-        <div className="col-span-3 mt-16">
-          <p className="text-center">No one has contacted you yet</p>
+        <div className="col-span-3 mt-16 text-center">
+          <Link href="/">
+            <a className="btn btn-blue">Find a Provider</a>
+          </Link>
+          <p className="text-center">No Current Messages</p>
         </div>
       )}
     </div>

@@ -7,6 +7,8 @@ import RemoteCallNotification from "./RemoteCallNotification";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import LocalCallNotification from "./LocalCallNotification";
+import { useNotification } from "../customHooks/useNotification";
+import Notification from "./Notification";
 
 const Msg = ({ msg, attributes }) => {
   let heading;
@@ -45,7 +47,22 @@ function AgoraLoginWrapper({ children }) {
       progress: undefined,
     });
   };
+
+  const displayNotification = (hasNotified, notification) => {
+    toast(() => <Notification notification={notification} />, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      onClose: () => hasNotified(notification.id),
+    });
+  };
   const { authUser, loading } = useFirebaseAuth();
+  const { notificationsLoading, notifications, hasNotified } =
+    useNotification();
   const router = useRouter();
   const {
     localInvitation,
@@ -64,6 +81,14 @@ function AgoraLoginWrapper({ children }) {
       displayMsg(message.message.text, message.attributes);
     }
   }, [message]);
+
+  useEffect(() => {
+    if (notifications) {
+      notifications.forEach((notification) =>
+        displayNotification(hasNotified, notification)
+      );
+    }
+  }, [notifications]);
 
   useEffect(() => {
     if (localInvitation) {
