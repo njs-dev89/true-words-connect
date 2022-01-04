@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFirebaseAuth } from "../../context/authContext";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
 import { useAgora } from "../../context/agoraContextNoSsr";
@@ -15,11 +15,23 @@ function CreateOffer({ setShowModal, room }) {
   const [language, setLanguage] = useState("akan");
   const [hrs, setHrs] = useState(0);
   const [days, setDays] = useState(0);
-  const [budget, setBudget] = useState(0);
+  const [price, setPrice] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
-  const { query } = useRouter();
+  const [langOptions, setLangOptions] = useState([]);
+  const router = useRouter();
   const { authUser } = useFirebaseAuth();
   const { sendMessageToPeer } = useAgora();
+
+  useEffect(() => {
+    let suggst = [];
+    const q = query(collection(db, "/languages"));
+    getDocs(q).then((snap) => {
+      snap.forEach((langSnap) => {
+        suggst.push(langSnap.data().language);
+      });
+      setLangOptions(suggst);
+    });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +41,7 @@ function CreateOffer({ setShowModal, room }) {
       serviceType,
       language,
       status: "active",
-      budget,
+      price,
       client: {
         id: room.client.id,
         username: room.client.username,
@@ -81,6 +93,11 @@ function CreateOffer({ setShowModal, room }) {
           >
             <option value="teaching">Teaching</option>
             <option value="translation">Translation</option>
+            <option value="interpretation">Interpretation</option>
+            <option value="subtitling">Subtitling</option>
+            <option value="proofreading">Proofreading</option>
+            <option value="dubbing">Dubbing</option>
+            <option value="localization">Localization</option>
           </select>
         </div>
 
@@ -130,16 +147,19 @@ function CreateOffer({ setShowModal, room }) {
           >
             Select Language
           </label>
-          <select
+          <input
             name="language"
-            id=""
+            id="language"
+            list="languages"
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="form-input border-gray-200 h-10 rounded text-sm"
-          >
-            <option value="akan">Akan</option>
-            <option value="ewe">Ewe</option>
-          </select>
+            className="form-input border focus:border-blue-500 px-4 border-gray-200 h-10 rounded text-sm"
+          />
+          <datalist id="languages">
+            {langOptions.map((opt, idx) => (
+              <option value={opt} key={idx + 5} />
+            ))}
+          </datalist>
         </div>
 
         {contractType === "hourly" && (
@@ -227,8 +247,8 @@ function CreateOffer({ setShowModal, room }) {
               min="0"
               name="price"
               id="price"
-              value={budget === 0 ? "" : budget}
-              onChange={(e) => setBudget(Number(e.target.value))}
+              value={price === 0 ? "" : price}
+              onChange={(e) => setPrice(Number(e.target.value))}
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
             />

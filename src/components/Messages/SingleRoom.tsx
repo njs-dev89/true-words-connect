@@ -35,7 +35,7 @@ function SingleRoom({ room }) {
                 <Image src={room.client?.profile_pic} layout="fill" alt="" />
               </div>
               {onlineStatus && onlineStatus[room.client.id] === "ONLINE" && (
-                <span className="inline-block w-2 h-2 rounded bg-green absolute left-8 top-7"></span>
+                <span className="inline-block w-3 h-3 rounded bg-green absolute left-8 top-7 border-2 border-white"></span>
               )}
               <div className="ml-2">{room?.client?.username}</div>
             </div>

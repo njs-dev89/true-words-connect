@@ -23,7 +23,11 @@ function SentOffers() {
     if (filter === "all") {
       q = query(offersCollection, where("provider.id", "==", authUser.uid));
     } else {
-      q = query(offersCollection, where("status", "==", filter));
+      q = query(
+        offersCollection,
+        where("provider.id", "==", authUser.uid),
+        where("status", "==", filter)
+      );
     }
     const unsubscribe = onSnapshot(q, {}, (querySnapshot) => {
       const offers = [];

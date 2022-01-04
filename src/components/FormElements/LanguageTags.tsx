@@ -1,4 +1,5 @@
 import { collection, getDocs, query } from "@firebase/firestore";
+import { matchSorter } from "match-sorter";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactTags from "react-tag-autocomplete";
 import { db } from "../../config/firebaseConfig";
@@ -44,12 +45,17 @@ function LanguageTags({ langs, setLangs, placeholder }) {
     [langs]
   );
 
+  function suggestionsFilter(query, suggestions) {
+    return matchSorter(suggestions, query, { keys: ["name"] });
+  }
+
   return (
     <ReactTags
       ref={reactTags}
       tags={langs}
       placeholderText={placeholder}
       suggestions={suggestions}
+      suggestionsTransform={suggestionsFilter}
       onDelete={onDelete}
       onAddition={onAddition}
     />
