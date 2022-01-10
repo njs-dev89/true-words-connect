@@ -2,8 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import AvailableServices from "../components/LandingPage/AvailableServices";
-import FeaturedProviders from "../components/LandingPage/FeaturedProviders";
-import Testimonials from "../components/LandingPage/Testimonials";
+// import FeaturedProviders from "../components/LandingPage/FeaturedProviders";
+// import Testimonials from "../components/LandingPage/Testimonials";
 import Footer from "../components/LandingPage/Footer";
 import HowItWorks from "../components/LandingPage/HowItWorks";
 
@@ -55,12 +55,12 @@ export default function Home() {
         <div className="container py-32">
           <HowItWorks />
         </div>
-        <div className="container py-32">
+        {/* <div className="container py-32">
           <FeaturedProviders />
-        </div>
-        <div className="container py-32">
+        </div> */}
+        {/* <div className="container py-32">
           <Testimonials />
-        </div>
+        </div> */}
       </main>
       <Footer />
     </div>

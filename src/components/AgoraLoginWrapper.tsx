@@ -57,7 +57,7 @@ function AgoraLoginWrapper({ children }) {
       onClose: () => hasNotified(notification.id),
     });
   };
-  const { authUser, loading } = useFirebaseAuth();
+
   const { notificationsLoading, notifications, hasNotified } =
     useNotification();
   const router = useRouter();

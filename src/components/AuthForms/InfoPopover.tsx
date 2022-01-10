@@ -15,10 +15,13 @@ export default function MyPopover() {
       />
       <Popover.Panel className="absolute z-10">
         <div className="bg-gray-100 px-6 py-8 rounded-lg shadow-lg text-base">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit nisi
-          nam perspiciatis. Cumque laudantium culpa aut architecto pariatur
-          dignissimos suscipit incidunt, nihil est ab velit cum dolorum minima
-          quam! Et.
+          <h3 className="text-medium">Why we need this information?</h3>
+          <p className="text-sm">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
+            nisi nam perspiciatis. Cumque laudantium culpa aut architecto
+            pariatur dignissimos suscipit incidunt, nihil est ab velit cum
+            dolorum minima quam! Et.
+          </p>
         </div>
       </Popover.Panel>
     </Popover>
