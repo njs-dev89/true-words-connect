@@ -30,9 +30,10 @@ function ProfileCard({ provider, currentPosition }) {
         <p className="text-sm font-medium text-gray-500">
           {console.log(currentPosition)}
           {provider._geoloc && currentPosition
-            ? `${(
-                haversine(provider._geoloc, currentPosition) / 1000
-              ).toPrecision(2)} Km`
+            ? `${new Intl.NumberFormat("en-US", {
+                style: "unit",
+                unit: "kilometer",
+              }).format(haversine(provider._geoloc, currentPosition) / 1000)}`
             : " "}
         </p>
         <div className="flex flex-col sm:flex-row mt-6">
