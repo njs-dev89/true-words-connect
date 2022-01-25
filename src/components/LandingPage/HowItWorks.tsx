@@ -23,7 +23,7 @@ const SingleStep = ({ iconLink, step, description }) => {
 
 function HowItWorks() {
   return (
-    <div className="">
+    <div className="" id="works">
       <h1 className="font-bold text-3xl text-center mb-16">How It Works</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-32">
         <SingleStep

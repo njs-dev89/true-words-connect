@@ -9,7 +9,7 @@ function AboutPage() {
     <>
       <div className="bg-light-blue min-h-screen flex items-center">
         <div className="container mt-32">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto shadow-xl bg-white p-8 rounded-xl">
             <h1 className="font-bold text-3xl mb-8">
               Our Mission | Providing Language Solutions Globally
             </h1>

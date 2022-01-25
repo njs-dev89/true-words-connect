@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { useFirebaseAuth } from "../../context/authContext";
 import AuthUserDropdown from "./AuthUserDropdown";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { TiMessages } from "react-icons/ti";
+
 import NotificationDropdown from "./NotificationDropdown";
 
 function Navbar() {
@@ -25,15 +24,13 @@ function Navbar() {
         <div className="flex justify-between pt-1 items-center">
           <div className="flex items-center gap-4 sm:gap-16">
             <div
-              className={`logo relative ${
-                router.pathname === "/" ? "w-28 h-20" : "w-24 h-16"
-              }`}
+              className={`logo relative
+                ${router.pathname === "/" ? "w-24 h-24" : "w-20 h-20"}`}
             >
               {" "}
               <Link href="/">
-                <a>
-                  {" "}
-                  <Image src="/logo.svg" alt="" layout="fill" />
+                <a className="font-bold text-4xl">
+                  <Image src="/logo.png" alt="" layout="fill" />
                 </a>
               </Link>
             </div>

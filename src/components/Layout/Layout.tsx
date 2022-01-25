@@ -34,7 +34,7 @@ function Layout({ children }) {
     }
   }, [authUser]);
   return (
-    <div>
+    <div className="scroll-smooth">
       <Navbar />
       {router.pathname.includes("adminDashboard") ? (
         <>

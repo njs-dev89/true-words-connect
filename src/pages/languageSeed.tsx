@@ -266,7 +266,7 @@ function languageSeed() {
       <button
         className="btn btn-blue mt-32"
         onClick={() => {
-          addAdminRole({ uid: "PxrDoqH4ZiS3vIrvWtyLmpKwr8I3" });
+          addAdminRole({ uid: "3kMg7iLGISRxXyPwK0Dj0kEdDPQ2" });
         }}
       >
         Add admin role

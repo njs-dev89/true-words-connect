@@ -19,7 +19,7 @@ const SingleService = ({ iconLink, serviceTitle, description }) => {
 
 function AvailableServices() {
   return (
-    <div>
+    <div id="services">
       <h1 className="font-bold text-3xl text-center mb-16">
         Available Services
       </h1>
