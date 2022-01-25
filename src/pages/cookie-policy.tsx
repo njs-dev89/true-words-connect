@@ -9,9 +9,9 @@ function CookiePolicyPage() {
             <h1 className="font-bold text-3xl mb-8">Cookie Policy</h1>
             <p className="leading-7 mb-4">
               We use cookies to help improve your experience of our website at
-              https://www.langways.io/. This cookie policy is part of Langways'
-              privacy policy. It covers the use of cookies between your device
-              and our site.
+              https://www.langways.io/. This cookie policy is part of
+              Langways&apos; privacy policy. It covers the use of cookies
+              between your device and our site.
             </p>{" "}
             <p className="leading-7 mb-4">
               We also provide basic information on third-party services we may

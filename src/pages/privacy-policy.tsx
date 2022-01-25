@@ -9,11 +9,11 @@ function PrivacyPolicyPage() {
           <div className="max-w-3xl mx-auto shadow-xl bg-white p-8 rounded-xl">
             <h1 className="font-bold text-3xl mb-8">Privacy Policy</h1>
             <p className="leading-7 mb-4">
-              Your privacy is important to us. It is Langways' policy to respect
-              your privacy and comply with any applicable law and regulation
-              regarding any personal information we may collect about you,
-              including across our website, https://www.langways.io/, and other
-              sites we own and operate.
+              Your privacy is important to us. It is Langways&apos; policy to
+              respect your privacy and comply with any applicable law and
+              regulation regarding any personal information we may collect about
+              you, including across our website, https://www.langways.io/, and
+              other sites we own and operate.
             </p>
             <p className="leading-7 mb-4">
               Personal information is any information about you which can be
@@ -200,7 +200,8 @@ function PrivacyPolicyPage() {
             </p>{" "}
             <ul className="list-disc ml-4">
               <li className="leading-7 mb-4">
-                to provide you with our platform's core features and services
+                to provide you with our platform&apos;s core features and
+                services
               </li>
               <li className="leading-7 mb-4">
                 to enable you to customize or personalize your experience of our
