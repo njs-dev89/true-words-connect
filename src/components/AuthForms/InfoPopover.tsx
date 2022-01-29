@@ -17,11 +17,15 @@ export default function MyPopover() {
         <div className="bg-gray-100 px-6 py-8 rounded-lg shadow-lg text-base">
           <h3 className="text-medium">Why we need this information?</h3>
           <p className="text-sm">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            nisi nam perspiciatis. Cumque laudantium culpa aut architecto
-            pariatur dignissimos suscipit incidunt, nihil est ab velit cum
-            dolorum minima quam! Et.
+            We need all the information for our sign-up process to:
           </p>
+          <ul className="text-sm">
+            <li>Confirm your identity</li>
+            <li>Ensure the safety of the community</li>
+            <li>Ensure you are a qualified language professional</li>
+            <li>To review your application</li>
+            <li>Maintain high standards for all involved</li>
+          </ul>
         </div>
       </Popover.Panel>
     </Popover>

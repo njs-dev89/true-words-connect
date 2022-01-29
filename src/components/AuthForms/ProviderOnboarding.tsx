@@ -90,7 +90,7 @@ function ProviderOnboarding() {
       {step === 2 && (
         <div>
           <button
-            onClick={() => setStep(2)}
+            onClick={() => setStep(1)}
             className="text-sm font-medium text-blue flex items-center gap-1 mb-2"
           >
             <FaArrowLeft />
