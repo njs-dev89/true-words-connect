@@ -6,6 +6,7 @@ import AvailableServices from "../components/LandingPage/AvailableServices";
 // import Testimonials from "../components/LandingPage/Testimonials";
 import Footer from "../components/LandingPage/Footer";
 import HowItWorks from "../components/LandingPage/HowItWorks";
+import CookieConsent from "react-cookie-consent";
 
 export default function Home() {
   return (
@@ -27,8 +28,8 @@ export default function Home() {
                 <p className="mb-12 text-center md:text-left">
                   Where there is language, you will find a community, a culture,
                   and an identity. From translation and language learning to
-                  localization, Truewords Connect has all your language needs,
-                  all on one platform.
+                  localization, LangWays has all your language needs, all on one
+                  platform.
                 </p>
                 <div className="text-center md:text-left">
                   <Link href="/providers">
@@ -63,6 +64,29 @@ export default function Home() {
         </div> */}
       </main>
       <Footer />
+      <CookieConsent
+        location="bottom"
+        buttonText="I Accept!"
+        declineButtonText="I Decline"
+        enableDeclineButton
+        setDeclineCookie={false}
+        disableButtonStyles
+        containerClasses="px-4 py-2"
+        buttonClasses="btn btn-small btn-yellow"
+        declineButtonClasses="btn-small btn-outline mr-2"
+        cookieName="cookieConsent"
+        style={{ background: "#2B373B" }}
+        expires={150}
+      >
+        This website uses cookies to enhance the user experience.{" "}
+        <span style={{ fontSize: "12px" }}>
+          Checkout our{" "}
+          <Link href="/cookie-policy">
+            <a className="underline">Cookie policy</a>
+          </Link>{" "}
+          for details.
+        </span>
+      </CookieConsent>
     </div>
   );
 }

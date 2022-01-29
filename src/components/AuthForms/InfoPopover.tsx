@@ -19,7 +19,7 @@ export default function MyPopover() {
           <p className="text-sm">
             We need all the information for our sign-up process to:
           </p>
-          <ul className="text-sm">
+          <ul className="text-sm list-disc">
             <li>Confirm your identity</li>
             <li>Ensure the safety of the community</li>
             <li>Ensure you are a qualified language professional</li>

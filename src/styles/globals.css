@@ -79,15 +79,26 @@
   background-color: #e2be2d;
   border-color: #e2be2d;
 }
+.btn-yellow:hover {
+  background-color: #c8a828;
+  border-color: #c8a828;
+}
 
 .btn-blue {
   @apply bg-blue-900 text-white  border-blue-900;
+}
+.btn-blue:hover {
+  @apply bg-blue-800 border-blue-800;
 }
 
 .btn-green {
   @apply text-white;
   background-color: #69bd45;
   border-color: #69bd45;
+}
+.btn-green:hover {
+  background-color: #5eb33a;
+  border-color: #5eb33a;
 }
 
 .btn-rounded {
@@ -96,6 +107,9 @@
 
 .btn-outline {
   @apply border-2  border-gray-600;
+}
+.btn-outline:hover {
+  @apply border-gray-500;
 }
 
 /* ================== */
