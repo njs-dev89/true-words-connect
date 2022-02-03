@@ -1,7 +1,8 @@
 import { httpsCallable } from "@firebase/functions";
 import AgoraRTM from "agora-rtm-sdk";
+import { collection, doc, getDoc } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
-import { functions } from "../config/firebaseConfig";
+import { db, functions } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 
 const client = AgoraRTM.createInstance(process.env.NEXT_PUBLIC_AGORA_APP_ID);
@@ -83,10 +84,35 @@ export default function useAgoraRtm() {
   }, [authUser, agoraLoginStatus]);
 
   useEffect(() => {
-    client.on("MessageFromPeer", function (message, peerId) {
-      getUserAttributes(peerId, (attributes) => {
+    client.on("MessageFromPeer", async function (message, peerId) {
+      const clients = collection(db, "clients");
+      const providers = collection(db, "providers");
+      const userDoc = doc(clients, peerId);
+      const providerDoc = doc(providers, peerId);
+      const docSnap = await getDoc(userDoc);
+
+      if (docSnap.exists()) {
+        const attributes = {
+          profile_pic: docSnap.data().profile_pic,
+          username: docSnap.data().username,
+        };
         setMessage({ attributes, message });
-      });
+      } else {
+        const providerSnap = await getDoc(providerDoc);
+        if (providerSnap.exists()) {
+          const attributes = {
+            profile_pic: providerSnap.data().profile_pic,
+            username: providerSnap.data().username,
+          };
+          setMessage({ attributes, message });
+        } else {
+          const attributes = {
+            profile_pic: "/profile-placeholder.png",
+            username: "Unknown",
+          };
+          setMessage({ attributes, message });
+        }
+      }
     });
     client.on("ConnectionStateChanged", function (newState, reason) {
       console.log(newState, reason);

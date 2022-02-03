@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   collection,
   doc,
-  limit,
   limitToLast,
   onSnapshot,
   orderBy,
@@ -25,7 +24,6 @@ function Messages({ room }) {
   const [messages, setMessages] = useState(null);
   const { authUser } = useFirebaseAuth();
   const router = useRouter();
-  //   const mesgRef = useRef<any>();
 
   const downloadFile = (url, name) => {
     const xhr = new XMLHttpRequest();
@@ -48,13 +46,6 @@ function Messages({ room }) {
 
         saveBlob(blob, name);
       }
-      // writeFile(name, blob)
-      //   .then((data) => {
-      //     console.log(data);
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //   });
     };
     xhr.open("GET", url);
     xhr.send();
@@ -104,12 +95,6 @@ function Messages({ room }) {
     }
   }, [messages]);
 
-  //   useEffect(() => {
-  //     // mesgRef.current?.scrollIntoView();
-  //     if (mesgRef) {
-  //       mesgRef.current?.scrollIntoView();
-  //     }
-  //   }, [messages, mesgRef.current]);
   if (loading) {
     return <p>Loading....</p>;
   } else {
@@ -172,7 +157,6 @@ function Messages({ room }) {
               </div>
             ))}
         </ScrollableFeed>
-        {/* <span ref={mesgRef}></span> */}
       </div>
     );
   }
