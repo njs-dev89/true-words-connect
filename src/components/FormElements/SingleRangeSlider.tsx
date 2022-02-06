@@ -1,25 +1,19 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import * as React from "react";
 
 function SingleRangeSlider({ min, max, value, onChange }) {
   if (!value) {
     value = max;
   }
-  const [val, setVal] = useState(value);
-  const range = useRef<HTMLDivElement>(null);
+  const [val, setVal] = React.useState(value);
+  const range = React.useRef<HTMLDivElement>(null);
 
-  const getPercent = useCallback(
+  const getPercent = React.useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
 
   // Set width of the range to decrease from the left side
-  useEffect(() => {
+  React.useEffect(() => {
     const minPercent = getPercent(val);
 
     if (range.current) {
@@ -45,7 +39,7 @@ function SingleRangeSlider({ min, max, value, onChange }) {
         min={0}
         max={100}
         value={val}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const value = Number(event.target.value);
           setVal(value);
           onChange(value);

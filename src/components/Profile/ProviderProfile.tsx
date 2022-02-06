@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import EditUser from "./EditUser";
 import OfferRequest from "./OfferRequest";
 import TabsPaneContainer from "../Tabs/TabsPaneContainer";
@@ -40,11 +40,11 @@ const stripeDashboardLoginLink = httpsCallable(
 function ProviderProfile({ userId }) {
   const router = useRouter();
   const { authUser, loading } = useFirebaseAuth();
-  const [showModal, setShowModal] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [roomsLoading, setRoomsLoading] = useState(true);
-  const [onboardingComplete, setOnboardingComplete] = useState(false);
-  const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
+  const [rooms, setRooms] = React.useState([]);
+  const [roomsLoading, setRoomsLoading] = React.useState(true);
+  const [onboardingComplete, setOnboardingComplete] = React.useState(false);
+  const [hasUnreadMessages, setHasUnreadMessages] = React.useState(false);
 
   const stripeOnboarding = async () => {
     const accountLink: any = await createStripeAccountLink({
@@ -67,7 +67,7 @@ function ProviderProfile({ userId }) {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (authUser && authUser.profile.isStripeOnboardingComplete) {
       setOnboardingComplete(true);
     }
@@ -88,7 +88,7 @@ function ProviderProfile({ userId }) {
     }
   }, [authUser]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const messageRoomsCollection = collection(db, `/messageRooms`);
     const q = query(
       messageRoomsCollection,
@@ -109,7 +109,7 @@ function ProviderProfile({ userId }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (rooms.length > 0) {
       const noOfRooms = rooms.filter(
         (room) => room.provider.hasUnreadMessages

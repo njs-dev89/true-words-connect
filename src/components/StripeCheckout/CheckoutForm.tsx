@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import * as React from "react";
 import {
   useStripe,
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
+import useSiteNotifications from "../../customHooks/useSiteNotifications";
 
 // import CardSection from "./CardSection";
 
 export default function CheckoutForm({ providerId }) {
   const stripe = useStripe();
   const elements = useElements();
-  const [error, setError] = useState(null);
+  const [error, setError] = React.useState(null);
+  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,6 +37,7 @@ export default function CheckoutForm({ providerId }) {
       // details incomplete)
       setError(error.message);
     } else {
+      setSiteInfo("Order placed successfully");
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.

@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import * as React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useAgora } from "../context/agoraContextNoSsr";
-import { useFirebaseAuth } from "../context/authContext";
 import RemoteCallNotification from "./RemoteCallNotification";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
 import LocalCallNotification from "./LocalCallNotification";
 import { useNotification } from "../customHooks/useNotification";
 import Notification from "./Notification";
+import useSiteNotifications from "../customHooks/useSiteNotifications";
 
 const Msg = ({ msg, attributes }) => {
   let heading;
@@ -33,6 +33,14 @@ const Msg = ({ msg, attributes }) => {
 };
 
 function AgoraLoginWrapper({ children }) {
+  const {
+    siteErrors,
+    siteInfo,
+    setSiteInfo,
+    setSiteErrors,
+    siteWarning,
+    setSiteWarning,
+  } = useSiteNotifications();
   const displayMsg = (msg, attributes) => {
     toast(() => <Msg msg={msg} attributes={attributes} />, {
       position: "bottom-right",
@@ -72,14 +80,59 @@ function AgoraLoginWrapper({ children }) {
     message,
   } = useAgora();
 
-  useEffect(() => {
+  React.useEffect(() => {
+    if (siteInfo !== "") {
+      toast.success(siteInfo, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setSiteInfo(""),
+      });
+    }
+  }, [siteInfo]);
+
+  React.useEffect(() => {
+    if (siteErrors !== "") {
+      toast.error(siteErrors, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setSiteErrors(""),
+      });
+    }
+  }, [siteErrors]);
+
+  React.useEffect(() => {
+    if (siteWarning !== "") {
+      toast.warn(siteWarning, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        onClose: () => setSiteWarning(""),
+      });
+    }
+  }, [siteWarning]);
+
+  React.useEffect(() => {
     if (message) {
       console.log(message);
       displayMsg(message.message.text, message.attributes);
     }
   }, [message]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (notifications) {
       notifications.forEach((notification) =>
         displayNotification(hasNotified, notification)
@@ -87,7 +140,7 @@ function AgoraLoginWrapper({ children }) {
     }
   }, [notifications]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (localInvitation) {
       localInvitation.on("LocalInvitationReceivedByPeer", () => {
         setLocalCallNotification(true);
@@ -156,6 +209,7 @@ function AgoraLoginWrapper({ children }) {
         draggable
         pauseOnHover
       />
+
       {children}
     </>
   );

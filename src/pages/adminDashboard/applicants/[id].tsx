@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { deleteDoc, doc, getDoc, setDoc } from "@firebase/firestore";
@@ -9,15 +9,15 @@ import { useFirebaseAuth } from "../../../context/authContext";
 function SingleApplicant() {
   const router = useRouter();
   const { authUser, loading } = useFirebaseAuth();
-  const [dataLoading, setDataLoading] = useState(true);
-  const [applicant, setApplicant] = useState(null);
+  const [dataLoading, setDataLoading] = React.useState(true);
+  const [applicant, setApplicant] = React.useState(null);
   const addProviderRole = httpsCallable(functions, "addProviderRole");
-  useEffect(() => {
+  React.useEffect(() => {
     if (!loading && !authUser) {
       router.push("/login");
     }
   }, [authUser]);
-  useEffect(() => {
+  React.useEffect(() => {
     async function loadData() {
       const docRef = doc(db, `/applicants/${router.query.id}`);
       const docSnap = await getDoc(docRef);

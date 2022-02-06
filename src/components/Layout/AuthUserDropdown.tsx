@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Link from "next/link";
 import { useAgora } from "../../context/agoraContextNoSsr";
@@ -16,7 +16,7 @@ function AuthUserDropdown({ username }) {
             <TiArrowSortedDown className=" text-2xl text-blue" />
           </Menu.Button>
           <Transition
-            as={Fragment}
+            as={React.Fragment}
             enter="transition ease-out duration-100"
             enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100"

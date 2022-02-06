@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Image from "next/image";
 import { RatingView } from "react-simple-star-rating";
 import Link from "next/link";

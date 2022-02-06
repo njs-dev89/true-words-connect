@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useAgora } from "../../context/agoraContextNoSsr";
 import { useRouter } from "next/router";
 import { useFirebaseAuth } from "../../context/authContext";
@@ -11,11 +11,11 @@ import Link from "next/link";
 function MessagesTab({ loading, rooms }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = React.useState(null);
   const { message } = useAgora();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!router.query.room && rooms.length > 0) {
       router.push(`/profile/messages?room=${rooms[0].id}`);
     }

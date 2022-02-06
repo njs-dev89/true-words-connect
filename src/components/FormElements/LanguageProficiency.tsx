@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 
 function LanguageProficiency({ langs, setLanguages, languages }) {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
     const tranformedLangs = langs.map((lang) => {
       if (languages.length > 0) {
         const langDoc = languages.find(
@@ -16,7 +16,7 @@ function LanguageProficiency({ langs, setLanguages, languages }) {
     });
     setLanguages(tranformedLangs);
   }, [langs]);
-  useEffect(() => {
+  React.useEffect(() => {
     if (languages.length > 0 && loading === true) {
       setLoading(false);
     }

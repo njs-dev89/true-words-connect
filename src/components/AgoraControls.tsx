@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-react";
 import { BiExit, BiVideo, BiVideoOff } from "react-icons/bi";
 import { AiOutlineAudio, AiOutlineAudioMuted } from "react-icons/ai";
@@ -10,7 +10,10 @@ const AgoraControls = (props: {
   client: any;
 }) => {
   const { tracks, setStart, setInCall, client } = props;
-  const [trackState, setTrackState] = useState({ video: true, audio: true });
+  const [trackState, setTrackState] = React.useState({
+    video: true,
+    audio: true,
+  });
 
   const mute = async (type: "audio" | "video") => {
     if (type === "audio") {

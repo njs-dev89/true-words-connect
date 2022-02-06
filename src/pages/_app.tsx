@@ -2,11 +2,11 @@ import "../styles/globals.css";
 import { AuthUserProvider } from "../context/authContext";
 import Layout from "../components/Layout/Layout";
 import { AgoraProviderWithNoSSR } from "../context/agoraContextNoSsr";
-import React, { useEffect } from "react";
+import * as React from "react";
 import AgoraLoginWrapper from "../components/AgoraLoginWrapper";
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
+  React.useEffect(() => {
     if (window !== undefined) {
       (function () {
         window["sib"] = { equeue: [], client_key: "9q9jvw4lk579mqued8fb1bug" };

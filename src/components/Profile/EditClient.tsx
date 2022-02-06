@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import UploadProfilePic from "../FormElements/UploadProfilePic";
 import Image from "next/image";
@@ -10,16 +10,16 @@ import ModalContainer from "../ModalContainer";
 function EditUser({ setShowModal, client }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [username, setUsername] = useState(client.username);
-  const [fullname, setFullname] = useState("");
-  const [tagline, setTagline] = useState("");
+  const [username, setUsername] = React.useState(client.username);
+  const [fullname, setFullname] = React.useState("");
+  const [tagline, setTagline] = React.useState("");
 
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [picLink, setPicLink] = useState("");
+  const [city, setCity] = React.useState("");
+  const [state, setState] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [picLink, setPicLink] = React.useState("");
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (client.address) {
       setCity(client.address.city);
       setState(client.address.state);
@@ -44,14 +44,14 @@ function EditUser({ setShowModal, client }) {
     const newUser = await setDoc(
       userDoc,
       {
-        username,
-        fullname,
-        tagline,
+        username: username.trim(),
+        fullname: fullname.trim(),
+        tagline: tagline.trim(),
 
         address: {
-          city,
-          state,
-          country,
+          city: city.trim(),
+          state: state.trim(),
+          country: country.trim(),
         },
         profile_pic: picLink,
       },

@@ -6,7 +6,7 @@ import {
   query,
   where,
 } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { db } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import { Rating, RatingView } from "react-simple-star-rating";
@@ -14,10 +14,10 @@ import Image from "next/image";
 
 function OrderReviews({ order }) {
   const { authUser } = useFirebaseAuth();
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [reviews, setReviews] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [rating, setRating] = React.useState(0);
+  const [comment, setComment] = React.useState("");
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -48,7 +48,7 @@ function OrderReviews({ order }) {
       rating,
     });
   };
-  useEffect(() => {
+  React.useEffect(() => {
     // const reviewsCollection = collection(db, `/orders/${order.id}/reviews`);
     const q = query(
       collectionGroup(db, "reviews"),

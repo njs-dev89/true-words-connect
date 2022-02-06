@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import * as React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFirebaseAuth } from "../../context/authContext";
 import { doc, collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
+import useSiteNotifications from "../../customHooks/useSiteNotifications";
 
 function OfferRequestToOffer({ setShowModal, reqData }) {
-  const [offerAmount, setOfferAmount] = useState(0);
+  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const [offerAmount, setOfferAmount] = React.useState(0);
   const { authUser } = useFirebaseAuth();
 
   console.log(authUser);
@@ -30,10 +32,12 @@ function OfferRequestToOffer({ setShowModal, reqData }) {
         { status: "offer Sent" },
         { merge: true }
       );
-      setShowModal(false);
+      setSiteInfo("Offer Sent Successfully");
     } catch (error) {
       console.error(error);
+      setSiteErrors("Offer could not be sent. Try again");
     }
+    setShowModal(false);
   };
   return (
     <ModalContainer title="Create Offer" setShowModal={setShowModal}>

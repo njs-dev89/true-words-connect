@@ -1,14 +1,14 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
-import React, { useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { storage } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import ModalContainer from "./ModalContainer";
 
 const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream;
     }
@@ -33,11 +33,10 @@ export default function VideoModal({
   setUpload,
   setUploadFailed,
 }) {
-  const videoRef = useRef(null);
   const { authUser } = useFirebaseAuth();
-  const [showPreview, setShowPreview] = useState(true);
-  const [blob, setBlob] = useState(null);
-  const [recordingStarted, setRecordingStarted] = useState(false);
+  const [showPreview, setShowPreview] = React.useState(true);
+  const [blob, setBlob] = React.useState(null);
+  const [recordingStarted, setRecordingStarted] = React.useState(false);
   const { status, startRecording, stopRecording, mediaBlobUrl, previewStream } =
     useReactMediaRecorder({
       video: true,
@@ -46,7 +45,7 @@ export default function VideoModal({
       },
     });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (recordingStarted) {
       startRecording();
     }

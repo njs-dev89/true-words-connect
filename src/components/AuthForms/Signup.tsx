@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useFirebaseAuth } from "../../context/authContext";
@@ -7,11 +7,11 @@ import SignupForm from "./SignupForm";
 import validator from "validator";
 
 function Signup() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const router = useRouter();
-  const [error, setError] = useState(null);
+  const [error, setError] = React.useState(null);
 
   const { createUser } = useFirebaseAuth();
 

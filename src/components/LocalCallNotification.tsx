@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useAgora } from "../context/agoraContextNoSsr";
 import ModalContainer from "./ModalContainer";
 import Image from "next/image";
 
 function LocalCallNotification({ localInvitation, setLocalCallNotification }) {
   const { getUserAttributes } = useAgora();
-  const [userAttributes, setUserAttributes] = useState(null);
+  const [userAttributes, setUserAttributes] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getUserAttributes(localInvitation.calleeId, setUserAttributes);
     console.log(userAttributes);
   }, []);

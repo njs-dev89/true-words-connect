@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import * as React from "react";
 import OrderDetails from "../../../../components/OrderDetails";
 import { useFirebaseAuth } from "../../../../context/authContext";
 
 function OrderDetailsPage() {
   const { loading, authUser } = useFirebaseAuth();
   const router = useRouter();
-  useEffect(() => {
+  React.useEffect(() => {
     if (!loading && !authUser) {
       router.push("/login");
     }

@@ -1,5 +1,6 @@
-import React from "react";
+import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const SingleStep = ({ iconLink, step, description }) => {
   return (
@@ -23,7 +24,7 @@ const SingleStep = ({ iconLink, step, description }) => {
 
 function HowItWorks() {
   return (
-    <div className="" id="works">
+    <div className="pb-16">
       <h1 className="font-bold text-3xl text-center mb-16">How It Works</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-32">
         <SingleStep
@@ -48,6 +49,14 @@ function HowItWorks() {
           description="Start your learning! Whether it is translation, localization, interpretation, or simply learning a
           new language, our service providers will be here to support you along the way."
         />
+      </div>
+      <div className="text-center mt-16">
+        <Link href="/providers">
+          <a className="btn btn-yellow mr-4 shadow-xl">Find a Provider</a>
+        </Link>
+        <Link href="/provider-signup">
+          <a className="btn btn-outline">Become a Provider</a>
+        </Link>
       </div>
     </div>
   );

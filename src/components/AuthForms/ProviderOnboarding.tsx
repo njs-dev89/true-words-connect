@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import LanguageProficiency from "../FormElements/LanguageProficiency";
 import LanguageTags from "../FormElements/LanguageTags";
@@ -11,13 +11,13 @@ import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import InfoPopover from "./InfoPopover";
 
 function ProviderOnboarding() {
-  const [step, setStep] = useState(1);
-  const [error, setError] = useState(null);
-  const [languages, setLanguages] = useState([]);
-  const [langs, setLangs] = useState([]);
-  const [resumeLink, setResumeLink] = useState(null);
-  const [passportLink, setPassportLink] = useState(null);
-  const [videoLink, setVideoLink] = useState(null);
+  const [step, setStep] = React.useState(1);
+  const [error, setError] = React.useState(null);
+  const [languages, setLanguages] = React.useState([]);
+  const [langs, setLangs] = React.useState([]);
+  const [resumeLink, setResumeLink] = React.useState(null);
+  const [passportLink, setPassportLink] = React.useState(null);
+  const [videoLink, setVideoLink] = React.useState(null);
   const { authUser, addProviderApplicant } = useFirebaseAuth();
   const router = useRouter();
 

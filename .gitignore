@@ -34,5 +34,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-/truewordsconnect-sa.json
-/seed.sh
+truewordsconnect-sa.json
+seed.sh

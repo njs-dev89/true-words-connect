@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import * as React from "react";
 import { useAgora } from "../../context/agoraContextNoSsr";
 import { useFirebaseAuth } from "../../context/authContext";
 import SingleRoom from "./SingleRoom";
@@ -7,7 +7,7 @@ function MessageRooms({ rooms, loading }) {
   const { peersOnline, agoraLoginStatus } = useAgora();
   const { authUser } = useFirebaseAuth();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!loading && agoraLoginStatus === "connected") {
       let peerIds;
       if (authUser.role === "client") {

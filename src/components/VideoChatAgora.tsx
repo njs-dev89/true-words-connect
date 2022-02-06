@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useAgora } from "../context/agoraContextNoSsr";
 import { useFirebaseAuth } from "../context/authContext";
 import VideoCall from "./VideoCall";

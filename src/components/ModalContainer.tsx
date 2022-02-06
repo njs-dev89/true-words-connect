@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 function ModalContainer({ children, setShowModal, title }) {
   return (

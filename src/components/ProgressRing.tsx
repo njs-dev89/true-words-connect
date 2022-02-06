@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 function ProgressRing({ radius, stroke, progress }) {
   const normalizedRadius = radius - stroke * 2;

@@ -5,7 +5,7 @@ import {
   ClientConfig,
   IAgoraRTCRemoteUser,
 } from "agora-rtc-react";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { db, functions } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import AgoraControls from "./AgoraControls";
@@ -29,16 +29,15 @@ function VideoCall(props: {
   order;
 }) {
   const { setInCall, channelName, order } = props;
-  const [users, setUsers] = useState<IAgoraRTCRemoteUser[]>([]);
-  const [start, setStart] = useState<boolean>(false);
-  const [timer, setTimer] = useState(0);
+  const [users, setUsers] = React.useState<IAgoraRTCRemoteUser[]>([]);
+  const [start, setStart] = React.useState<boolean>(false);
+  const [timer, setTimer] = React.useState(0);
   const client = useClient();
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const { authUser } = useFirebaseAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    // function to initialise the SDK
+  React.useEffect(() => {
     let init = async (name: string) => {
       console.log("init", name);
       let tenMinuteTimer;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import * as React from "react";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 import AdminSidebar from "./AdminSidebar";
@@ -28,7 +28,7 @@ function Layout({ children }) {
       (error) => {}
     );
   };
-  useEffect(() => {
+  React.useEffect(() => {
     if (authUser && authUser.role === "provider") {
       setGeoLocation(authUser.uid);
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import {
   collection,
@@ -17,16 +17,16 @@ import ModalContainer from "../ModalContainer";
 import { useAgora } from "../../context/agoraContextNoSsr";
 
 function UserOffers() {
-  const [loading, setLoading] = useState(false);
-  const [offers, setOffers] = useState([]);
-  const [offerId, setOfferId] = useState(null);
-  const [providerId, setProviderId] = useState(null);
-  const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = React.useState(false);
+  const [offers, setOffers] = React.useState([]);
+  const [offerId, setOfferId] = React.useState(null);
+  const [providerId, setProviderId] = React.useState(null);
+  const [filter, setFilter] = React.useState("all");
   const { authUser } = useFirebaseAuth();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
   const { sendMessageToPeer } = useAgora();
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     const offersCollection = collection(db, `/offers`);
     let q;

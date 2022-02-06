@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  FC,
-  useCallback,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import * as React from "react";
 
 interface MultiRangeSliderProps {
   min: number;
@@ -15,7 +8,7 @@ interface MultiRangeSliderProps {
   onChange: Function;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
+const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
   min,
   max,
   minValue,
@@ -28,19 +21,19 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   if (!maxValue) {
     maxValue = max;
   }
-  const [minVal, setMinVal] = useState(minValue);
-  const [maxVal, setMaxVal] = useState(maxValue);
-  const minValRef = useRef(minValue);
-  const maxValRef = useRef(maxValue);
-  const range = useRef<HTMLDivElement>(null);
+  const [minVal, setMinVal] = React.useState(minValue);
+  const [maxVal, setMaxVal] = React.useState(maxValue);
+  const minValRef = React.useRef(minValue);
+  const maxValRef = React.useRef(maxValue);
+  const range = React.useRef<HTMLDivElement>(null);
 
   // Convert to percentage
-  const getPercent = useCallback(
+  const getPercent = React.useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
   // Set width of the range to decrease from the left side
-  useEffect(() => {
+  React.useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxVal);
 
@@ -52,7 +45,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   }, [minVal]);
 
   // Set width of the range to decrease from the right side
-  useEffect(() => {
+  React.useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxVal);
 
@@ -80,7 +73,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         min={min}
         max={max}
         value={minVal}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const value = Math.min(Number(event.target.value), maxVal - 1);
           setMinVal(value);
           minValRef.current = value;
@@ -94,7 +87,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         min={min}
         max={max}
         value={maxVal}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
           maxValRef.current = value;

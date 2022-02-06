@@ -1,5 +1,5 @@
 import { LoadScript } from "@react-google-maps/api";
-import React, { useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import Map from "./Map";
 import Geocode from "react-geocode";
@@ -20,10 +20,10 @@ const libraries: (
 function SearchBar({ query, currentPosition, setCurrentPosition }) {
   const { location, setLocation } = useSearch();
 
-  const [showModal, setShowModal] = useState(false);
-  const [autocomplete, setAutocomplete] = useState(null);
-  const [place, setPlace] = useState("");
-  const placeRef = useRef(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const [autocomplete, setAutocomplete] = React.useState(null);
+  const [place, setPlace] = React.useState("");
+  const placeRef = React.useRef(null);
   const onLoad = (autocomplete) => {
     console.log("autocomplete: ", autocomplete);
 

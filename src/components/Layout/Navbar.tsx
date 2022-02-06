@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -22,15 +22,15 @@ function Navbar() {
     >
       <div className="container">
         <div className="flex justify-between pt-1 items-center">
-          <div className="flex items-center gap-4 sm:gap-16">
+          <div className="flex items-center gap-4 sm:gap-16 py-2">
             <div
               className={`logo relative
-                ${router.pathname === "/" ? "w-24 h-24" : "w-20 h-20"}`}
+                ${router.pathname === "/" ? "w-60 h-12" : "w-60 h-12"}`}
             >
               {" "}
               <Link href="/">
                 <a className="font-bold text-4xl">
-                  <Image src="/logo.png" alt="" layout="fill" />
+                  <Image src="/langways.png" alt="" layout="fill" />
                 </a>
               </Link>
             </div>

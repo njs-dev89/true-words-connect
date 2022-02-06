@@ -1,6 +1,6 @@
 import { addDoc, collection } from "@firebase/firestore";
 import { httpsCallable } from "@firebase/functions";
-import React from "react";
+import * as React from "react";
 import { db, functions } from "../config/firebaseConfig";
 
 const languages = [
@@ -266,7 +266,7 @@ function languageSeed() {
       <button
         className="btn btn-blue mt-32"
         onClick={() => {
-          addAdminRole({ uid: "3kMg7iLGISRxXyPwK0Dj0kEdDPQ2" });
+          addAdminRole({ uid: "WYOPenanlxX0qIDlhITaRABIjlW2" });
         }}
       >
         Add admin role

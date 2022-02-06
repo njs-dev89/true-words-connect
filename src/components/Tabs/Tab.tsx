@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 function Tab({ openTab, setOpenTab, text, tabNo }): JSX.Element {
   return (

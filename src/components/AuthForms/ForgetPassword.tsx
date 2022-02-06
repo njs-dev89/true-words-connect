@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
@@ -28,9 +28,9 @@ const Msg = ({ email, heading }) => (
 );
 
 function ForgetPassword() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const { forgotPassword } = useFirebaseAuth();
 
   const displayMsg = (email, heading) => {
@@ -81,7 +81,7 @@ function ForgetPassword() {
             className="mb-4"
             placeholder="Email"
             value={email}
-            handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+            handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(event.target.value);
             }}
           />

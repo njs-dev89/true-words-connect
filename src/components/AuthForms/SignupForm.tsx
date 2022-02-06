@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import * as React from "react";
 import Input from "../FormElements/Input";
 
 function SignupForm({
@@ -23,7 +23,7 @@ function SignupForm({
         className="mb-6"
         placeholder="Username"
         value={username}
-        handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+        handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setUsername(event.target.value);
         }}
       />
@@ -35,7 +35,7 @@ function SignupForm({
         className="mb-4"
         placeholder="Email"
         value={email}
-        handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+        handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setEmail(event.target.value);
         }}
       />
@@ -47,7 +47,7 @@ function SignupForm({
         className="mb-6"
         placeholder="Password"
         value={password}
-        handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+        handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setPassword(event.target.value);
         }}
       />

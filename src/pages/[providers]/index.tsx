@@ -14,7 +14,7 @@ const index = client.initIndex("providers");
 
 function ProvidersPage({ query, hits }) {
   const [currentPosition, setCurrentPosition] = useState(null);
-
+  console.log(hits);
   useEffect(() => {
     if (!!query.lng) {
       setCurrentPosition({
@@ -46,7 +46,7 @@ function ProvidersPage({ query, hits }) {
             name="description"
             content="List of providers on true words connect"
           />
-          <link rel="icon" href="/logo.svg" />
+          <link rel="icon" href="/langways-globe.png" />
         </Head>
         <div className="container">
           <SearchBar

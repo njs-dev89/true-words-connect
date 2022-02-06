@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useAgora } from "../context/agoraContextNoSsr";
 import ModalContainer from "./ModalContainer";
 import Image from "next/image";
@@ -8,9 +8,9 @@ function RemoteCallNotification({
   setRemoteCallNotification,
 }) {
   const { getUserAttributes } = useAgora();
-  const [userAttributes, setUserAttributes] = useState(null);
+  const [userAttributes, setUserAttributes] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getUserAttributes(remoteInvitation.callerId, setUserAttributes);
     console.log(userAttributes);
   }, []);

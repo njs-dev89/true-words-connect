@@ -7,22 +7,24 @@ import {
   setDoc,
   where,
 } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import OfferRequestToOffer from "./OfferRequestToOffer";
 import Image from "next/image";
+import useSiteNotifications from "../../customHooks/useSiteNotifications";
 
 function OfferRequest() {
+  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
   const { authUser } = useFirebaseAuth();
-  const [showModal, setShowModal] = useState(false);
-  const [requestData, setRequestData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [offerRequests, setOfferRequests] = useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const [requestData, setRequestData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [offerRequests, setOfferRequests] = React.useState(null);
 
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = React.useState("all");
 
-  useEffect(() => {
+  React.useEffect(() => {
     const offerRequestCollection = collection(
       db,
       `/providers/${authUser.uid}/offerRequest`
@@ -67,8 +69,10 @@ function OfferRequest() {
         { status: "offer sent" },
         { merge: true }
       );
+      setSiteInfo("Offer Sent Successfully");
     } catch (error) {
       console.error(error);
+      setSiteErrors("Offer could not be sent. Try again");
     }
   };
 

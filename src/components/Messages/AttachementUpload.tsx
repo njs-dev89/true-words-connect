@@ -4,17 +4,17 @@ import {
   ref,
   uploadBytesResumable,
 } from "@firebase/storage";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import { storage } from "../../config/firebaseConfig";
 import { FaTimes } from "react-icons/fa";
 
 function AttachementUpload({ file, setFiles, files, room, id }) {
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadFailed, setUploadFailed] = useState(false);
-  const [upload, setUpload] = useState(false);
-  const [error, setError] = useState(null);
+  const [uploadProgress, setUploadProgress] = React.useState(0);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
+  const [uploadFailed, setUploadFailed] = React.useState(false);
+  const [upload, setUpload] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   const removeFile = (e) => {
     const storageRef = ref(
@@ -33,7 +33,7 @@ function AttachementUpload({ file, setFiles, files, room, id }) {
       });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (file.uploadComplete) {
       setUploadProgress(100);
       setUploadSuccess(true);

@@ -5,17 +5,17 @@ import {
   query,
   where,
 } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import Image from "next/image";
 import { RatingView } from "react-simple-star-rating";
 
 function UserReviews() {
-  const [loading, setLoading] = useState(true);
-  const [reviews, setReviews] = useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [reviews, setReviews] = React.useState(null);
   const { authUser } = useFirebaseAuth();
-  useEffect(() => {
+  React.useEffect(() => {
     let reviewsCollection;
 
     if (authUser.role === "client") {

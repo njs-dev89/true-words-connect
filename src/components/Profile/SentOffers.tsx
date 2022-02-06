@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import {
   collection,
@@ -12,12 +12,12 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 
 function SentOffers() {
-  const [loading, setLoading] = useState(false);
-  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [offers, setOffers] = React.useState([]);
   const { authUser } = useFirebaseAuth();
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = React.useState("all");
 
-  useEffect(() => {
+  React.useEffect(() => {
     const offersCollection = collection(db, `/offers`);
     let q;
     if (filter === "all") {

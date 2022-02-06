@@ -1,5 +1,5 @@
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import * as React from "react";
 import { AiOutlinePaperClip } from "react-icons/ai";
 import { IoMdSend } from "react-icons/io";
 import { db } from "../../config/firebaseConfig";
@@ -9,10 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import AttachementUpload from "./AttachementUpload";
 
 function CreateMessage({ room, setShowModal }) {
-  const [msg, setMsg] = useState("");
-  const [id, setId] = useState(null);
-  const [files, setFiles] = useState([]);
-  const [error, setError] = useState(null);
+  const [msg, setMsg] = React.useState("");
+  const [id, setId] = React.useState(null);
+  const [files, setFiles] = React.useState([]);
+  const [error, setError] = React.useState(null);
   const { authUser } = useFirebaseAuth();
   const { message, sendMessageToPeer } = useAgora();
 

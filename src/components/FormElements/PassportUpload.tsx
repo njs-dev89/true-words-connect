@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import ProgressRing from "../ProgressRing";
 import Image from "next/image";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
@@ -8,10 +8,10 @@ import { FcHighPriority, FcOk } from "react-icons/fc";
 
 function PassportUpload({ setPassportLink, setError, title }) {
   const { authUser } = useFirebaseAuth();
-  const [upload, setUpload] = useState(false);
-  const [passportProgress, setPassportProgress] = useState(0);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadFailed, setUploadFailed] = useState(false);
+  const [upload, setUpload] = React.useState(false);
+  const [passportProgress, setPassportProgress] = React.useState(0);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
+  const [uploadFailed, setUploadFailed] = React.useState(false);
   const uploadPassport = (e) => {
     console.log(e.target.files[0]);
     if (e.target.files[0].type.split("/")[0] !== "image") {

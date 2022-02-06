@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Image from "next/image";
 
 const SingleService = ({ iconLink, serviceTitle, description }) => {
@@ -19,7 +19,7 @@ const SingleService = ({ iconLink, serviceTitle, description }) => {
 
 function AvailableServices() {
   return (
-    <div id="services">
+    <div>
       <h1 className="font-bold text-3xl text-center mb-16">
         Available Services
       </h1>

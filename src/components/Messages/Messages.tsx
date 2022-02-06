@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import {
   collection,
@@ -20,8 +20,8 @@ import { HiDownload } from "react-icons/hi";
 dayjs.extend(relativeTime);
 
 function Messages({ room }) {
-  const [loading, setLoading] = useState(true);
-  const [messages, setMessages] = useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [messages, setMessages] = React.useState(null);
   const { authUser } = useFirebaseAuth();
   const router = useRouter();
 
@@ -51,7 +51,7 @@ function Messages({ room }) {
     xhr.send();
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const q = query(
       collection(db, `/messageRooms/${router.query.room}/messages`),
       limitToLast(50),
@@ -73,7 +73,7 @@ function Messages({ room }) {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (messages) {
       const roomData =
         authUser.role === "client"

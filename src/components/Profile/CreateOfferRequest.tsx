@@ -1,26 +1,28 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFirebaseAuth } from "../../context/authContext";
 import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
+import useSiteNotifications from "../../customHooks/useSiteNotifications";
 
 function CreateOfferRequest({ setShowModal }) {
-  const [service, setService] = useState("teaching");
-  const [contractType, setContractType] = useState("hourly");
-  const [serviceType, setServiceType] = useState("online");
-  const [language, setLanguage] = useState("");
-  const [hrs, setHrs] = useState(0);
-  const [days, setDays] = useState(0);
-  const [budget, setBudget] = useState(0);
-  const [startDate, setStartDate] = useState(new Date());
-  const [langOptions, setLangOptions] = useState([]);
+  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const [service, setService] = React.useState("teaching");
+  const [contractType, setContractType] = React.useState("hourly");
+  const [serviceType, setServiceType] = React.useState("online");
+  const [language, setLanguage] = React.useState("");
+  const [hrs, setHrs] = React.useState(0);
+  const [days, setDays] = React.useState(0);
+  const [budget, setBudget] = React.useState(0);
+  const [startDate, setStartDate] = React.useState(new Date());
+  const [langOptions, setLangOptions] = React.useState([]);
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
 
-  useEffect(() => {
+  React.useEffect(() => {
     let suggst = [];
     const q = query(collection(db, "/languages"));
     getDocs(q).then((snap) => {
@@ -58,8 +60,12 @@ function CreateOfferRequest({ setShowModal }) {
       db,
       `/providers/${router.query.id}/offerRequest`
     );
-    const offerReqDocRef = await addDoc(offerRequestCollection, formData);
-
+    try {
+      const offerReqDocRef = await addDoc(offerRequestCollection, formData);
+      setSiteInfo("Offer Request Sent Successfully");
+    } catch (err) {
+      setSiteErrors("Offer Request not sent try again");
+    }
     setShowModal(false);
   };
   return (

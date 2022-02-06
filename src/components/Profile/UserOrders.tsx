@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
@@ -6,12 +6,12 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 
 function UserOrders() {
-  const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = React.useState(false);
+  const [orders, setOrders] = React.useState([]);
+  const [filter, setFilter] = React.useState("all");
   const { authUser } = useFirebaseAuth();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const ordersCollection = collection(db, `/orders`);
     let q;
     if (authUser.role === "client") {

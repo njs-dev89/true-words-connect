@@ -1,15 +1,15 @@
 import { collection, onSnapshot, query } from "@firebase/firestore";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { db } from "../../config/firebaseConfig";
 import Image from "next/image";
 import { RatingView } from "react-simple-star-rating";
 import { useRouter } from "next/router";
 
 function UserReviews() {
-  const [loading, setLoading] = useState(true);
-  const [reviews, setReviews] = useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const [reviews, setReviews] = React.useState(null);
   const router = useRouter();
-  useEffect(() => {
+  React.useEffect(() => {
     const reviewsCollection = collection(
       db,
       `/providers/${router.query.id}/reviews`

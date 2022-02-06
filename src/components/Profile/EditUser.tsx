@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import UploadProfilePic from "../FormElements/UploadProfilePic";
 import Image from "next/image";
@@ -11,19 +11,19 @@ import validator from "validator";
 function EditUser({ setShowModal, provider }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [username, setUsername] = useState(provider.username);
-  const [fullname, setFullname] = useState("");
-  const [hourlyPrice, setHourlyPrice] = useState(null);
-  const [tagline, setTagline] = useState("");
-  const [about, setAbout] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [picLink, setPicLink] = useState("");
-  const [error, setError] = useState(null);
-  const [step, setStep] = useState(1);
+  const [username, setUsername] = React.useState(provider.username);
+  const [fullname, setFullname] = React.useState("");
+  const [hourlyPrice, setHourlyPrice] = React.useState(null);
+  const [tagline, setTagline] = React.useState("");
+  const [about, setAbout] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [state, setState] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [picLink, setPicLink] = React.useState("");
+  const [error, setError] = React.useState(null);
+  const [step, setStep] = React.useState(1);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (provider.address) {
       setCity(provider.address.city);
       setState(provider.address.state);
@@ -88,18 +88,18 @@ function EditUser({ setShowModal, provider }) {
     const newUser = await setDoc(
       userDoc,
       {
-        username,
-        fullname,
-        tagline,
+        username: username.trim(),
+        fullname: fullname.trim(),
+        tagline: tagline.trim(),
         hourly_rate: Number(hourlyPrice),
         isProfileComplete: true,
         address: {
-          city,
-          state,
-          country,
+          city: city.trim(),
+          state: state.trim(),
+          country: country.trim(),
         },
         profile_pic: picLink,
-        about,
+        about: about.trim(),
       },
       { merge: true }
     );

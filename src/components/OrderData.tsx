@@ -1,7 +1,7 @@
 import { doc, setDoc } from "@firebase/firestore";
 import { httpsCallable } from "@firebase/functions";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import * as React from "react";
 import { db, functions } from "../config/firebaseConfig";
 import { useFirebaseAuth } from "../context/authContext";
 import ModalContainer from "./ModalContainer";
@@ -11,8 +11,8 @@ const cancelOrder = httpsCallable(functions, "cancelOrder");
 function OrderData({ order }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [showModal, setShowModal] = useState(false);
-  const [cancelError, setCancelError] = useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const [cancelError, setCancelError] = React.useState(null);
 
   console.log({ order });
   const cancelOrderCnfrm = async () => {

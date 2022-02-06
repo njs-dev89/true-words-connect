@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
@@ -20,9 +20,9 @@ const Msg = ({ msg, heading }) => (
 );
 
 function ResetPassword() {
-  const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [newPassword, setNewPassword] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const { resetPassword } = useFirebaseAuth();
   const router = useRouter();
 
@@ -73,7 +73,7 @@ function ResetPassword() {
             className="mb-4"
             placeholder="Password"
             value={newPassword}
-            handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+            handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setNewPassword(event.target.value);
             }}
           />

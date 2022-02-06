@@ -8,7 +8,7 @@ import {
 } from "@firebase/firestore";
 import { where } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import * as React from "react";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import CreateOfferRequest from "./CreateOfferRequest";
@@ -16,8 +16,11 @@ import CreateOfferRequest from "./CreateOfferRequest";
 function ProviderOverview({ provider }) {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
   const createMessage = async (client, provider) => {
+    if (authUser.uid === provider.id) {
+      return;
+    }
     const messageRoomsCollection = collection(db, `/messageRooms`);
 
     try {

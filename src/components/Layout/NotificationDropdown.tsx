@@ -1,6 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import React, { Fragment, useEffect, useState } from "react";
+import * as React from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
@@ -9,10 +9,10 @@ import SingleNotification from "./SingleNotification";
 
 function NotificationDropdown() {
   const { loading, authUser } = useFirebaseAuth();
-  const [notificationsLoading, setNotificationsLoading] = useState(true);
-  const [notifications, setNotifications] = useState([]);
+  const [notificationsLoading, setNotificationsLoading] = React.useState(true);
+  const [notifications, setNotifications] = React.useState([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!loading && authUser) {
       let q;
       if (authUser.role === "client") {
@@ -65,7 +65,7 @@ function NotificationDropdown() {
           </Menu.Button>
 
           <Transition
-            as={Fragment}
+            as={React.Fragment}
             enter="transition ease-out duration-100"
             enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100"

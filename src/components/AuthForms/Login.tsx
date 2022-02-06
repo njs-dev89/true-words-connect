@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { ChangeEvent, useState } from "react";
+import * as React from "react";
 import { useFirebaseAuth } from "../../context/authContext";
 import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
@@ -8,10 +8,10 @@ import Image from "next/image";
 import validator from "validator";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const { signInUser } = useFirebaseAuth();
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
@@ -56,7 +56,7 @@ function Login() {
             className="mb-4"
             placeholder="Email"
             value={email}
-            handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+            handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(event.target.value);
             }}
           />
@@ -68,7 +68,7 @@ function Login() {
             className="mb-6"
             placeholder="Password"
             value={password}
-            handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+            handleChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setPassword(event.target.value);
             }}
           />

@@ -1,5 +1,5 @@
 import { Menu } from "@headlessui/react";
-import React, { useEffect } from "react";
+import * as React from "react";
 import Image from "next/image";
 import { useFirebaseAuth } from "../../context/authContext";
 import { db } from "../../config/firebaseConfig";
@@ -7,10 +7,16 @@ import { doc, setDoc } from "firebase/firestore";
 
 function SingleNotification({ notification }) {
   const { authUser } = useFirebaseAuth();
-  useEffect(() => {
+  React.useEffect(() => {
     if (authUser.role === "client") {
       setDoc(
         doc(db, `/clients/${authUser.uid}/notifications/${notification.id}`),
+        { hasRead: true },
+        { merge: true }
+      );
+    } else {
+      setDoc(
+        doc(db, `/providers/${authUser.uid}/notifications/${notification.id}`),
         { hasRead: true },
         { merge: true }
       );

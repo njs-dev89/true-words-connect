@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import MultiRangeSlider from "../FormElements/MultiRangeSlider";
 import SingleRangeSlider from "../FormElements/SingleRangeSlider";
 import { useSearch } from "../../context/searchAndFilterContext";
@@ -16,7 +16,7 @@ function FilterSidebar({ query }) {
     setHourlyPrice,
   } = useSearch();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (query.language) {
       const langArray = query.language.split(",").map((lang, idx) => {
         return { id: idx + 1, name: lang };

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { FcHighPriority, FcOk } from "react-icons/fc";
 import VideoModal from "../VideoModal";
 // import { IoMdVideocam } from "react-icons/io";
 
 function SkillTest({ setVideoLink, reUpload }) {
-  const [showModal, setShowModal] = useState(false);
-  const [upload, setUpload] = useState(false);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadFailed, setUploadFailed] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
+  const [upload, setUpload] = React.useState(false);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
+  const [uploadFailed, setUploadFailed] = React.useState(false);
 
   return (
     <div>

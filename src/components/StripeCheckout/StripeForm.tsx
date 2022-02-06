@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -14,9 +14,9 @@ const stripePromise = loadStripe(
 const createPaymentIntent = httpsCallable(functions, "createPaymentIntent");
 
 function StripeForm({ offerId, providerId }) {
-  const [loading, setLoading] = useState(true);
-  const [clientSecret, setClientSecret] = useState(null);
-  useEffect(() => {
+  const [loading, setLoading] = React.useState(true);
+  const [clientSecret, setClientSecret] = React.useState(null);
+  React.useEffect(() => {
     createPaymentIntent({ offerId }).then((data: any) => {
       setClientSecret(data.data);
       setLoading(false);

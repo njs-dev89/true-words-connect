@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import * as React from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
 function Map({ currentPosition, setLocation }) {

@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import * as React from "react";
 
 interface Props {
   label: string;
@@ -8,7 +8,7 @@ interface Props {
   id: string;
   value: string;
   className?: string;
-  handleChange: ChangeEventHandler;
+  handleChange: React.ChangeEventHandler;
 }
 
 function Input({

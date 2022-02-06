@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { doc, getDoc } from "@firebase/firestore";
+import { doc } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import UserDetails from "./Profile/UserDetails";
 import { useFirebaseAuth } from "../context/authContext";
@@ -16,26 +16,10 @@ const VideoChatNoSSR = dynamic(() => import("./VideoChatAgora"), {
 function OrderDetails() {
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
-  const [order, setOrder] = useState(null);
-  const [orderLoading, setOrderLoading] = useState(true);
+  const [order, setOrder] = React.useState(null);
+  const [orderLoading, setOrderLoading] = React.useState(true);
 
-  // async function loadData() {
-  //   const docRef = doc(db, `/orders/${router.query.id}`);
-  //   const unsub =  onSnapshot(docRef, (docSnap) => {
-  //     if (docSnap.exists()) {
-  //       const data = docSnap.data();
-  //       data.id = docSnap.id;
-  //       setOrder(data);
-  //       setOrderLoading(false);
-  //     } else {
-  //       // doc.data() will be undefined in this case
-  //       console.log("No such document!");
-  //     }
-  //   });
-
-  // }
-  useEffect(() => {
-    // loadData();
+  React.useEffect(() => {
     const docRef = doc(db, `/orders/${router.query.id}`);
     const unsub = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {

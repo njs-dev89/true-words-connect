@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import EditClient from "./EditClient";
 import TabsPaneContainer from "../Tabs/TabsPaneContainer";
 import UserDetails from "./UserDetails";
@@ -14,14 +14,14 @@ import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 
 function ClientProfile({ userId }) {
-  const [showModal, setShowModal] = useState(false);
-  const [roomsLoading, setRoomsLoading] = useState(true);
-  const [rooms, setRooms] = useState([]);
-  const [hasUnreadMessages, setHasUnreadMessages] = useState(false);
+  const [showModal, setShowModal] = React.useState(false);
+  const [roomsLoading, setRoomsLoading] = React.useState(true);
+  const [rooms, setRooms] = React.useState([]);
+  const [hasUnreadMessages, setHasUnreadMessages] = React.useState(false);
   const router = useRouter();
   const { authUser, loading } = useFirebaseAuth();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const messageRoomsCollection = collection(db, `/messageRooms`);
     const q = query(
       messageRoomsCollection,
@@ -42,7 +42,7 @@ function ClientProfile({ userId }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (rooms.length > 0) {
       const noOfRooms = rooms.filter(
         (room) => room.client.hasUnreadMessages
