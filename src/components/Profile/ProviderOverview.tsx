@@ -11,15 +11,20 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 import CreateOfferRequest from "./CreateOfferRequest";
 
 function ProviderOverview({ provider }) {
+  const { setSiteErrors } = useSiteNotificationContext();
   const router = useRouter();
   const { authUser } = useFirebaseAuth();
   const [showModal, setShowModal] = React.useState(false);
   const createMessage = async (client, provider) => {
     if (authUser.uid === provider.id) {
-      return;
+      return setSiteErrors("You can not message yourself");
+    }
+    if (authUser.role === "provider") {
+      return setSiteErrors("Provider can not contact other providers");
     }
     const messageRoomsCollection = collection(db, `/messageRooms`);
 
@@ -72,6 +77,12 @@ function ProviderOverview({ provider }) {
                 if (!authUser) {
                   return router.push("/login");
                 }
+                if (authUser.uid === provider.id) {
+                  return setSiteErrors("This is your own profile");
+                }
+                if (authUser.role === "provider") {
+                  return setSiteErrors("Provider can not send offer request");
+                }
                 setShowModal(true);
               }}
             >
@@ -80,7 +91,6 @@ function ProviderOverview({ provider }) {
             <button
               className="btn-small btn-blue"
               onClick={() => {
-                console.log(provider);
                 if (!authUser) {
                   return router.push("/login");
                 }

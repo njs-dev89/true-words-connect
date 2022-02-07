@@ -35,7 +35,6 @@ export default function useAgoraRtm() {
         });
       } catch (error) {
         setAgoraLoginStatus("disconnected");
-        console.log(error);
       }
     },
     [authUser]
@@ -47,7 +46,7 @@ export default function useAgoraRtm() {
 
   async function getUserAttributes(userId, callBack) {
     const attributes = await client.getUserAttributes(userId);
-    console.log(attributes);
+
     callBack(attributes);
   }
   function createCallInvitation(calleeId) {
@@ -63,14 +62,10 @@ export default function useAgoraRtm() {
       })
       .then((sendResult) => {
         if (sendResult.hasPeerReceived) {
-          console.log("Message Recieved");
         } else {
-          console.log("User is offline");
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }
 
   const peersOnline = (peerIds) => {
@@ -115,18 +110,15 @@ export default function useAgoraRtm() {
       }
     });
     client.on("ConnectionStateChanged", function (newState, reason) {
-      console.log(newState, reason);
       if (newState === "CONNECTED") {
         setAgoraLoginStatus("connected");
       }
       if (newState === "DISCONNECTED") {
-        console.log("Agora disconnected");
         setAgoraLoginStatus("disconnected");
       }
     });
 
     client.on("PeersOnlineStatusChanged", (status) => {
-      console.log(status);
       setOnlineStatus(status);
     });
     client.on("RemoteInvitationReceived", (RemoteInvitation) => {

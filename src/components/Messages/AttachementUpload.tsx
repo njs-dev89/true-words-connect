@@ -52,13 +52,11 @@ function AttachementUpload({ file, setFiles, files, room, id }) {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setUploadProgress(progress);
-          console.log("Upload is " + progress + "% done");
+
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
               break;
           }
         },
@@ -73,10 +71,9 @@ function AttachementUpload({ file, setFiles, files, room, id }) {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadAttachement.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             file.uploadComplete = true;
             file.downloadURL = downloadURL;
-            console.log(file);
+
             const filteredFiles = files.filter((f) => f.name !== file.name);
             setFiles([...filteredFiles, file]);
           });

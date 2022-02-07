@@ -36,7 +36,7 @@ function SentOffers() {
         data["id"] = doc.id;
         offers.push(data);
       });
-      console.log(offers);
+
       setOffers(offers);
       setLoading(false);
     });

@@ -8,7 +8,7 @@ import Image from "next/image";
 import LocalCallNotification from "./LocalCallNotification";
 import { useNotification } from "../customHooks/useNotification";
 import Notification from "./Notification";
-import useSiteNotifications from "../customHooks/useSiteNotifications";
+import { useSiteNotificationContext } from "../context/siteNotificationsContext";
 
 const Msg = ({ msg, attributes }) => {
   let heading;
@@ -40,7 +40,7 @@ function AgoraLoginWrapper({ children }) {
     setSiteErrors,
     siteWarning,
     setSiteWarning,
-  } = useSiteNotifications();
+  } = useSiteNotificationContext();
   const displayMsg = (msg, attributes) => {
     toast(() => <Msg msg={msg} attributes={attributes} />, {
       position: "bottom-right",
@@ -127,7 +127,6 @@ function AgoraLoginWrapper({ children }) {
 
   React.useEffect(() => {
     if (message) {
-      console.log(message);
       displayMsg(message.message.text, message.attributes);
     }
   }, [message]);

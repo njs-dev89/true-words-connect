@@ -25,21 +25,17 @@ function SearchBar({ query, currentPosition, setCurrentPosition }) {
   const [place, setPlace] = React.useState("");
   const placeRef = React.useRef(null);
   const onLoad = (autocomplete) => {
-    console.log("autocomplete: ", autocomplete);
-
     setAutocomplete(autocomplete);
   };
 
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
-      console.log(placeRef.current.value);
       setPlace(placeRef.current.value);
       setCurrentPosition({
         lat: autocomplete.getPlace().geometry.location.lat(),
         lng: autocomplete.getPlace().geometry.location.lng(),
       });
     } else {
-      console.log("Autocomplete is not loaded yet!");
     }
   };
 

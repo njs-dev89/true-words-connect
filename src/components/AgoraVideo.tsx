@@ -18,8 +18,6 @@ const AgoraVideos = (props: {
       className="flex relative mx-auto grid grid-cols-1 w-full h-full"
       // style={{ height: "500px" }}
     >
-      {console.log(users)}
-
       {users.length > 0 &&
         users.map((user) => {
           if (user.videoTrack) {

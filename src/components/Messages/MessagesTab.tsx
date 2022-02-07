@@ -26,7 +26,6 @@ function MessagesTab({ loading, rooms }) {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      {console.log(message)}
       {!loading && rooms.length > 0 ? (
         <>
           <MessageRooms rooms={rooms} loading={loading} />

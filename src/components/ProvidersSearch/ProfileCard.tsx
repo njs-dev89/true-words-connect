@@ -28,7 +28,6 @@ function ProfileCard({ provider, currentPosition }) {
           </Link>
         </div>
         <p className="text-sm font-medium text-gray-500">
-          {console.log(currentPosition)}
           {provider._geoloc && currentPosition
             ? `${new Intl.NumberFormat("en-US", {
                 style: "unit",

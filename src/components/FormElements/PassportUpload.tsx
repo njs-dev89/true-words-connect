@@ -13,7 +13,6 @@ function PassportUpload({ setPassportLink, setError, title }) {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [uploadFailed, setUploadFailed] = React.useState(false);
   const uploadPassport = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0].type.split("/")[0] !== "image") {
       return setError("Passport must be an image format");
     }
@@ -28,13 +27,11 @@ function PassportUpload({ setPassportLink, setError, title }) {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setPassportProgress(progress);
-        console.log("Upload is " + progress + "% done");
+
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -49,7 +46,6 @@ function PassportUpload({ setPassportLink, setError, title }) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadPassport.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
           setPassportLink(downloadURL);
         });
       }

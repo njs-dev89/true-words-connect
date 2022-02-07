@@ -2,7 +2,6 @@ import * as React from "react";
 import ProfileCard from "./ProfileCard";
 
 function SearchResult({ providers, currentPosition }) {
-  console.log(providers);
   return (
     <div className="col-span-4 sm:col-span-3 rounded-md bg-white shadow px-8 py-8">
       {providers?.length === 0 ? (

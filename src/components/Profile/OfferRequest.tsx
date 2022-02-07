@@ -12,10 +12,10 @@ import { db } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import OfferRequestToOffer from "./OfferRequestToOffer";
 import Image from "next/image";
-import useSiteNotifications from "../../customHooks/useSiteNotifications";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 
 function OfferRequest() {
-  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const { setSiteInfo, setSiteErrors } = useSiteNotificationContext();
   const { authUser } = useFirebaseAuth();
   const [showModal, setShowModal] = React.useState(false);
   const [requestData, setRequestData] = React.useState(null);
@@ -42,7 +42,7 @@ function OfferRequest() {
         data["id"] = doc.id;
         offerRequests.push(data);
       });
-      console.log(offerRequests);
+
       setOfferRequests(offerRequests);
       setLoading(false);
     });

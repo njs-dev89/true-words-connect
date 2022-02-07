@@ -12,7 +12,6 @@ function ProfilePicUpload({ setPicLink }) {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [uploadFailed, setUploadFailed] = React.useState(false);
   const uploadProfilePic = (e) => {
-    console.log(e.target.files[0]);
     setUpload(true);
     const storageRef = ref(storage, `profile/${authUser.uid}`);
     const uploadPic = uploadBytesResumable(storageRef, e.target.files[0]);
@@ -24,13 +23,11 @@ function ProfilePicUpload({ setPicLink }) {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setPicProgress(progress);
-        console.log("Upload is " + progress + "% done");
+
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -45,7 +42,6 @@ function ProfilePicUpload({ setPicLink }) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadPic.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
           setPicLink(downloadURL);
         });
       }

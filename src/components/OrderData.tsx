@@ -14,7 +14,6 @@ function OrderData({ order }) {
   const [showModal, setShowModal] = React.useState(false);
   const [cancelError, setCancelError] = React.useState(null);
 
-  console.log({ order });
   const cancelOrderCnfrm = async () => {
     const data = await cancelOrder({
       orderId: order.id,

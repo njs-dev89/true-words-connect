@@ -4,6 +4,7 @@ import Layout from "../components/Layout/Layout";
 import { AgoraProviderWithNoSSR } from "../context/agoraContextNoSsr";
 import * as React from "react";
 import AgoraLoginWrapper from "../components/AgoraLoginWrapper";
+import { SiteNotificationProvider } from "../context/siteNotificationsContext";
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
@@ -55,11 +56,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthUserProvider>
       <AgoraProviderWithNoSSR>
-        <AgoraLoginWrapper>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </AgoraLoginWrapper>
+        <SiteNotificationProvider>
+          <AgoraLoginWrapper>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AgoraLoginWrapper>
+        </SiteNotificationProvider>
       </AgoraProviderWithNoSSR>
     </AuthUserProvider>
   );

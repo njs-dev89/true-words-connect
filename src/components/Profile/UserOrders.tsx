@@ -44,7 +44,7 @@ function UserOrders() {
         data["id"] = doc.id;
         orders.push(data);
       });
-      console.log(orders);
+
       setOrders(orders);
       setLoading(false);
     });

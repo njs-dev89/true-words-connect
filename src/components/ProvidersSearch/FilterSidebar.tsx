@@ -45,7 +45,6 @@ function FilterSidebar({ query }) {
           minValue={hourlyPrice.minPrice}
           maxValue={hourlyPrice.maxPrice}
           onChange={({ min, max }: { min: number; max: number }) => {
-            console.log(min);
             setHourlyPrice({ minPrice: min, maxPrice: max });
           }}
         />

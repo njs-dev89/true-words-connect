@@ -48,7 +48,7 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="font-medium">
-                    <Link href="/providers">
+                    <Link href="/contact-us">
                       <a>Contact Us</a>
                     </Link>
                   </li>

@@ -35,7 +35,6 @@ function ProviderSignup() {
     setError(null);
     createUser(username, email, password)
       .then(() => {
-        console.log("Success. The user is created in Firebase");
         router.push("/provider-onboarding");
       })
       .catch((error) => {

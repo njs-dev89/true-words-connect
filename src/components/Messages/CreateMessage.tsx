@@ -7,6 +7,7 @@ import { useAgora } from "../../context/agoraContextNoSsr";
 import { useFirebaseAuth } from "../../context/authContext";
 import { v4 as uuidv4 } from "uuid";
 import AttachementUpload from "./AttachementUpload";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 
 function CreateMessage({ room, setShowModal }) {
   const [msg, setMsg] = React.useState("");
@@ -15,21 +16,22 @@ function CreateMessage({ room, setShowModal }) {
   const [error, setError] = React.useState(null);
   const { authUser } = useFirebaseAuth();
   const { message, sendMessageToPeer } = useAgora();
+  const { setSiteErrors } = useSiteNotificationContext();
 
   const attachFiles = (e) => {
+    console.log(e.target.files.length);
     if (!id) {
       setId(uuidv4());
     }
-    if (files && files.length > 5) {
-      return setError("You can not attach more than 5 files");
+    if (files && files.length >= 5) {
+      return setSiteErrors("You can not attach more than 5 files");
     }
-    if (files && e.target.files[0].length + files.length > 5) {
-      return setError("You can not attach more than 5 files");
+    if (files && e.target.files.length + files.length > 5) {
+      return setSiteErrors("You can not attach more than 5 files");
     }
-    if (e.target.files[0].length > 5) {
-      return setError("You can not attach more than 5 files");
+    if (e.target.files.length > 5) {
+      return setSiteErrors("You can not attach more than 5 files");
     }
-    console.log(e.target.files);
 
     e.target.files.forEach(function (file) {
       file.uploadComplete = false;
@@ -42,7 +44,7 @@ function CreateMessage({ room, setShowModal }) {
 
     const peerId =
       authUser.role === "client" ? room.provider.id : room.client.id;
-    console.log({ peerId });
+
     const roomData =
       authUser.role === "client"
         ? { provider: { hasUnreadMessages: true } }
@@ -54,7 +56,7 @@ function CreateMessage({ room, setShowModal }) {
       const attachements = files.map((file) => {
         return { name: file.name, downloadUrl: file.downloadURL };
       });
-      console.log(attachements);
+
       await setDoc(doc(db, `/messageRooms/${room.id}/messages/${id}`), {
         text: msg,
         senderId: authUser.uid,
@@ -132,7 +134,15 @@ function CreateMessage({ room, setShowModal }) {
                 </label>
               </div>
 
-              <button className=" text-yellow  mr-4 " type="submit">
+              <button
+                className={
+                  msg.length === 0 && files.length === 0
+                    ? "text-gray-600 mr-4"
+                    : "text-yellow  mr-4"
+                }
+                type="submit"
+                disabled={msg.length === 0 && files.length === 0}
+              >
                 <IoMdSend className="text-3xl" />
               </button>
             </div>

@@ -4,14 +4,13 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { doc, collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
-import useSiteNotifications from "../../customHooks/useSiteNotifications";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 
 function OfferRequestToOffer({ setShowModal, reqData }) {
-  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const { setSiteInfo, setSiteErrors } = useSiteNotificationContext();
   const [offerAmount, setOfferAmount] = React.useState(0);
   const { authUser } = useFirebaseAuth();
 
-  console.log(authUser);
   const handleSubmit = async (e) => {
     e.preventDefault();
     delete reqData.budget;

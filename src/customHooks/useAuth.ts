@@ -59,7 +59,7 @@ export default function useAuth() {
         console.log("No such document!");
       }
     }
-    console.log(authState);
+
     var formattedUser = formatAuthUser(authState);
     setAuthUser(formattedUser);
     setLoading(false);
@@ -88,11 +88,9 @@ export default function useAuth() {
         profile_pic: "/profile-placeholder.png",
       });
       const roleMessage = await addClientRole({ uid: credential.user.uid });
-      console.log(roleMessage);
+
       authStateChanged(credential.user);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const createProviderApplicant = async (username, email, password) => {
@@ -102,9 +100,7 @@ export default function useAuth() {
         email,
         password
       );
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   const addProviderApplicant = async (
     userId,
@@ -126,9 +122,7 @@ export default function useAuth() {
         passport_link: passportLink,
         video_link: videoLink,
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const forgotPassword = (email) => {

@@ -13,7 +13,6 @@ function IdCardUpload({ setIdCardLink, setError }) {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [uploadFailed, setUploadFailed] = React.useState(false);
   const uploadIdCard = (e) => {
-    console.log(e.target.files[0]);
     if (e.target.files[0].type.split("/")[0] !== "image") {
       return setError("Passport must be an image format");
     }
@@ -28,13 +27,11 @@ function IdCardUpload({ setIdCardLink, setError }) {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setIdCardProgress(progress);
-        console.log("Upload is " + progress + "% done");
+
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -49,7 +46,6 @@ function IdCardUpload({ setIdCardLink, setError }) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadIdCard.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
           setIdCardLink(downloadURL);
         });
       }

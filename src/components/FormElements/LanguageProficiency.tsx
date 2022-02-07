@@ -49,7 +49,6 @@ function LanguageProficiency({ langs, setLanguages, languages }) {
                       ...filtLanguages,
                       { language: lang.language, proficiency: e.target.value },
                     ];
-                    console.log(newLanguages);
                     return newLanguages;
                   });
                 }}

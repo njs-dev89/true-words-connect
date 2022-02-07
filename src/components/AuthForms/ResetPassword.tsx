@@ -54,7 +54,6 @@ function ResetPassword() {
     } catch (error) {
       displayMsg(error.message, "Error!");
       setLoading(false);
-      console.log(error.message);
     }
   };
   return (

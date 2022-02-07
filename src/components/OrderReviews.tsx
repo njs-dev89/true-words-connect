@@ -65,7 +65,7 @@ function OrderReviews({ order }) {
           data["id"] = doc.id;
           reviews.push(data);
         });
-        console.log(reviews);
+
         setReviews(reviews);
         setLoading(false);
       }

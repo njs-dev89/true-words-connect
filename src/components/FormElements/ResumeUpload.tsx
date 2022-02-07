@@ -13,7 +13,6 @@ function ResumeUpload({ setResumeLink, setError, title }) {
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [uploadFailed, setUploadFailed] = React.useState(false);
   const uploadResume = (e) => {
-    console.log(e.target.files[0].type);
     if (e.target.files[0].type !== "application/pdf") {
       return setError("Resumes must be in pdf format");
     }
@@ -28,13 +27,11 @@ function ResumeUpload({ setResumeLink, setError, title }) {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setResumeProgress(progress);
-        console.log("Upload is " + progress + "% done");
+
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -49,7 +46,6 @@ function ResumeUpload({ setResumeLink, setError, title }) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadResume.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
           setResumeLink(downloadURL);
         });
       }

@@ -65,7 +65,7 @@ function Messages({ room }) {
         messages.push(data);
       });
       setLoading(true);
-      console.log(messages);
+
       setMessages(messages);
 
       setLoading(false);

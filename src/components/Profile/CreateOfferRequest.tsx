@@ -6,10 +6,10 @@ import { useFirebaseAuth } from "../../context/authContext";
 import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import ModalContainer from "../ModalContainer";
-import useSiteNotifications from "../../customHooks/useSiteNotifications";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 
 function CreateOfferRequest({ setShowModal }) {
-  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const { setSiteInfo, setSiteErrors } = useSiteNotificationContext();
   const [service, setService] = React.useState("teaching");
   const [contractType, setContractType] = React.useState("hourly");
   const [serviceType, setServiceType] = React.useState("online");

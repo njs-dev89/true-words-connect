@@ -12,7 +12,6 @@ function RemoteCallNotification({
 
   React.useEffect(() => {
     getUserAttributes(remoteInvitation.callerId, setUserAttributes);
-    console.log(userAttributes);
   }, []);
   return (
     <ModalContainer

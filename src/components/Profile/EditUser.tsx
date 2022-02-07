@@ -64,6 +64,9 @@ function EditUser({ setShowModal, provider }) {
     if (validator.isEmpty(String(hourlyPrice))) {
       return setError("Please enter your hourly price");
     }
+    if (hourlyPrice === 0) {
+      return setError("Please enter your hourly price");
+    }
     setError(null);
     setStep(2);
   };
@@ -71,8 +74,8 @@ function EditUser({ setShowModal, provider }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validator.isEmpty(about)) {
-      return setError("Please write something about yourself");
+    if (!validator.isLength(about, { min: 30, max: undefined })) {
+      return setError("About must be atleast 30 characters long");
     }
     if (validator.isEmpty(city)) {
       return setError("Please Enter your city");

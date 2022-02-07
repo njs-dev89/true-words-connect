@@ -39,11 +39,9 @@ function VideoCall(props: {
 
   React.useEffect(() => {
     let init = async (name: string) => {
-      console.log("init", name);
       let tenMinuteTimer;
       let perSecondTimer;
       client.on("connection-state-change", async (newState, oldState) => {
-        console.log(newState);
         if (newState === "CONNECTED") {
           let countDownStartTime =
             new Date().getTime() + order.time_remaining_secs * 1000;
@@ -79,7 +77,7 @@ function VideoCall(props: {
         if (newState === "DISCONNECTED") {
           clearInterval(tenMinuteTimer);
           clearInterval(perSecondTimer);
-          console.log(client.getRTCStats());
+
           if (authUser.role === "client") {
             await setDoc(
               doc(db, `/orders/${channelName}`),
@@ -104,8 +102,7 @@ function VideoCall(props: {
       });
       client.on("user-published", async (user, mediaType) => {
         await client.subscribe(user, mediaType);
-        console.log("subscribe success");
-        console.log({ user });
+
         if (mediaType === "video") {
           setUsers((prevUsers) => {
             return [...prevUsers, user];
@@ -117,7 +114,6 @@ function VideoCall(props: {
       });
 
       client.on("user-unpublished", (user, type) => {
-        console.log("unpublished", user, type);
         if (type === "audio") {
           user.audioTrack?.stop();
         }
@@ -126,29 +122,24 @@ function VideoCall(props: {
             return prevUsers.filter((User) => User.uid !== user.uid);
           });
         }
-        console.log(client.getRTCStats());
       });
 
       client.on("user-left", (user) => {
-        console.log("leaving", user);
-
         setUsers((prevUsers) => {
           return prevUsers.filter((User) => User.uid !== user.uid);
         });
       });
-      const uid = Math.ceil(Math.random() * 10);
+      const uid = authUser.role === "client" ? 1 : 2;
       const token = await genRtcToken({
         uid,
         channelName: name,
       });
-      console.log(token);
       await client.join(appId, name, token.data as string, uid);
       if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
     };
 
     if (ready && tracks) {
-      console.log("init ready");
       init(channelName);
     }
   }, [channelName, client, ready, tracks]);

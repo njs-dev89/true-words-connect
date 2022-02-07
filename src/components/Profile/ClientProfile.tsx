@@ -35,7 +35,7 @@ function ClientProfile({ userId }) {
         data["id"] = doc.id;
         rooms.push(data);
       });
-      console.log(rooms);
+
       setRooms(rooms);
       setRoomsLoading(false);
     });

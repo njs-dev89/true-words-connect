@@ -4,7 +4,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import useSiteNotifications from "../../customHooks/useSiteNotifications";
+import { useSiteNotificationContext } from "../../context/siteNotificationsContext";
 
 // import CardSection from "./CardSection";
 
@@ -12,7 +12,7 @@ export default function CheckoutForm({ providerId }) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = React.useState(null);
-  const { setSiteInfo, setSiteErrors } = useSiteNotifications();
+  const { setSiteInfo, setSiteErrors } = useSiteNotificationContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

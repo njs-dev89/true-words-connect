@@ -52,7 +52,6 @@ function ProviderProfile({ userId }) {
     });
 
     if (window !== undefined) {
-      console.log(accountLink.data.url);
       window.location.href = accountLink.data.url;
     }
   };
@@ -62,7 +61,6 @@ function ProviderProfile({ userId }) {
       accountId: authUser.profile.stripeAccountId,
     });
     if (window !== undefined) {
-      console.log(link.data.url);
       window.open(link.data.url);
     }
   };
@@ -75,7 +73,6 @@ function ProviderProfile({ userId }) {
       checkOnboardingComplete({
         accountId: authUser.profile.stripeAccountId,
       }).then((account: any) => {
-        console.log(account.data);
         if (account.data.details_submitted) {
           setDoc(
             doc(db, `/providers/${authUser.uid}`),
@@ -102,7 +99,7 @@ function ProviderProfile({ userId }) {
         data["id"] = doc.id;
         rooms.push(data);
       });
-      console.log(rooms);
+
       setRooms(rooms);
       setRoomsLoading(false);
     });

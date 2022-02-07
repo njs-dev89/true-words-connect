@@ -9,7 +9,6 @@ function LocalCallNotification({ localInvitation, setLocalCallNotification }) {
 
   React.useEffect(() => {
     getUserAttributes(localInvitation.calleeId, setUserAttributes);
-    console.log(userAttributes);
   }, []);
   return (
     <ModalContainer
