@@ -1,0 +1,12 @@
+node_modules
+functions
+.firebase
+.next
+.vscode
+firebase.json
+package-lock.json
+firestore.indexes.json
+firestore.rules
+seed.sh
+storage.rules
+truewordsconnect-sa.json
