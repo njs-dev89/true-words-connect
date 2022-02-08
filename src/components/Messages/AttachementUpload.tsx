@@ -8,6 +8,7 @@ import * as React from "react";
 import Image from "next/image";
 import { storage } from "../../config/firebaseConfig";
 import { FaTimes } from "react-icons/fa";
+import loadingGif from "../../../public/loading.gif";
 
 function AttachementUpload({ file, setFiles, files, room, id }) {
   const [uploadProgress, setUploadProgress] = React.useState(0);
@@ -91,7 +92,7 @@ function AttachementUpload({ file, setFiles, files, room, id }) {
       {file.name}
       {upload && (
         <div className="relative h-4 w-4">
-          <Image src="/loading.gif" layout="fill" />
+          <Image src={loadingGif} layout="fill" />
         </div>
       )}
       {uploadSuccess && (

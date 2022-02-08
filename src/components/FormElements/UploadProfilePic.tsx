@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
+import cloudSvg from "../../../public/cloud.svg";
 
 function ProfilePicUpload({ setPicLink }) {
   const { authUser } = useFirebaseAuth();
@@ -51,7 +52,7 @@ function ProfilePicUpload({ setPicLink }) {
     <div className=" mt-2">
       <label className="w-full flex items-center justify-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide cursor-pointer ease-linear transition-all duration-150">
         <div className="relative h-4 w-4 rounded-full px-2 py-2 bg-purple-100">
-          <Image src="/cloud.svg" alt="" layout="fill" className="" />
+          <Image src={cloudSvg} alt="" layout="fill" className="" />
         </div>
         <div className="text-sm font-medium ml-2">Upload Profile Pic</div>
         {upload && (

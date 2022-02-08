@@ -5,6 +5,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { storage } from "../../config/firebaseConfig";
 import { useFirebaseAuth } from "../../context/authContext";
 import { FcHighPriority, FcOk } from "react-icons/fc";
+import cloudSvg from "../../../public/cloud.svg";
 
 function IdCardUpload({ setIdCardLink, setError }) {
   const { authUser } = useFirebaseAuth();
@@ -55,7 +56,7 @@ function IdCardUpload({ setIdCardLink, setError }) {
     <div className="mt-4">
       <label className="w-full flex items-center justify-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide cursor-pointer ease-linear transition-all duration-150">
         <div className="relative h-6 w-6 rounded-full px-2 py-2 bg-purple-100">
-          <Image src="/cloud.svg" alt="" layout="fill" className="" />
+          <Image src={cloudSvg} alt="" layout="fill" className="" />
         </div>
         <div className="text-base ml-2 mr-2">Upload Verified ID</div>
         {upload && (

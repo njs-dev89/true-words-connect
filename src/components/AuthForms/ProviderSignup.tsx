@@ -5,6 +5,7 @@ import { useFirebaseAuth } from "../../context/authContext";
 import LeftImagePanel from "./LeftImagePanel";
 import SignupForm from "./SignupForm";
 import validator from "validator";
+import loginImage from "../../../public/client-signup.svg";
 
 function ProviderSignup() {
   const [username, setUsername] = React.useState("");
@@ -42,7 +43,7 @@ function ProviderSignup() {
       });
   };
   return (
-    <LeftImagePanel imgSrc="/client-signup.svg">
+    <LeftImagePanel imgSrc={loginImage}>
       <div>
         <h3 className="text-3xl text-yellow-300 font-bold mb-6">Sign up</h3>
         <SignupForm

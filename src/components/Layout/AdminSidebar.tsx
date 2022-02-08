@@ -1,13 +1,14 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../public/logo.svg";
 
 function AdminSidebar() {
   return (
     <div className="col-span-1 bg-white py-6 shadow-md rounded-xl">
       <div className="flex flex-col items-center px-4 pb-4 border-b">
         <div className="w-32 h-32 relative ">
-          <Image src="/logo.svg" alt="" layout="fill" />
+          <Image src={logo} alt="" layout="fill" />
         </div>
         <h3 className="font-bold text-lg mt-4 mb-2">True Words Connect</h3>
       </div>

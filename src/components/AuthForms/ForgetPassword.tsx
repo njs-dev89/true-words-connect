@@ -6,6 +6,8 @@ import validator from "validator";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { FcHighPriority, FcOk } from "react-icons/fc";
+import loginImage from "../../../public/client-signup.svg";
+import loadingGif from "../../../public/loading.gif";
 
 const Msg = ({ email, heading }) => (
   <div>
@@ -66,7 +68,7 @@ function ForgetPassword() {
     }
   };
   return (
-    <LeftImagePanel imgSrc="/client-signup.svg">
+    <LeftImagePanel imgSrc={loginImage}>
       <div>
         <h3 className="text-3xl text-yellow-300 font-bold mb-6">
           forgot password?
@@ -94,7 +96,7 @@ function ForgetPassword() {
             >
               {loading ? (
                 <div className="relative w-6 h-6">
-                  <Image src="/loading.gif" layout="fill" />
+                  <Image src={loadingGif} layout="fill" />
                 </div>
               ) : (
                 "Submit"

@@ -7,6 +7,7 @@ import AvailableServices from "../components/LandingPage/AvailableServices";
 import Footer from "../components/LandingPage/Footer";
 import HowItWorks from "../components/LandingPage/HowItWorks";
 import CookieConsent from "react-cookie-consent";
+import homeTwo from "../../public/home2.svg";
 
 export default function Home() {
   return (
@@ -44,7 +45,7 @@ export default function Home() {
               </div>
               <div className="col-span-11 md:col-span-5 hidden md:block">
                 <div className="relative h-96">
-                  <Image src="/home2.svg" alt="" layout="fill" />
+                  <Image src={homeTwo} alt="" layout="fill" />
                 </div>
               </div>
             </div>

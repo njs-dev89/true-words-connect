@@ -9,6 +9,7 @@ import SkillTest from "./SkillTest";
 import { useRouter } from "next/router";
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import InfoPopover from "./InfoPopover";
+import loginImage from "../../../public/client-signup.svg";
 
 function ProviderOnboarding() {
   const [step, setStep] = React.useState(1);
@@ -54,7 +55,7 @@ function ProviderOnboarding() {
   };
 
   return (
-    <LeftImagePanel imgSrc="/applicant.svg">
+    <LeftImagePanel imgSrc={loginImage}>
       {step === 1 && (
         <div>
           <h3 className="text-3xl text-yellow-300 font-bold mb-6">

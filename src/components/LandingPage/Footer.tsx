@@ -8,6 +8,8 @@ import {
   FaTiktok,
   FaTwitter,
 } from "react-icons/fa";
+import globe from "../../../public/langways-globe.png";
+import copyright from "../../../public/copyright.svg";
 
 function Footer() {
   return (
@@ -15,7 +17,7 @@ function Footer() {
       <div className="grid grid-cols-5 max-w-screen-lg mx-auto gap-8 pt-16 border-b pb-16">
         <div className="sm:col-span-2 col-span-5 mx-auto">
           <div className="w-16 h-16 relative overflow-hidden rounded-full">
-            <Image src="/langways-globe.png" layout="fill" />
+            <Image src={globe} layout="fill" />
           </div>
           <p className="text-blue mt-4">Connecting People Through Languages</p>
           <div className="flex gap-2 mt-4">
@@ -96,7 +98,7 @@ function Footer() {
       </div>
       <div className="py-6 flex justify-center items-center gap-3">
         <div className="w-4 h-4 relative overflow-hidden rounded-full">
-          <Image src="/copyright.svg" layout="fill" />
+          <Image src={copyright} layout="fill" />
         </div>
         <p className="text-center text-blue">
           All Rights Reserved By langways.io

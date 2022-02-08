@@ -1,8 +1,8 @@
 node_modules
 functions
 .firebase
-.next
 .vscode
+.next
 firebase.json
 package-lock.json
 firestore.indexes.json

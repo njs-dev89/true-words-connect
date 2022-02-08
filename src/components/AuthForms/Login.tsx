@@ -6,6 +6,8 @@ import Input from "../FormElements/Input";
 import LeftImagePanel from "./LeftImagePanel";
 import Image from "next/image";
 import validator from "validator";
+import loginImage from "../../../public/client-signup.svg";
+import loadingGif from "../../../public/loading.gif";
 
 function Login() {
   const [email, setEmail] = React.useState("");
@@ -43,7 +45,7 @@ function Login() {
       });
   };
   return (
-    <LeftImagePanel imgSrc="/client-signup.svg">
+    <LeftImagePanel imgSrc={loginImage}>
       <div>
         <h3 className="text-3xl text-yellow-300 font-bold mb-6">Login</h3>
         <form className="" onSubmit={onSubmit}>
@@ -80,7 +82,7 @@ function Login() {
             >
               {loading ? (
                 <div className="relative w-6 h-6">
-                  <Image src="/loading.gif" layout="fill" />
+                  <Image src={loadingGif} layout="fill" />
                 </div>
               ) : (
                 "Login"

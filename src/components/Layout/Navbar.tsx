@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import logo from "../../../public/langways.png";
 
 import { useFirebaseAuth } from "../../context/authContext";
 import AuthUserDropdown from "./AuthUserDropdown";
@@ -30,7 +31,7 @@ function Navbar() {
               {" "}
               <Link href="/">
                 <a className="font-bold text-4xl">
-                  <Image src="/langways.png" alt="" layout="fill" />
+                  <Image src={logo} alt="" />
                 </a>
               </Link>
             </div>

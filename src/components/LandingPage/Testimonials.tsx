@@ -1,5 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
+import quote from "../../../public/quote.svg";
 
 const SingleTestimonial = ({ imgLink, testimonial, name, designation }) => {
   return (
@@ -14,7 +15,7 @@ const SingleTestimonial = ({ imgLink, testimonial, name, designation }) => {
           <h4 className="text-blue">{designation}</h4>
         </div>
         <div className="w-12 h-12 relative overflow-hidden rounded-full">
-          <Image src="/quote.svg" layout="fill" />
+          <Image src={quote} layout="fill" />
         </div>
       </div>
     </div>
